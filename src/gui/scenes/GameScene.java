@@ -1,0 +1,74 @@
+package gui.scenes;
+
+import gamelogic.Bomb;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class GameScene extends JPanel {
+
+    private static JPanel pLeftSpace;
+    private static JPanel pTopSpace;
+    private static JPanel pRightSpace;
+    private static JPanel pBottomSpace;
+
+    private static GridBagConstraints gbContraints;
+
+    public GameScene(){
+
+        pLeftSpace = new JPanel();
+        pTopSpace = new JPanel();
+        pRightSpace = new JPanel();
+        pBottomSpace = new JPanel();
+
+        gbContraints = new GridBagConstraints();
+
+        this.setBackground(Color.GREEN);
+
+        pLeftSpace.setBackground(Color.RED);
+        pTopSpace.setBackground(Color.GREEN);
+        pRightSpace.setBackground(Color.BLUE);
+        pBottomSpace.setBackground(Color.WHITE);
+
+        pLeftSpace.setPreferredSize(pLeftSpace.getPreferredSize());
+        pTopSpace.setPreferredSize(pTopSpace.getPreferredSize());
+        pRightSpace.setPreferredSize(pRightSpace.getPreferredSize());
+        pBottomSpace.setPreferredSize(pBottomSpace.getPreferredSize());
+
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 0;
+        gbContraints.weightx = 0.1;
+        gbContraints.weighty = 0.1;
+        gbContraints.gridwidth = 3;
+        this.add(pTopSpace, gbContraints);
+
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 1;
+        gbContraints.weightx = 0.2;
+        gbContraints.weighty = 0.2;
+        gbContraints.gridwidth = 1;
+        this.add(pLeftSpace, gbContraints);
+
+        gbContraints.gridx = 1;
+        gbContraints.gridy = 1;
+        gbContraints.weightx = 1;
+        gbContraints.weighty = 1;
+        gbContraints.gridwidth = 1;
+        this.add(new Bomb(), gbContraints);
+
+        gbContraints.gridx = 2;
+        gbContraints.gridy = 1;
+        gbContraints.weightx = 0.2;
+        gbContraints.weighty = 0.2;
+        gbContraints.gridwidth = 1;
+        this.add(pRightSpace, gbContraints);
+
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 2;
+        gbContraints.weightx = 0.1;
+        gbContraints.weighty = 0.1;
+        gbContraints.gridwidth = 3;
+        this.add(pBottomSpace, gbContraints);
+
+    }
+}
