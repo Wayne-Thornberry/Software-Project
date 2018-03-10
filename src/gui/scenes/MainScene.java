@@ -24,7 +24,8 @@ public class MainScene extends JPanel {
     private static GridBagConstraints gbContraints;
 
     public MainScene(){
-        //Test
+
+        this.setLayout(new GridBagLayout());
         pLeftSpace = new JPanel();
         pMiddleSpace = new JPanel(new GridBagLayout());
         pRightSpace = new JPanel();
@@ -54,6 +55,18 @@ public class MainScene extends JPanel {
         pLeftSpace.setPreferredSize(pLeftSpace.getPreferredSize());
         pMiddleSpace.setPreferredSize(pMiddleSpace.getPreferredSize());
         pRightSpace.setPreferredSize(pRightSpace.getPreferredSize());
+
+        // Default Var
+
+        gbContraints.fill = 1;
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 0;
+        gbContraints.weightx = 1;
+        gbContraints.weighty = 1;
+        gbContraints.gridwidth = 1;
+        gbContraints.gridheight = 1;
+
+        // End
 
         // Sections
         gbContraints.gridx = 0;

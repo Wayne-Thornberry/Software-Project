@@ -1,6 +1,6 @@
 package gui.scenes;
 
-import gamelogic.Bomb;
+import gamelogic.bomb.Bomb;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +16,7 @@ public class GameScene extends JPanel {
 
     public GameScene(){
 
+        this.setLayout(new GridBagLayout());
         pLeftSpace = new JPanel();
         pTopSpace = new JPanel();
         pRightSpace = new JPanel();
@@ -34,6 +35,18 @@ public class GameScene extends JPanel {
         pTopSpace.setPreferredSize(pTopSpace.getPreferredSize());
         pRightSpace.setPreferredSize(pRightSpace.getPreferredSize());
         pBottomSpace.setPreferredSize(pBottomSpace.getPreferredSize());
+
+        // Default Var
+
+        gbContraints.fill = 1;
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 0;
+        gbContraints.weightx = 1;
+        gbContraints.weighty = 1;
+        gbContraints.gridwidth = 1;
+        gbContraints.gridheight = 1;
+
+        // End
 
         gbContraints.gridx = 0;
         gbContraints.gridy = 0;
