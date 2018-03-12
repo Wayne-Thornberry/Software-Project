@@ -7,4 +7,6 @@ public class EndScene extends JPanel {
     public EndScene(){
         this.setBackground(Color.BLUE);
     }
+
+
 }
