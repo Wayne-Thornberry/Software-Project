@@ -5,25 +5,29 @@ import java.awt.*;
 
 public class BombTimer extends JPanel {
 
-    private static JLabel lTitle;
+    private static JLabel lTimer;
     private static Timer tTimer;
 
     // Primitives
     private static int iTimer;
 
     public BombTimer(){
-        lTitle = new JLabel();
-        iTimer = 10;
+        lTimer = new JLabel();
+        iTimer = 1000;
+        System.out.println(this.getMinimumSize().height);
+        lTimer.setFont(new Font("Arial",0,72));
 
-        this.add(lTitle);
+        this.add(lTimer);
         this.setBackground(Color.BLUE);
 
         // Events
 
         tTimer = new Timer(1000, e-> {
+            System.out.println("Test");
             setTimer();
             updateTimerText();
         });
+
         tTimer.start();
     }
 
@@ -36,6 +40,6 @@ public class BombTimer extends JPanel {
     }
 
     private static void updateTimerText(){
-        lTitle.setText(Integer.toString(iTimer / 60)  + ":" +  Integer.toString(iTimer % 60));
+        lTimer.setText(Integer.toString(iTimer / 60)  + ":" +  Integer.toString(iTimer % 60));
     }
 }

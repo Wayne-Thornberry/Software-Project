@@ -1,6 +1,5 @@
-import gamelogic.LogicController;
+import gamelogic.*;
 import gui.*;
-import gamelogic.sections.SectionManager;
 
 public class Application {
 
@@ -10,9 +9,5 @@ public class Application {
     public static void main(String ARGS[]){
         gController = new GUIController();
         lController = new LogicController();
-
-        if(gController.getScene() == "1"){
-            lController.startGame();
-        }
     }
 }

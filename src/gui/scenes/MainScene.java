@@ -85,7 +85,7 @@ public class MainScene extends JPanel {
         gbContraints.weighty = 0.4;
         this.add(pRightSpace, gbContraints);
 
-        // Middle Section
+        // Middle Challenge
         gbContraints.gridx = 0;
         gbContraints.gridy = 0;
         gbContraints.weightx = 0.2;

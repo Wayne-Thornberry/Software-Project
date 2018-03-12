@@ -1,6 +1,6 @@
 package gui.scenes;
 
-import gamelogic.bomb.Bomb;
+import gamelogic.bomb.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +9,7 @@ public class GameScene extends JPanel {
 
     private static JPanel pLeftSpace;
     private static JPanel pTopSpace;
+    public static JPanel pBombSpace;
     private static JPanel pRightSpace;
     private static JPanel pBottomSpace;
 
@@ -19,6 +20,7 @@ public class GameScene extends JPanel {
         this.setLayout(new GridBagLayout());
         pLeftSpace = new JPanel();
         pTopSpace = new JPanel();
+        pBombSpace = new Bomb();
         pRightSpace = new JPanel();
         pBottomSpace = new JPanel();
 
@@ -67,7 +69,7 @@ public class GameScene extends JPanel {
         gbContraints.weightx = 1;
         gbContraints.weighty = 1;
         gbContraints.gridwidth = 1;
-        this.add(new Bomb(), gbContraints);
+        this.add(pBombSpace, gbContraints);
 
         gbContraints.gridx = 2;
         gbContraints.gridy = 1;
@@ -83,5 +85,6 @@ public class GameScene extends JPanel {
         gbContraints.gridwidth = 3;
         this.add(pBottomSpace, gbContraints);
 
+        pBombSpace.resetChallenges();
     }
 }

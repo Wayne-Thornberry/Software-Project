@@ -7,11 +7,6 @@ public class LogicController {
 
 
     public LogicController(){
-        bBomb = new Bomb();
-    }
 
-    public static void startGame(){
-        System.out.println("Game Started");
-        bBomb.bTimer.getTimer().start();
     }
 }

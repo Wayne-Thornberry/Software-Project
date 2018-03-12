@@ -1,6 +1,7 @@
 package gamelogic.bomb;
 
-import gamelogic.Section;
+import gamelogic.*;
+import gamelogic.challanges.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +11,16 @@ public class Bomb extends JPanel{
     private static JPanel pInfoSpace;
     private static JPanel pSectionSpace;
 
-    public static BombSticker bSticker;
-    public static BombTimer bTimer;
-    public static BombLives bLives;
+    private static BombSticker bSticker;
+    private static BombTimer bTimer;
+    private static BombLives bLives;
+
+    private static Wire_Challenge cOne;
+    private static Challenge cTwo;
+    private static Challenge cThree;
+    private static Challenge cFour;
+    private static Challenge cFive;
+    private static Challenge cSix;
 
     private static GridBagConstraints gbContraints;
 
@@ -57,8 +65,20 @@ public class Bomb extends JPanel{
         pInfoSpace.add(bLives);
 
         //Sections
-        for(int x=0;x<=5;x++){
-            pSectionSpace.add(new Section());
-        }
+        pSectionSpace.add(cOne);
+        pSectionSpace.add(cTwo);
+        pSectionSpace.add(cThree);
+        pSectionSpace.add(cFour);
+        pSectionSpace.add(cFive);
+        pSectionSpace.add(cSix);
+    }
+
+    public static void resetChallanges(){
+        cOne.resetChallange();
+        cTwo.resetChallenge();
+        cThree.resetChallenge();
+        cFour.resetChallenge();
+        cFive.resetChallenge();
+        cSix.resetChallenge();
     }
 }
