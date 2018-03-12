@@ -9,7 +9,7 @@ public class GameScene extends JPanel {
 
     private static JPanel pLeftSpace;
     private static JPanel pTopSpace;
-    public static JPanel pBombSpace;
+    public static Bomb pBombSpace;
     private static JPanel pRightSpace;
     private static JPanel pBottomSpace;
 
@@ -84,7 +84,5 @@ public class GameScene extends JPanel {
         gbContraints.weighty = 0.1;
         gbContraints.gridwidth = 3;
         this.add(pBottomSpace, gbContraints);
-
-        pBombSpace.resetChallenges();
     }
 }

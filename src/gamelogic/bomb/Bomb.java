@@ -40,6 +40,13 @@ public class Bomb extends JPanel{
         pInfoSpace.setPreferredSize(pInfoSpace.getPreferredSize());
         pSectionSpace.setPreferredSize(pSectionSpace.getPreferredSize());
 
+        cOne = new Wire_Challenge();
+        cTwo = new Challenge();
+        cThree = new Challenge();
+        cFour = new Challenge();
+        cFive = new Challenge();
+        cSix = new Challenge();
+
         // Default Var
         gbContraints.fill = 1;
         gbContraints.gridx = 0;
@@ -73,7 +80,7 @@ public class Bomb extends JPanel{
         pSectionSpace.add(cSix);
     }
 
-    public static void resetChallanges(){
+    public void resetChallanges(){
         cOne.resetChallange();
         cTwo.resetChallenge();
         cThree.resetChallenge();
