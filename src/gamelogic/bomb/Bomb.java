@@ -8,19 +8,24 @@ import java.awt.*;
 
 public class Bomb extends JPanel{
 
-    private static JPanel pInfoSpace;
-    private static JPanel pSectionSpace;
+    private JPanel pInfoSpace;
+    private JPanel pSectionSpace;
 
-    private static BombSticker bSticker;
-    private static BombTimer bTimer;
-    private static BombLives bLives;
+    private BombSticker bSticker;
+    private BombTimer bTimer;
+    private BombLives bLives;
 
-    private static Wire_Challenge cOne;
-    private static Challenge cTwo;
-    private static Challenge cThree;
-    private static Challenge cFour;
-    private static Challenge cFive;
-    private static Challenge cSix;
+    private Wire_Challenge cOne;
+    private Wire_Challenge cTwo;
+    private Wire_Challenge cThree;
+    private Wire_Challenge cFour;
+    private Wire_Challenge cFive;
+    private Wire_Challenge cSix;
+
+    private int iChallengesCompleted;
+    private int iChallengesFailed;
+
+    private boolean bBombCompleted;
 
     private static GridBagConstraints gbContraints;
 
@@ -41,11 +46,16 @@ public class Bomb extends JPanel{
         pSectionSpace.setPreferredSize(pSectionSpace.getPreferredSize());
 
         cOne = new Wire_Challenge();
-        cTwo = new Challenge();
-        cThree = new Challenge();
-        cFour = new Challenge();
-        cFive = new Challenge();
-        cSix = new Challenge();
+        cTwo = new Wire_Challenge();
+        cThree = new Wire_Challenge();
+        cFour = new Wire_Challenge();
+        cFive = new Wire_Challenge();
+        cSix = new Wire_Challenge();
+
+        iChallengesCompleted = 0;
+        iChallengesFailed = 0;
+
+        bBombCompleted = false;
 
         // Default Var
         gbContraints.fill = 1;
@@ -61,6 +71,7 @@ public class Bomb extends JPanel{
         gbContraints.weightx = 0.2;
         gbContraints.weighty = 0.2;
         this.add(pInfoSpace, gbContraints);
+
         gbContraints.gridx = 0;
         gbContraints.gridy = 1;
         gbContraints.weightx = 1;
@@ -71,6 +82,11 @@ public class Bomb extends JPanel{
         pInfoSpace.add(bTimer);
         pInfoSpace.add(bLives);
 
+        Timer tUpdate = new Timer(100, e-> {
+            checkSections();
+        });
+        tUpdate.start();
+
         //Sections
         pSectionSpace.add(cOne);
         pSectionSpace.add(cTwo);
@@ -80,12 +96,65 @@ public class Bomb extends JPanel{
         pSectionSpace.add(cSix);
     }
 
-    public void resetChallanges(){
-        cOne.resetChallange();
+    public void resetBomb(){
+
+        bTimer.resetTimer();
+        bSticker.resetSticker();
+        bLives.resetLives();
+
+        cOne.resetChallenge();
         cTwo.resetChallenge();
         cThree.resetChallenge();
         cFour.resetChallenge();
         cFive.resetChallenge();
         cSix.resetChallenge();
+    }
+
+    public void checkSections(){
+        switch (cOne.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+
+        switch (cTwo.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+
+        switch (cThree.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+
+        switch (cFour.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+
+        switch (cFive.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+
+        switch (cSix.getState()){
+            case 1 : passedSection(); break;
+            case 2 : failedSection(); break;
+        }
+    }
+
+    private void passedSection(){
+        iChallengesCompleted++;
+        checkProgress();
+    }
+
+    private void failedSection(){
+        iChallengesFailed++;
+        checkProgress();
+    }
+
+    private void checkProgress(){
+        if(iChallengesFailed == 3 || iChallengesFailed + iChallengesCompleted == 6){
+            bBombCompleted = true;
+        }
     }
 }
