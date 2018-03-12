@@ -5,29 +5,27 @@ import java.awt.*;
 
 public class Wire_Challenge extends JPanel {
 
-    private static JButton bWireOne;
-    private static JButton bWireTwo;
-    private static JButton bWireThree;
-    private static JButton bWireFour;
-    private static JButton bWireFive;
+    private JButton bWireOne;
+    private JButton bWireTwo;
+    private JButton bWireThree;
+    private JButton bWireFour;
+    private JButton bWireFive;
 
-    private static boolean bIsWireOneCut;
-    private static boolean bIsWireTwoCut;
-    private static boolean bIsWireThreeCut;
-    private static boolean bIsWireFourCut;
-    private static boolean bIsWireFiveCut;
+    private boolean bIsWireOneCut;
+    private boolean bIsWireTwoCut;
+    private boolean bIsWireThreeCut;
+    private boolean bIsWireFourCut;
+    private boolean bIsWireFiveCut;
 
-    private static int iChallangeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed
-
-    private static int iButtonOrder[] = {
+    private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
+    private int iSequence;
+    private int iButtonOrder[] = {
             2, // First Button Order 3st
             4, // Second Button Order 5nd
             1, // Third Button Order 2rd
             0, // Fourth Button Order 1th
             3  // Fifth Button Order 4th
     };
-
-    private static int iSequence;
 
     public Wire_Challenge(){
         this.setBackground(Color.LIGHT_GRAY);
@@ -38,7 +36,7 @@ public class Wire_Challenge extends JPanel {
         bIsWireFourCut = false;
         bIsWireFiveCut = false;
 
-        iChallangeState = 0;
+        iChallengeState = 0;
         iSequence = 0;
 
         bWireOne = new JButton("One", new ImageIcon("wire_black.png"));
@@ -67,7 +65,7 @@ public class Wire_Challenge extends JPanel {
         bWireFive.setBorderPainted(false);
 
         bWireOne.addActionListener(e->{
-            if(!bIsWireOneCut && iChallangeState != 2) {
+            if(!bIsWireOneCut && iChallengeState < 2) {
                 bIsWireOneCut = true;
                 System.out.println(bWireOne.getText() + " Is Cut " + bIsWireOneCut);
                 bWireOne.setIcon(new ImageIcon("wire_black_cut.png"));
@@ -75,9 +73,12 @@ public class Wire_Challenge extends JPanel {
                     iSequence++;
                     System.out.println("CORRECT");
                     System.out.println(iSequence);
+                    if(iSequence == 5){
+                        iChallengeState = 1;
+                    }
                 } else {
                     System.out.println("INCORRECT");
-                    iChallangeState = 2; // Failed Challenge
+                    iChallengeState = 2; // Failed Challenge
                 }
             }else {
                 System.out.println("Wire has been cut already or the challenge has failed");
@@ -85,17 +86,20 @@ public class Wire_Challenge extends JPanel {
         });
 
         bWireTwo.addActionListener(e->{
-            if(!bIsWireTwoCut && iChallangeState != 2) {
+            if(!bIsWireTwoCut && iChallengeState < 2) {
                 bIsWireTwoCut = true;
                 System.out.println(bWireTwo.getText() + " Is Cut " + bIsWireTwoCut);
-                bWireTwo.setIcon(new ImageIcon("wire_red_cut.png"));
-                if (isCorrct(bWireOne.getText())) {
+                bWireTwo.setIcon(new ImageIcon("wire_white_cut.png"));
+                if (isCorrct(bWireTwo.getText())) {
                     iSequence++;
                     System.out.println("CORRECT");
                     System.out.println(iSequence);
+                    if(iSequence == 5){
+                        iChallengeState = 1;
+                    }
                 } else {
                     System.out.println("INCORRECT");
-                    iChallangeState = 2; // Failed Challenge
+                    iChallengeState = 2; // Failed Challenge
                 }
             }else {
                 System.out.println("Wire has been cut already or the challenge has failed");
@@ -103,7 +107,7 @@ public class Wire_Challenge extends JPanel {
         });
 
         bWireThree.addActionListener(e->{
-            if(!bIsWireThreeCut && iChallangeState != 2) {
+            if(!bIsWireThreeCut && iChallengeState < 2) {
                 bIsWireThreeCut = true;
                 System.out.println(bWireThree.getText() + " Is Cut " + bIsWireThreeCut);
                 bWireThree.setIcon(new ImageIcon("wire_red_cut.png"));
@@ -111,9 +115,12 @@ public class Wire_Challenge extends JPanel {
                     iSequence++;
                     System.out.println("CORRECT");
                     System.out.println(iSequence);
+                    if(iSequence == 5){
+                        iChallengeState = 1;
+                    }
                 } else {
                     System.out.println("INCORRECT");
-                    iChallangeState = 2; // Failed Challenge
+                    iChallengeState = 2; // Failed Challenge
                 }
             }else {
                 System.out.println("Wire has been cut already or the challenge has failed");
@@ -121,7 +128,7 @@ public class Wire_Challenge extends JPanel {
         });
 
         bWireFour.addActionListener(e->{
-            if(!bIsWireFourCut && iChallangeState != 2) {
+            if(!bIsWireFourCut && iChallengeState < 2) {
                 bIsWireFourCut = true;
                 System.out.println(bWireFour.getText() + " Is Cut " + bIsWireFourCut);
                 bWireFour.setIcon(new ImageIcon("wire_green_cut.png"));
@@ -129,9 +136,12 @@ public class Wire_Challenge extends JPanel {
                     iSequence++;
                     System.out.println("CORRECT");
                     System.out.println(iSequence);
+                    if(iSequence == 5){
+                        iChallengeState = 1;
+                    }
                 } else {
                     System.out.println("INCORRECT");
-                    iChallangeState = 2; // Failed Challenge
+                    iChallengeState = 2; // Failed Challenge
                 }
             }else {
                 System.out.println("Wire has been cut already or the challenge has failed");
@@ -139,7 +149,7 @@ public class Wire_Challenge extends JPanel {
         });
 
         bWireFive.addActionListener(e->{
-            if(!bIsWireFiveCut && iChallangeState != 2) {
+            if(!bIsWireFiveCut && iChallengeState < 2) {
                 bIsWireFiveCut = true;
                 System.out.println(bWireFive.getText() + " Is Cut " + bIsWireFiveCut);
                 bWireFive.setIcon(new ImageIcon("wire_blue_cut.png"));
@@ -147,9 +157,12 @@ public class Wire_Challenge extends JPanel {
                     iSequence++;
                     System.out.println("CORRECT");
                     System.out.println(iSequence);
+                    if(iSequence == 5){
+                        iChallengeState = 1;
+                    }
                 } else {
                     System.out.println("INCORRECT");
-                    iChallangeState = 2; // Failed Challenge
+                    iChallengeState = 2; // Failed Challenge
                 }
             }else {
                 System.out.println("Wire has been cut already or the challenge has failed");
@@ -166,7 +179,7 @@ public class Wire_Challenge extends JPanel {
         this.add(bWireFive);
     }
 
-    private static boolean isCorrct(String bText){
+    private boolean isCorrct(String bText){
         switch (bText){
             case "One" : return iButtonOrder[0] == iSequence;
             case "Two" : return iButtonOrder[1] == iSequence;
@@ -177,14 +190,14 @@ public class Wire_Challenge extends JPanel {
         }
     }
 
-    public static void resetChallange(){
+    public void resetChallenge(){
         bIsWireOneCut = false;
         bIsWireTwoCut = false;
         bIsWireThreeCut = false;
         bIsWireFourCut = false;
         bIsWireFiveCut = false;
 
-        iChallangeState = 0;
+        iChallengeState = 0;
         iSequence = 0;
 
         bWireOne.setIcon(new ImageIcon("wire_black.png"));
@@ -192,5 +205,15 @@ public class Wire_Challenge extends JPanel {
         bWireThree.setIcon(new ImageIcon("wire_red.png"));
         bWireFour.setIcon(new ImageIcon("wire_green.png"));
         bWireFive.setIcon(new ImageIcon("wire_blue.png"));
+    }
+
+    public int getState(){
+        switch (iChallengeState){
+            case 0 : return 0;
+            case 1 : iChallengeState = 3; return 1;
+            case 2 : iChallengeState = 3; return 2;
+            case 3 : return 3;
+            default: return 0;
+        }
     }
 }

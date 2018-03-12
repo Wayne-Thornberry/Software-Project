@@ -18,4 +18,9 @@ public class BombSticker extends JPanel {
         this.setPreferredSize(this.getPreferredSize());
         this.setBackground(Color.WHITE);
     }
+
+    public void resetSticker(){
+        iStickerNo = (int)(Math.random() * 999999);
+        lSticker.setText(Integer.toString(iStickerNo));
+    }
 }

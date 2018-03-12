@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class BombLives extends JPanel {
 
-    private static JLabel lLives;
+    private JLabel lLives;
 
-    private static int iLives;
+    private int iLives;
 
     public BombLives(){
 
@@ -18,5 +18,15 @@ public class BombLives extends JPanel {
         this.add(lLives);
         this.setPreferredSize(this.getPreferredSize());
         this.setBackground(Color.RED);
+    }
+
+    public void decreaseLives(){
+        iLives--;
+        lLives.setText(Integer.toString(iLives));
+    }
+
+    public void resetLives(){
+        iLives = 3;
+        lLives.setText(Integer.toString(iLives));
     }
 }
