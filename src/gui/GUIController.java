@@ -87,7 +87,7 @@ public class GUIController extends JFrame{
         });
 
         mItemReloadGameScene.addActionListener(e -> {
-            pGameScene.pBombSpace.resetChallenges();
+            pGameScene.pBombSpace.resetChallanges();
         });
 
 
