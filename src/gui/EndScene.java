@@ -1,4 +1,4 @@
-package gui.scenes;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,5 +8,8 @@ public class EndScene extends JPanel {
         this.setBackground(Color.BLUE);
     }
 
+    public void setScene(String scene){
 
+    }
 }
+

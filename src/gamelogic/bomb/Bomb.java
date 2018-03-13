@@ -129,6 +129,9 @@ public class Bomb extends JPanel{
         bSticker.resetSticker();
         bLives.resetLives();
 
+        iChallengesFailed = 0;
+        iChallengesCompleted = 0;
+
         cOne.resetChallenge();
         cTwo.resetChallenge();
         cThree.resetChallenge();
@@ -156,6 +159,7 @@ public class Bomb extends JPanel{
     }
 
     public boolean getBombState(){
+        System.out.println(iChallengesFailed + iChallengesCompleted);
         return (iChallengesFailed + iChallengesCompleted == 6 || bLives.getLives() <= 0 || bTimer.getTimer() <=0);
     }
 }

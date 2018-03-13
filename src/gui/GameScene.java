@@ -1,4 +1,4 @@
-package gui.scenes;
+package gui;
 
 import gamelogic.bomb.*;
 

@@ -1,5 +1,3 @@
-import gui.*;
-
 public class Application {
 
     private static Controller gController;
