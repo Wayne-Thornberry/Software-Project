@@ -5,15 +5,17 @@ import java.awt.*;
 
 public class BombTimer extends JPanel {
 
-    private static JLabel lTimer;
-    private static Timer tTimer;
+    private JLabel lTimer;
+    public Timer tTimer;
 
     // Primitives
-    private static int iTimer;
+    private int iTime;
+    private int iDelay;
 
     public BombTimer(){
         lTimer = new JLabel();
-        iTimer = 1000;
+        iTime = 300;
+        iDelay = 1000;
         System.out.println(this.getMinimumSize().height);
         lTimer.setFont(new Font("Arial",0,72));
 
@@ -22,24 +24,32 @@ public class BombTimer extends JPanel {
 
         // Events
 
-        tTimer = new Timer(1000, e-> {
-            System.out.println("Test");
-            setTimer();
-            updateTimerText();
+        tTimer = new Timer(iDelay, e-> {
+            if(iTime > 0) {
+                iTime--;
+                lTimer.setText(Integer.toString(iTime / 60) + ":" + String.format("%02d", iTime % 60));
+            }else {
+                tTimer.stop();
+            }
         });
 
         tTimer.start();
     }
 
-    public static void setTimer(){
-        iTimer--;
+    public int getTimer(){
+        return iTime;
     }
 
-    public static Timer getTimer(){
-        return tTimer;
+    public void decreaseTimer(){
+        iDelay = iDelay / 2;
+        tTimer.setDelay(iDelay);
     }
 
-    private static void updateTimerText(){
-        lTimer.setText(Integer.toString(iTimer / 60)  + ":" +  Integer.toString(iTimer % 60));
+    public void resetTimer(){
+        iTime = 300;
+        iDelay = 1000;
+        tTimer.setDelay(iDelay);
+        lTimer.setText(Integer.toString(iTime / 60)  + ":" +  String.format("%02d", iTime % 60));
+        tTimer.start();
     }
 }

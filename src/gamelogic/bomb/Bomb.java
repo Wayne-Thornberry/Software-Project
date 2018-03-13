@@ -1,6 +1,5 @@
 package gamelogic.bomb;
 
-import gamelogic.*;
 import gamelogic.challanges.*;
 
 import javax.swing.*;
@@ -8,19 +7,22 @@ import java.awt.*;
 
 public class Bomb extends JPanel{
 
-    private static JPanel pInfoSpace;
-    private static JPanel pSectionSpace;
+    private JPanel pInfoSpace;
+    private JPanel pSectionSpace;
 
-    private static BombSticker bSticker;
-    private static BombTimer bTimer;
-    private static BombLives bLives;
+    private BombSticker bSticker;
+    private BombTimer bTimer;
+    private BombLives bLives;
 
-    private static Wire_Challenge cOne;
-    private static Challenge cTwo;
-    private static Challenge cThree;
-    private static Challenge cFour;
-    private static Challenge cFive;
-    private static Challenge cSix;
+    private WireChallenge cOne;
+    private WireChallenge cTwo;
+    private WireChallenge cThree;
+    private WireChallenge cFour;
+    private WireChallenge cFive;
+    private WireChallenge cSix;
+
+    private int iChallengesCompleted;
+    private int iChallengesFailed;
 
     private static GridBagConstraints gbContraints;
 
@@ -40,12 +42,15 @@ public class Bomb extends JPanel{
         pInfoSpace.setPreferredSize(pInfoSpace.getPreferredSize());
         pSectionSpace.setPreferredSize(pSectionSpace.getPreferredSize());
 
-        cOne = new Wire_Challenge();
-        cTwo = new Challenge();
-        cThree = new Challenge();
-        cFour = new Challenge();
-        cFive = new Challenge();
-        cSix = new Challenge();
+        cOne = new WireChallenge();
+        cTwo = new WireChallenge();
+        cThree = new WireChallenge();
+        cFour = new WireChallenge();
+        cFive = new WireChallenge();
+        cSix = new WireChallenge();
+
+        iChallengesCompleted = 0;
+        iChallengesFailed = 0;
 
         // Default Var
         gbContraints.fill = 1;
@@ -61,6 +66,7 @@ public class Bomb extends JPanel{
         gbContraints.weightx = 0.2;
         gbContraints.weighty = 0.2;
         this.add(pInfoSpace, gbContraints);
+
         gbContraints.gridx = 0;
         gbContraints.gridy = 1;
         gbContraints.weightx = 1;
@@ -71,6 +77,11 @@ public class Bomb extends JPanel{
         pInfoSpace.add(bTimer);
         pInfoSpace.add(bLives);
 
+        Timer tUpdate = new Timer(100, e-> {
+            checkSections();
+        });
+        tUpdate.start();
+
         //Sections
         pSectionSpace.add(cOne);
         pSectionSpace.add(cTwo);
@@ -80,12 +91,75 @@ public class Bomb extends JPanel{
         pSectionSpace.add(cSix);
     }
 
-    public void resetChallanges(){
-        cOne.resetChallange();
+    public void checkSections(){
+        switch (cOne.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cTwo.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cThree.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cFour.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+
+        switch (cFive.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+
+        switch (cSix.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+    }
+
+    public void resetBomb(){
+
+        bTimer.resetTimer();
+        bSticker.resetSticker();
+        bLives.resetLives();
+
+        iChallengesFailed = 0;
+        iChallengesCompleted = 0;
+
+        cOne.resetChallenge();
         cTwo.resetChallenge();
         cThree.resetChallenge();
         cFour.resetChallenge();
         cFive.resetChallenge();
         cSix.resetChallenge();
+    }
+
+    public void pauseBomb(){
+        bTimer.tTimer.stop();
+    }
+
+    public void resumeBomb(){
+        bTimer.tTimer.start();
+    }
+
+    private void setChallengeState(boolean bState){
+        if(bState) {
+            iChallengesCompleted++;
+        }else{
+            iChallengesFailed++;
+            bLives.decreaseLives();
+            bTimer.decreaseTimer();
+        }
+    }
+
+    public boolean getBombState(){
+        System.out.println(iChallengesFailed + iChallengesCompleted);
+        return (iChallengesFailed + iChallengesCompleted == 6 || bLives.getLives() <= 0 || bTimer.getTimer() <=0);
     }
 }
