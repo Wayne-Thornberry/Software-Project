@@ -85,4 +85,17 @@ public class GameScene extends JPanel {
         gbContraints.gridwidth = 3;
         this.add(pBottomSpace, gbContraints);
     }
+
+    public void resetGame(){
+        pBombSpace.resetBomb();
+    }
+
+    public void resumeGame(){
+        pBombSpace.resumeBomb();
+    }
+
+    public void pauseGame(){
+        pBombSpace.pauseBomb();
+    }
+
 }

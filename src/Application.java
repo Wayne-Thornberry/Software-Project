@@ -1,13 +1,10 @@
-import gamelogic.*;
 import gui.*;
 
 public class Application {
 
-    private static GUIController gController;
-    private static LogicController lController;
+    private static Controller gController;
 
     public static void main(String ARGS[]){
-        gController = new GUIController();
-        lController = new LogicController();
+        gController = new Controller();
     }
 }
