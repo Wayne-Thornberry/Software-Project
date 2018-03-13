@@ -24,7 +24,7 @@ public class MainScene extends JPanel {
     private static GridBagConstraints gbContraints;
 
     public MainScene(){
-        //Tests
+        //Test
         pLeftSpace = new JPanel();
         pMiddleSpace = new JPanel(new GridBagLayout());
         pRightSpace = new JPanel();

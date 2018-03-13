@@ -1,6 +1,6 @@
 package gui.scenes;
 
-import gamelogic.Bomb;
+import gamelogic.bomb.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +9,7 @@ public class GameScene extends JPanel {
 
     private static JPanel pLeftSpace;
     private static JPanel pTopSpace;
+    public static Bomb pBombSpace;
     private static JPanel pRightSpace;
     private static JPanel pBottomSpace;
 
@@ -16,8 +17,10 @@ public class GameScene extends JPanel {
 
     public GameScene(){
 
+        this.setLayout(new GridBagLayout());
         pLeftSpace = new JPanel();
         pTopSpace = new JPanel();
+        pBombSpace = new Bomb();
         pRightSpace = new JPanel();
         pBottomSpace = new JPanel();
 
@@ -34,6 +37,18 @@ public class GameScene extends JPanel {
         pTopSpace.setPreferredSize(pTopSpace.getPreferredSize());
         pRightSpace.setPreferredSize(pRightSpace.getPreferredSize());
         pBottomSpace.setPreferredSize(pBottomSpace.getPreferredSize());
+
+        // Default Var
+
+        gbContraints.fill = 1;
+        gbContraints.gridx = 0;
+        gbContraints.gridy = 0;
+        gbContraints.weightx = 1;
+        gbContraints.weighty = 1;
+        gbContraints.gridwidth = 1;
+        gbContraints.gridheight = 1;
+
+        // End
 
         gbContraints.gridx = 0;
         gbContraints.gridy = 0;
@@ -54,7 +69,7 @@ public class GameScene extends JPanel {
         gbContraints.weightx = 1;
         gbContraints.weighty = 1;
         gbContraints.gridwidth = 1;
-        this.add(new Bomb(), gbContraints);
+        this.add(pBombSpace, gbContraints);
 
         gbContraints.gridx = 2;
         gbContraints.gridy = 1;
@@ -69,6 +84,5 @@ public class GameScene extends JPanel {
         gbContraints.weighty = 0.1;
         gbContraints.gridwidth = 3;
         this.add(pBottomSpace, gbContraints);
-
     }
 }
