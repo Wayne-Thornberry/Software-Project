@@ -20,9 +20,15 @@ public class BombLives extends JPanel {
         this.setBackground(Color.RED);
     }
 
+    public int getLives(){
+        return iLives;
+    }
+
     public void decreaseLives(){
-        iLives--;
-        lLives.setText(Integer.toString(iLives));
+        if(iLives > 0) {
+            iLives--;
+            lLives.setText(Integer.toString(iLives));
+        }
     }
 
     public void resetLives(){

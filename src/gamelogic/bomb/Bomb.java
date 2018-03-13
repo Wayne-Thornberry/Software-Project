@@ -1,6 +1,5 @@
 package gamelogic.bomb;
 
-import gamelogic.*;
 import gamelogic.challanges.*;
 
 import javax.swing.*;
@@ -15,17 +14,15 @@ public class Bomb extends JPanel{
     private BombTimer bTimer;
     private BombLives bLives;
 
-    private Wire_Challenge cOne;
-    private Wire_Challenge cTwo;
-    private Wire_Challenge cThree;
-    private Wire_Challenge cFour;
-    private Wire_Challenge cFive;
-    private Wire_Challenge cSix;
+    private WireChallenge cOne;
+    private WireChallenge cTwo;
+    private WireChallenge cThree;
+    private WireChallenge cFour;
+    private WireChallenge cFive;
+    private WireChallenge cSix;
 
     private int iChallengesCompleted;
     private int iChallengesFailed;
-
-    private boolean bBombCompleted;
 
     private static GridBagConstraints gbContraints;
 
@@ -45,17 +42,15 @@ public class Bomb extends JPanel{
         pInfoSpace.setPreferredSize(pInfoSpace.getPreferredSize());
         pSectionSpace.setPreferredSize(pSectionSpace.getPreferredSize());
 
-        cOne = new Wire_Challenge();
-        cTwo = new Wire_Challenge();
-        cThree = new Wire_Challenge();
-        cFour = new Wire_Challenge();
-        cFive = new Wire_Challenge();
-        cSix = new Wire_Challenge();
+        cOne = new WireChallenge();
+        cTwo = new WireChallenge();
+        cThree = new WireChallenge();
+        cFour = new WireChallenge();
+        cFive = new WireChallenge();
+        cSix = new WireChallenge();
 
         iChallengesCompleted = 0;
         iChallengesFailed = 0;
-
-        bBombCompleted = false;
 
         // Default Var
         gbContraints.fill = 1;
@@ -96,6 +91,38 @@ public class Bomb extends JPanel{
         pSectionSpace.add(cSix);
     }
 
+    public void checkSections(){
+        switch (cOne.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cTwo.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cThree.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break;
+        }
+
+        switch (cFour.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+
+        switch (cFive.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+
+        switch (cSix.getState()){
+            case 1 : setChallengeState(true); break;
+            case 2 : setChallengeState(false); break; // test
+        }
+    }
+
     public void resetBomb(){
 
         bTimer.resetTimer();
@@ -110,51 +137,25 @@ public class Bomb extends JPanel{
         cSix.resetChallenge();
     }
 
-    public void checkSections(){
-        switch (cOne.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
-        }
+    public void pauseBomb(){
+        bTimer.tTimer.stop();
+    }
 
-        switch (cTwo.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
-        }
+    public void resumeBomb(){
+        bTimer.tTimer.start();
+    }
 
-        switch (cThree.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
-        }
-
-        switch (cFour.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
-        }
-
-        switch (cFive.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
-        }
-
-        switch (cSix.getState()){
-            case 1 : passedSection(); break;
-            case 2 : failedSection(); break;
+    private void setChallengeState(boolean bState){
+        if(bState) {
+            iChallengesCompleted++;
+        }else{
+            iChallengesFailed++;
+            bLives.decreaseLives();
+            bTimer.decreaseTimer();
         }
     }
 
-    private void passedSection(){
-        iChallengesCompleted++;
-        checkProgress();
-    }
-
-    private void failedSection(){
-        iChallengesFailed++;
-        checkProgress();
-    }
-
-    private void checkProgress(){
-        if(iChallengesFailed == 3 || iChallengesFailed + iChallengesCompleted == 6){
-            bBombCompleted = true;
-        }
+    public boolean getBombState(){
+        return (iChallengesFailed + iChallengesCompleted == 6 || bLives.getLives() <= 0 || bTimer.getTimer() <=0);
     }
 }

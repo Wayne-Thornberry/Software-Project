@@ -14,7 +14,7 @@ public class BombTimer extends JPanel {
 
     public BombTimer(){
         lTimer = new JLabel();
-        iTime = 1000;
+        iTime = 300;
         iDelay = 1000;
         System.out.println(this.getMinimumSize().height);
         lTimer.setFont(new Font("Arial",0,72));
@@ -25,11 +25,19 @@ public class BombTimer extends JPanel {
         // Events
 
         tTimer = new Timer(iDelay, e-> {
-            iTime--;
-            lTimer.setText(Integer.toString(iTime / 60)  + ":" +  Integer.toString(iTime % 60));
+            if(iTime > 0) {
+                iTime--;
+                lTimer.setText(Integer.toString(iTime / 60) + ":" + String.format("%02d", iTime % 60));
+            }else {
+                tTimer.stop();
+            }
         });
 
         tTimer.start();
+    }
+
+    public int getTimer(){
+        return iTime;
     }
 
     public void decreaseTimer(){
@@ -38,9 +46,10 @@ public class BombTimer extends JPanel {
     }
 
     public void resetTimer(){
-        iTime = 1000;
+        iTime = 300;
         iDelay = 1000;
         tTimer.setDelay(iDelay);
-        lTimer.setText(Integer.toString(iTime / 60)  + ":" +  Integer.toString(iTime % 60));
+        lTimer.setText(Integer.toString(iTime / 60)  + ":" +  String.format("%02d", iTime % 60));
+        tTimer.start();
     }
 }
