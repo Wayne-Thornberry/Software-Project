@@ -1,13 +1,12 @@
-package gui;
-
 import gamelogic.Player;
-import gui.scenes.*;
+import gui.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class Controller extends JFrame{
 
@@ -20,13 +19,17 @@ public class Controller extends JFrame{
     private static JMenuBar mBar;
     private static JMenu mMenu;
 
-    private static JMenuItem mItemMainScene;
+    private static JMenu mMenuMain;
+    private static JMenuItem mItemSwitchMainScene;
+    private static JMenuItem mItemOptionsScene;
 
-    private static JMenu mItemGameMenu;
+    private static JMenu mMenuGame;
     private static JMenuItem mItemSwitchGameScene;
     private static JMenuItem mItemReloadGameScene;
 
-    private static JMenuItem mItemEndScene;
+    private static JMenu mMenuEnd;
+    private static JMenuItem mItemSwitchEndScene;
+    private static JMenuItem mItemLeaderboardScene;
 
     private static CardLayout cLayout;
 
@@ -50,13 +53,17 @@ public class Controller extends JFrame{
         mBar = new JMenuBar();
         mMenu = new JMenu("Debug");
 
-        mItemMainScene = new JMenuItem("Load MainMenu Scene");
+        mMenuMain = new JMenu("Main Menu Scene");
+        mItemSwitchMainScene = new JMenuItem("Switch To Main Menu Scene");
+        mItemOptionsScene = new JMenuItem("Load Options Scene");
 
-        mItemGameMenu = new JMenu("Game Scene");
-        mItemSwitchGameScene = new JMenuItem("Switch To Scene");
-        mItemReloadGameScene = new JMenuItem("Reload Scene");
+        mMenuGame = new JMenu("Game Scene");
+        mItemSwitchGameScene = new JMenuItem("Switch To Game Scene");
+        mItemReloadGameScene = new JMenuItem("Load Game Scene");
 
-        mItemEndScene  = new JMenuItem("Load End Scene");
+        mMenuEnd  = new JMenu("End Scene");
+        mItemSwitchEndScene  = new JMenuItem("Switch To End Scene");
+        mItemLeaderboardScene  = new JMenuItem("Load Leaderboard Scene");
 
         cLayout = new CardLayout();
 
@@ -75,13 +82,17 @@ public class Controller extends JFrame{
 
         mBar.add(mMenu);
 
-        mMenu.add(mItemMainScene);
+        mMenu.add(mMenuMain);
+        mMenuMain.add(mItemSwitchMainScene);
+        mMenuMain.add(mItemOptionsScene);
 
-        mMenu.add(mItemGameMenu);
-        mItemGameMenu.add(mItemSwitchGameScene);
-        mItemGameMenu.add(mItemReloadGameScene);
+        mMenu.add(mMenuGame);
+        mMenuGame.add(mItemSwitchGameScene);
+        mMenuGame.add(mItemReloadGameScene);
 
-        mMenu.add(mItemEndScene);
+        mMenu.add(mMenuEnd);
+        mMenuEnd.add(mItemSwitchEndScene);
+        mMenuEnd.add(mItemLeaderboardScene);
 
         pBase.add(pMainScene, "0");
         pBase.add(pGameScene, "1");
@@ -89,10 +100,17 @@ public class Controller extends JFrame{
 
         // Events
 
-        mItemMainScene.addActionListener(e -> {
+        // Main Menu Items
+        mItemSwitchMainScene.addActionListener(e -> {
+            pMainScene.setScene("0");
             setScene("0");
         });
 
+        mItemOptionsScene.addActionListener(e -> {
+            pMainScene.setScene("1");
+        });
+
+        // Game Items
         mItemSwitchGameScene.addActionListener(e -> {
             setScene("1");
         });
@@ -101,9 +119,13 @@ public class Controller extends JFrame{
             pGameScene.resetGame();
         });
 
-
-        mItemEndScene.addActionListener(e -> {
+        // End Screen Items
+        mItemSwitchEndScene.addActionListener(e -> {
             setScene("2");
+        });
+
+        mItemLeaderboardScene.addActionListener(e -> {
+            pEndScene.setScene("2");
         });
 
         pMainScene.addComponentListener(new ComponentAdapter() {
@@ -141,7 +163,7 @@ public class Controller extends JFrame{
             }
         });
 
-        tTimer = new Timer(1000, e->{
+        tTimer = new Timer(100, e->{
             if(pGameScene.pBombSpace.getBombState()){
                 setScene("2");
             }
@@ -154,6 +176,11 @@ public class Controller extends JFrame{
 
             @Override
             public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_T){
+                    System.out.println("Tab Pressed");
+                    mBar.setVisible(!mBar.isVisible());
+                }
+
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE && sScene == "1"){
                     System.out.println("ESC pressed");
                     setScene("0");
@@ -171,7 +198,6 @@ public class Controller extends JFrame{
         this.requestFocusInWindow();
         this.requestFocus();
         this.setSize(1280,720);
-        this.setMinimumSize(new Dimension(800, 600));
         this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
