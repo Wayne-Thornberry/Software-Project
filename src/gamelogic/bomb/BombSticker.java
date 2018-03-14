@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class BombSticker extends JPanel {
 
+
     private JLabel lSticker;
 
     private int iStickerNo;
@@ -23,4 +24,10 @@ public class BombSticker extends JPanel {
         iStickerNo = (int)(Math.random() * 999999);
         lSticker.setText(Integer.toString(iStickerNo));
     }
+    public void setStickerNo(int iStickerNo)
+    {
+        this.iStickerNo = iStickerNo;
+    }
+
+
 }

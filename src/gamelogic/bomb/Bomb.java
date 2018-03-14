@@ -16,7 +16,7 @@ public class Bomb extends JPanel{
 
     private WireChallenge cOne;
     private WireChallenge cTwo;
-    private WireChallenge cThree;
+    private EvenOddChallenge cThree;
     private WireChallenge cFour;
     private WireChallenge cFive;
     private WireChallenge cSix;
@@ -44,7 +44,7 @@ public class Bomb extends JPanel{
 
         cOne = new WireChallenge();
         cTwo = new WireChallenge();
-        cThree = new WireChallenge();
+        cThree = new EvenOddChallenge();
         cFour = new WireChallenge();
         cFive = new WireChallenge();
         cSix = new WireChallenge();
