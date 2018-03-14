@@ -140,6 +140,16 @@ public class Bomb extends JPanel{
         cSix.resetChallenge();
     }
 
+
+    private void setChallengeSticker(){
+        cOne.setStickerNo(bSticker.getStickerNo());
+        cTwo.setStickerNo(bSticker.getStickerNo());
+        cThree.setStickerNo(bSticker.getStickerNo());
+        cFour.setStickerNo(bSticker.getStickerNo());
+        cFive.setStickerNo(bSticker.getStickerNo());
+        cSix.setStickerNo(bSticker.getStickerNo());
+    }
+
     public void pauseBomb(){
         bTimer.tTimer.stop();
     }

@@ -31,6 +31,8 @@ public class WireChallenge extends JPanel {
 
     private AudioClip aInteractSound;
 
+    private int iStickerNo;
+
     public WireChallenge(){
         this.setBackground(Color.LIGHT_GRAY);
 
@@ -42,6 +44,7 @@ public class WireChallenge extends JPanel {
 
         iChallengeState = 0;
         iSequence = 0;
+        iStickerNo = 0;
 
         bWireOne = new JButton("One", new ImageIcon("wire_black.png"));
         bWireOne.setOpaque(false);
@@ -188,6 +191,10 @@ public class WireChallenge extends JPanel {
         this.add(bWireThree);
         this.add(bWireFour);
         this.add(bWireFive);
+    }
+
+    public void setStickerNo(int iNumber){
+        iStickerNo = iNumber;
     }
 
     private boolean isCorrct(String bText){
