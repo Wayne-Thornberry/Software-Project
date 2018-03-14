@@ -11,13 +11,17 @@ public class BombSticker extends JPanel {
     private int iStickerNo;
 
     public BombSticker(){
-        iStickerNo = (int)(Math.random() * 999999);
+        iStickerNo = 265299; // (int)(Math.random() * 999999)
         lSticker = new JLabel(Integer.toString(iStickerNo));
         lSticker.setFont(new Font("Arial",0,72));
 
         this.add(lSticker);
         this.setPreferredSize(this.getPreferredSize());
         this.setBackground(Color.WHITE);
+    }
+
+    public int getStickerNo(){
+        return iStickerNo;
     }
 
     public void resetSticker(){
