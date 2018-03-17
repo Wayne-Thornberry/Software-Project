@@ -110,7 +110,7 @@ public class KeypadChallenge extends JPanel{
 
     public int getState(){
         //Return the state of challenge
-        return iChallengeState;
+         return iChallengeState;
     }
 
     public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
