@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EvenOddChallenge extends JPanel implements ActionListener{
-
+     int iStickerNo;
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private JButton bRedButton,bGreenButton;
     public EvenOddChallenge(){
@@ -30,10 +30,10 @@ public class EvenOddChallenge extends JPanel implements ActionListener{
         bGreenButton.setBorderPainted(false);
 
         bRedButton.addActionListener(e->{
-                    System.out.println("RED BUTTON PRESSED");
-                    if(true )
+                    System.out.println("RED BUTTON PRESSED" + iStickerNo);
+                    if((iStickerNo % 2 == 0))
                     {
-
+                        System.out.println("STICKER IS EVEN");
                     }
                 });
 
@@ -64,6 +64,10 @@ public class EvenOddChallenge extends JPanel implements ActionListener{
 
     public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
 
+    }
+
+    public void setStickerNo(int iNumber){
+        this.iStickerNo = iNumber;
     }
 
     @Override
