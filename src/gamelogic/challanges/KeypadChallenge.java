@@ -1,20 +1,24 @@
 package gamelogic.challanges;
 
+import javafx.scene.media.AudioClip;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class KeypadChallenge extends JPanel{
 
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
-    private int iStickerNo;
+    int iStickerNo;
     public JPanel keypad;
     JTextField textfield = new JTextField(30);
-
+    private AudioClip aInteractSound;
 
     public KeypadChallenge(){
         iChallengeState = 0;
-        iStickerNo = 0;
+        //iStickerNo = 0;
         textfield.setEditable(false);
+        aInteractSound = new AudioClip("file:Interaction.wav");
+
         this.setLayout(new GridLayout(5,3));
         //keypad.setLayout(new GridLayout(4,3));
         JButton Key1 = new JButton("1");
@@ -50,47 +54,62 @@ public class KeypadChallenge extends JPanel{
 
         Key1.addActionListener(e->{
             textfield.setText(textfield.getText() + "1");
+            aInteractSound.play();
         });
         Key2.addActionListener(e->{
             textfield.setText(textfield.getText() + "2");
+            aInteractSound.play();
         });
         Key3.addActionListener(e->{
             textfield.setText(textfield.getText() + "3");
+            aInteractSound.play();
         });
         Key4.addActionListener(e->{
             textfield.setText(textfield.getText() + "4");
+            aInteractSound.play();
         });
         Key5.addActionListener(e->{
             textfield.setText(textfield.getText() + "5");
+            aInteractSound.play();
         });
         Key6.addActionListener(e->{
             textfield.setText(textfield.getText() + "6");
+            aInteractSound.play();
         });
         Key7.addActionListener(e->{
             textfield.setText(textfield.getText() + "7");
+            aInteractSound.play();
         });
         Key8.addActionListener(e->{
             textfield.setText(textfield.getText() + "8");
+            aInteractSound.play();
         });
         Key9.addActionListener(e->{
             textfield.setText(textfield.getText() + "9");
+            aInteractSound.play();
         });
 
         Key0.addActionListener(e->{
             textfield.setText(textfield.getText() + "0");
+            aInteractSound.play();
         });
 
         KeyClear.addActionListener(e->{
             System.out.println("TEXT CLEARED");
+            aInteractSound.play();
             textfield.setText("");
         });
 
         KeyEnter.addActionListener(e->{
             System.out.println("TEXT ENTERED");
+            aInteractSound.play();
             if(textfield.getText().equals("2018"))
             {
+                textfield.setText("CORRECT!");
                 System.out.println("CORRECT");
-                isCorrect();
+                iChallengeState = 1;
+
+
             }
         });
 
@@ -100,7 +119,7 @@ public class KeypadChallenge extends JPanel{
     }
 
     public void setStickerNo(int iNumber){
-        iStickerNo = iNumber;
+        this.iStickerNo = iNumber;
     }
 
     private boolean isCorrect(){
