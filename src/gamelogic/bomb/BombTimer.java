@@ -17,10 +17,12 @@ public class BombTimer extends JPanel {
         iTime = 300;
         iDelay = 1000;
         System.out.println(this.getMinimumSize().height);
-        lTimer.setFont(new Font("Arial",0,72));
+        lTimer.setFont(new Font("Arial",0,70));
 
         this.add(lTimer);
-        this.setBackground(Color.BLUE);
+        //this.setBackground(Color.BLUE);
+        this.setBorder(BorderFactory.createEtchedBorder());
+
 
         // Events
 

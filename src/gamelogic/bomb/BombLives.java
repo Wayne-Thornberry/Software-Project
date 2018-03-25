@@ -13,11 +13,13 @@ public class BombLives extends JPanel {
 
         iLives = 3;
         lLives = new JLabel(Integer.toString(iLives));
-        lLives.setFont(new Font("Arial",0,72));
+        lLives.setFont(new Font("Arial",0,70));
 
         this.add(lLives);
         this.setPreferredSize(this.getPreferredSize());
-        this.setBackground(Color.RED);
+        //this.setBackground(Color.RED);
+        this.setBorder(BorderFactory.createEtchedBorder());
+
     }
 
     public int getLives(){

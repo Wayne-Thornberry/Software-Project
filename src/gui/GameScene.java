@@ -26,12 +26,12 @@ public class GameScene extends JPanel {
 
         gbContraints = new GridBagConstraints();
 
-        this.setBackground(Color.GREEN);
+        //this.setBackground(Color.GREEN);
 
-        pLeftSpace.setBackground(Color.RED);
-        pTopSpace.setBackground(Color.GREEN);
-        pRightSpace.setBackground(Color.BLUE);
-        pBottomSpace.setBackground(Color.WHITE);
+        //pLeftSpace.setBackground(Color.RED);
+        //pTopSpace.setBackground(Color.GREEN);
+        //pRightSpace.setBackground(Color.BLUE);
+        //pBottomSpace.setBackground(Color.WHITE);
 
         pLeftSpace.setPreferredSize(pLeftSpace.getPreferredSize());
         pTopSpace.setPreferredSize(pTopSpace.getPreferredSize());
