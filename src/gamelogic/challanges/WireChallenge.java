@@ -34,7 +34,6 @@ public class WireChallenge extends JPanel {
     private int iStickerNo;
 
     public WireChallenge(){
-        this.setBackground(Color.LIGHT_GRAY);
 
         bIsWireOneCut = false;
         bIsWireTwoCut = false;
@@ -72,6 +71,8 @@ public class WireChallenge extends JPanel {
         bWireFive.setBorderPainted(false);
 
         aInteractSound = new AudioClip("file:Interaction.wav");
+
+        this.setBorder(BorderFactory.createEtchedBorder());
 
         bWireOne.addActionListener(e->{
             if(!bIsWireOneCut && iChallengeState < 2) {

@@ -19,7 +19,7 @@ public class EvenOddChallenge extends JPanel implements ActionListener{
         iChallengeState = 0;
         // Define Any Vars
         // Create Any Events
-
+        this.setBorder(BorderFactory.createEtchedBorder());
         aInteractSound = new AudioClip("file:Interaction.wav");
         bRedButton = new JButton("", new ImageIcon("redbutton.png"));
         bRedButton.setOpaque(false);

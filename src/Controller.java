@@ -33,9 +33,9 @@ public class Controller extends JFrame{
 
     private static CardLayout cLayout;
 
-    private static boolean bMainVisible;
-    private static boolean bGameVisible;
-    private static boolean bEndVisible;
+    private boolean bMainVisible;
+    private boolean bGameVisible;
+    private boolean bEndVisible;
 
     private static String sScene;
 
@@ -73,7 +73,6 @@ public class Controller extends JFrame{
         bEndVisible = false;
 
         pPlayer = new Player();
-
         // Properties
 
         pBase.setLayout(cLayout);
@@ -166,6 +165,14 @@ public class Controller extends JFrame{
 
         tTimer = new Timer(100, e->{
             if(pGameScene.pBombSpace.getBombState()){
+                pPlayer.setiCompleted(pGameScene.pBombSpace.getiChallengesCompleted());
+                pPlayer.setiFailed(pGameScene.pBombSpace.getiChallengesFailed());
+                pPlayer.setiLives(pGameScene.pBombSpace.bLives.getLives());
+                //pPlayer.setiScore(pGameScene.pBombSpace.bLives.getLives());
+                pPlayer.setiSeconds(pGameScene.pBombSpace.bTimer.getTimer());
+                pPlayer.setsName("Test");
+                dBase.addUser(pPlayer);
+                System.out.println("Player Info: " + pPlayer.getsName() + " " + pPlayer.getiFailed() + " " + pPlayer.getiCompleted() + " " + pPlayer.getiLives() + " " + pPlayer.getiSeconds());
                 setScene("2");
             }
         });

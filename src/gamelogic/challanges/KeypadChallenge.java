@@ -8,131 +8,197 @@ import java.awt.*;
 public class KeypadChallenge extends JPanel{
 
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
-    int iStickerNo;
-    public JPanel keypad;
-    JTextField textfield = new JTextField(30);
+    private int iStickerNo;
+
+    private JLabel lRedLight;
+    private JLabel lInputDisplay;
+    private JLabel lGreenLight;
+    private String lInputText;
+
+    private JButton bKeyOne;
+    private JButton bKeyTwo;
+    private JButton bKeyThree;
+    private JButton bKeyFour;
+    private JButton bKeyFive;
+    private JButton bKeySix;
+    private JButton bKeySeven;
+    private JButton bKeyEight;
+    private JButton bKeyNine;
+    private JButton bKeyZero;
+    private JButton bKeyClear;
+    private JButton bKeyEnter;
+
     private AudioClip aInteractSound;
 
     public KeypadChallenge(){
+        // Define Any Vars
         iChallengeState = 0;
-        //iStickerNo = 0;
-        textfield.setEditable(false);
-        aInteractSound = new AudioClip("file:Interaction.wav");
 
         this.setLayout(new GridLayout(5,3));
-        //keypad.setLayout(new GridLayout(4,3));
-        JButton Key1 = new JButton("1");
-        JButton Key2 = new JButton("2");
-        JButton Key3 = new JButton("3");
-        JButton Key4 = new JButton("4");
-        JButton Key5 = new JButton("5");
-        JButton Key6 = new JButton("6");
-        JButton Key7 = new JButton("7");
-        JButton Key8 = new JButton("8");
-        JButton Key9 = new JButton("9");
-        JButton Key0 = new JButton("0");
-        JButton KeyClear = new JButton("Clear");
-        JButton KeyEnter = new JButton("Enter");
-        add(textfield, BorderLayout.NORTH);
-        add(new JButton());
-        add(new JButton());
-        add(Key1);
-        add(Key2);
-        add(Key3);
-        add(Key4);
-        add(Key5);
-        add(Key6);
-        add(Key7);
-        add(Key8);
-        add(Key9);
-        add(KeyClear);
-        add(Key0);
-        add(KeyEnter);
+        this.setBorder(BorderFactory.createEtchedBorder());
 
-        // Define Any Vars
+        lInputText = "";
+
+        lRedLight = new JLabel(new ImageIcon("redbutton.png"));
+        lInputDisplay = new JLabel("", SwingConstants.CENTER);
+        lGreenLight = new JLabel(new ImageIcon("greenbutton.png"));
+
+        lInputDisplay.setFont(new Font("Arial", 1, 28));
+
+        bKeyOne = new JButton("1");
+        bKeyTwo = new JButton("2");
+        bKeyThree = new JButton("3");
+        bKeyFour = new JButton("4");
+        bKeyFive = new JButton("5");
+        bKeySix = new JButton("6");
+        bKeySeven = new JButton("7");
+        bKeyEight = new JButton("8");
+        bKeyNine = new JButton("9");
+        bKeyZero = new JButton("0");
+
+        bKeyClear = new JButton("Clear");
+        bKeyEnter = new JButton("Enter");
+
+        aInteractSound = new AudioClip("file:Interaction.wav");
+
+        add(lRedLight);
+        add(lInputDisplay);
+        add(lGreenLight);
+        add(bKeyOne);
+        add(bKeyTwo);
+        add(bKeyThree);
+        add(bKeyFour);
+        add(bKeyFive);
+        add(bKeySix);
+        add(bKeySeven);
+        add(bKeyEight);
+        add(bKeyNine);
+        add(bKeyClear);
+        add(bKeyZero);
+        add(bKeyEnter);
+
         // Create Any Events
 
-        Key1.addActionListener(e->{
-            textfield.setText(textfield.getText() + "1");
-            aInteractSound.play();
-        });
-        Key2.addActionListener(e->{
-            textfield.setText(textfield.getText() + "2");
-            aInteractSound.play();
-        });
-        Key3.addActionListener(e->{
-            textfield.setText(textfield.getText() + "3");
-            aInteractSound.play();
-        });
-        Key4.addActionListener(e->{
-            textfield.setText(textfield.getText() + "4");
-            aInteractSound.play();
-        });
-        Key5.addActionListener(e->{
-            textfield.setText(textfield.getText() + "5");
-            aInteractSound.play();
-        });
-        Key6.addActionListener(e->{
-            textfield.setText(textfield.getText() + "6");
-            aInteractSound.play();
-        });
-        Key7.addActionListener(e->{
-            textfield.setText(textfield.getText() + "7");
-            aInteractSound.play();
-        });
-        Key8.addActionListener(e->{
-            textfield.setText(textfield.getText() + "8");
-            aInteractSound.play();
-        });
-        Key9.addActionListener(e->{
-            textfield.setText(textfield.getText() + "9");
-            aInteractSound.play();
-        });
-
-        Key0.addActionListener(e->{
-            textfield.setText(textfield.getText() + "0");
-            aInteractSound.play();
-        });
-
-        KeyClear.addActionListener(e->{
-            System.out.println("TEXT CLEARED");
-            aInteractSound.play();
-            textfield.setText("");
-        });
-
-        KeyEnter.addActionListener(e->{
-            System.out.println("TEXT ENTERED");
-            aInteractSound.play();
-            if(textfield.getText().equals("2018"))
-            {
-                textfield.setText("CORRECT!");
-                System.out.println("CORRECT");
-                iChallengeState = 1;
-
-
+        bKeyOne.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyOne.getText());
             }
+            aInteractSound.play();
         });
 
+        bKeyTwo.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyTwo.getText());
+            }
+            aInteractSound.play();
+        });
 
+        bKeyThree.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyThree.getText());
+            }
+            aInteractSound.play();
+        });
 
+        bKeyFour.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyFour.getText());
+            }
+            aInteractSound.play();
+        });
 
+        bKeyFive.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyFive.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeySix.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeySix.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeySeven.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeySeven.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyEight.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyEight.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyNine.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyNine.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyZero.addActionListener(e->{
+            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+                setlInputText(bKeyZero.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyClear.addActionListener(e->{
+            aInteractSound.play();
+            lInputText = "";
+            lInputDisplay.setText("");
+        });
+
+        bKeyEnter.addActionListener(e->{
+            aInteractSound.play();
+            isCorrect();
+        });
+    }
+
+    private int getKeyInputLength(){
+        return lInputText.length();
     }
 
     public void setStickerNo(int iNumber){
         this.iStickerNo = iNumber;
     }
 
-    private boolean isCorrect(){
-        // Return if your pattern or task is correct
-        return true;
+    private void setlInputText(String sInput){
+        lInputText = lInputText + sInput;
+        lInputDisplay.setText("<html><div style='color: red;'>" + lInputText + "</div></html>");
+    }
+
+    private void isCorrect(){
+        if(lInputText.equals("2018")) {
+            iChallengeState = 1;
+            System.out.println("Passed");
+        }else {
+            iChallengeState = 2;
+            System.out.println("Failed");
+        }
+        lInputText = "";
+        setlInputText("");
     }
 
     public int getState(){
-        //Return the state of challenge
-         return iChallengeState;
+        switch (iChallengeState){
+            case 0 : return 0;
+            case 1 : iChallengeState = 3; return 1;
+            case 2 : iChallengeState = 3; return 2;
+            case 3 : return 3;
+            default: return 0;
+        }
     }
 
     public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
-
+        iChallengeState = 0;
+        lInputText = "";
+        setlInputText("");
     }
 }

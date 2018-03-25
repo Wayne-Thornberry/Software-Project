@@ -10,9 +10,9 @@ public class Bomb extends JPanel{
     private JPanel pInfoSpace;
     private JPanel pSectionSpace;
 
-    private BombSticker bSticker;
-    private BombTimer bTimer;
-    private BombLives bLives;
+    public BombSticker bSticker;
+    public BombTimer bTimer;
+    public BombLives bLives;
 
     private WireChallenge cOne;
     private WireChallenge cTwo;
@@ -33,6 +33,8 @@ public class Bomb extends JPanel{
 
         pInfoSpace = new JPanel(new GridLayout(0,3));
         pSectionSpace = new JPanel(new GridLayout(2,3));
+        this.setBorder(BorderFactory.createEtchedBorder());
+
 
         bSticker = new BombSticker();
         bTimer = new BombTimer();
@@ -171,5 +173,13 @@ public class Bomb extends JPanel{
     public boolean getBombState(){
         //System.out.println(iChallengesFailed + iChallengesCompleted);
         return (iChallengesFailed + iChallengesCompleted == 6 || bLives.getLives() <= 0 || bTimer.getTimer() <=0);
+    }
+
+    public int getiChallengesCompleted() {
+        return iChallengesCompleted;
+    }
+
+    public int getiChallengesFailed() {
+        return iChallengesFailed;
     }
 }
