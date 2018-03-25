@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 public class Controller extends JFrame{
 
     private static JPanel pBase;
+    private static Database dBase;
 
     public static MainScene pMainScene;
     public static GameScene pGameScene;
@@ -44,6 +45,7 @@ public class Controller extends JFrame{
     public Controller(){
         super("Game");
         pBase = new JPanel();
+        dBase = new Database();
 
         pMainScene = new MainScene();
         pGameScene = new GameScene();
