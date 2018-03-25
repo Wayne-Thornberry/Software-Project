@@ -15,10 +15,10 @@ public class Bomb extends JPanel{
     public BombLives bLives;
 
     private WireChallenge cOne;
-    private WireChallenge cTwo;
+    private LetterGame cTwo;
     private EvenOddChallenge cThree;
     private KeypadChallenge cFour;
-    private WireChallenge cFive;
+    private PictureGame cFive;
     private WireChallenge cSix;
 
     private int iChallengesCompleted;
@@ -45,10 +45,10 @@ public class Bomb extends JPanel{
         pSectionSpace.setPreferredSize(pSectionSpace.getPreferredSize());
 
         cOne = new WireChallenge();
-        cTwo = new WireChallenge();
+        cTwo = new LetterGame();
         cThree = new EvenOddChallenge();
         cFour = new KeypadChallenge();
-        cFive = new WireChallenge();
+        cFive = new PictureGame();
         cSix = new WireChallenge();
 
         iChallengesCompleted = 0;
