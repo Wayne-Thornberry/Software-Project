@@ -109,17 +109,17 @@ public class Bomb extends JPanel{
 
         switch (cFour.getState()){
             case 1 : setChallengeState(true); break;
-            case 2 : setChallengeState(false); break; // test
+            case 2 : setChallengeState(false); break;
         }
 
         switch (cFive.getState()){
             case 1 : setChallengeState(true); break;
-            case 2 : setChallengeState(false); break; // test
+            case 2 : setChallengeState(false); break;
         }
 
         switch (cSix.getState()){
             case 1 : setChallengeState(true); break;
-            case 2 : setChallengeState(false); break; // test
+            case 2 : setChallengeState(false); break;
         }
     }
 
@@ -169,7 +169,7 @@ public class Bomb extends JPanel{
     }
 
     public boolean getBombState(){
-        System.out.println(iChallengesFailed + iChallengesCompleted);
+        //System.out.println(iChallengesFailed + iChallengesCompleted);
         return (iChallengesFailed + iChallengesCompleted == 6 || bLives.getLives() <= 0 || bTimer.getTimer() <=0);
     }
 }
