@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 
 
-public class PictureGame extends JPanel implements ActionListener {//class start
+public class ChallengePicture extends JPanel implements ActionListener {//class start
     private int iChallengeState;
     //pannels
     JPanel paneLabel = new JPanel(new GridLayout(1,2));//north
@@ -51,12 +51,12 @@ public class PictureGame extends JPanel implements ActionListener {//class start
     ImageIcon yellow = new ImageIcon("yellow.jpg");
     ImageIcon black = new ImageIcon("black.png");
 
-    public PictureGame()
+    public ChallengePicture(int iNumber)
     {//testImgChall start
         add(paneLabel);
        add(paneButtons);
        add(paneSouth);
-
+        this.setBorder(BorderFactory.createEtchedBorder());
         //adding panels to the frame
         this.add(paneLabel,BorderLayout.PAGE_START);
         this.add(paneButtons,BorderLayout.CENTER);
@@ -102,7 +102,7 @@ public class PictureGame extends JPanel implements ActionListener {//class start
 
   /*public static void main(String []args)
     {
-		PictureGame nna = new PictureGame();
+		ChallengePicture nna = new ChallengePicture();
 	}*/
    @Override
     public void actionPerformed(ActionEvent e)
@@ -142,7 +142,7 @@ public class PictureGame extends JPanel implements ActionListener {//class start
         //two
         if (e.getActionCommand().equals ("blue")){
             bPicTwo=true;
-            resetChallenge();
+            //resetChallenge();
             bImgTwo.setIcon(wrong);
             lBottomLabel.setText("Wrong!!!");
 
@@ -154,7 +154,7 @@ public class PictureGame extends JPanel implements ActionListener {//class start
         //four
         if (e.getActionCommand().equals ("blue1")){
             bPicFour=true;
-            resetChallenge();
+            //resetChallenge();
             bImgFour.setIcon(wrong);
             lBottomLabel.setText("Wrong!!!");
         }
@@ -164,7 +164,7 @@ public class PictureGame extends JPanel implements ActionListener {//class start
         }
         if(e.getActionCommand().equals ("RESTART"))
         {
-            resetChallenge();
+            //resetChallenge();
             lBottomLabel.setText(" ");
 
         }
@@ -251,7 +251,7 @@ public class PictureGame extends JPanel implements ActionListener {//class start
         return true;
     }
 
-    public void resetChallenge()
+    public void resetChallenge(int iNumber)
     {
         bImgOne.setIcon(red);
         bImgTwo.setIcon(blue);

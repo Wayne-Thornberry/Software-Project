@@ -5,7 +5,7 @@ import javafx.scene.media.AudioClip;
 import javax.swing.*;
 import java.awt.*;
 
-public class KeypadChallenge extends JPanel{
+public class ChallengeKeypad extends JPanel{
 
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private int iStickerNo;
@@ -30,7 +30,7 @@ public class KeypadChallenge extends JPanel{
 
     private AudioClip aInteractSound;
 
-    public KeypadChallenge(){
+    public ChallengeKeypad(int iNumber){
         // Define Any Vars
         iChallengeState = 0;
 
@@ -59,7 +59,7 @@ public class KeypadChallenge extends JPanel{
         bKeyClear = new JButton("Clear");
         bKeyEnter = new JButton("Enter");
 
-        aInteractSound = new AudioClip("file:Interaction.wav");
+        aInteractSound = new AudioClip("file:Audio/Interaction.wav");
 
         add(lRedLight);
         add(lInputDisplay);
@@ -165,10 +165,6 @@ public class KeypadChallenge extends JPanel{
         return lInputText.length();
     }
 
-    public void setStickerNo(int iNumber){
-        this.iStickerNo = iNumber;
-    }
-
     private void setlInputText(String sInput){
         lInputText = lInputText + sInput;
         lInputDisplay.setText("<html><div style='color: red;'>" + lInputText + "</div></html>");
@@ -196,7 +192,7 @@ public class KeypadChallenge extends JPanel{
         }
     }
 
-    public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
+    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
         iChallengeState = 0;
         lInputText = "";
         setlInputText("");
