@@ -2,7 +2,6 @@ package gamelogic.challanges;
 
 
 
-import gamelogic.bomb.BombSticker;
 import javafx.scene.media.AudioClip;
 
 import javax.swing.*;
@@ -10,17 +9,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EvenOddChallenge extends JPanel implements ActionListener{
+public class ChallengeEvenOdd extends JPanel implements ActionListener{
      int iStickerNo;
     private AudioClip aInteractSound;
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private JButton bRedButton,bGreenButton;
-    public EvenOddChallenge(){
+
+    public ChallengeEvenOdd(int iNumber){
         iChallengeState = 0;
         // Define Any Vars
         // Create Any Events
         this.setBorder(BorderFactory.createEtchedBorder());
-        aInteractSound = new AudioClip("file:Interaction.wav");
+        aInteractSound = new AudioClip("file:Audio/Interaction.wav");
         bRedButton = new JButton("", new ImageIcon("redbutton.png"));
         bRedButton.setOpaque(false);
         bRedButton.setContentAreaFilled(false);
@@ -66,13 +66,8 @@ public class EvenOddChallenge extends JPanel implements ActionListener{
         return iChallengeState;
     }
 
-    public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
+    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
 
-    }
-
-    public void setStickerNo(int iNumber){
-        this.iStickerNo = iNumber;
-        System.out.println(iStickerNo);
     }
 
     @Override

@@ -5,7 +5,7 @@ import javafx.scene.media.AudioClip;
 import javax.swing.*;
 import java.awt.*;
 
-public class WireChallenge extends JPanel {
+public class ChallengeWire extends JPanel {
 
     private JButton bWireOne;
     private JButton bWireTwo;
@@ -33,7 +33,7 @@ public class WireChallenge extends JPanel {
 
     private int iStickerNo;
 
-    public WireChallenge(){
+    public ChallengeWire(int iNumber){
 
         bIsWireOneCut = false;
         bIsWireTwoCut = false;
@@ -70,7 +70,7 @@ public class WireChallenge extends JPanel {
         bWireFive.setContentAreaFilled(false);
         bWireFive.setBorderPainted(false);
 
-        aInteractSound = new AudioClip("file:Interaction.wav");
+        aInteractSound = new AudioClip("file:Audio/Interaction.wav");
 
         this.setBorder(BorderFactory.createEtchedBorder());
 
@@ -209,7 +209,7 @@ public class WireChallenge extends JPanel {
         }
     }
 
-    public void resetChallenge(){  // Reset the object to its default states allowing to start again, must have this
+    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
         bIsWireOneCut = false;
         bIsWireTwoCut = false;
         bIsWireThreeCut = false;

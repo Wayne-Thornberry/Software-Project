@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class LetterGame extends JPanel implements ActionListener {
+public class ChallengeLetter extends JPanel implements ActionListener {
     private int iChallengeState;
     private static final String characters =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";//random charcters that loop will pick from
@@ -24,8 +24,9 @@ public class LetterGame extends JPanel implements ActionListener {
 
 
     //////////////////////////////////////////////////////////////////////////
-    public LetterGame()
+    public ChallengeLetter(int iNumber)
     {
+        this.setBorder(BorderFactory.createEtchedBorder());
         //getContentPane().add(pane);
         this.add(pane,new GridLayout(2,2));
         pane.add(lab);
@@ -92,7 +93,7 @@ public class LetterGame extends JPanel implements ActionListener {
 
         if(e.getActionCommand().equals("Reset"))
         {
-            resetChallenge();
+            //resetChallenge();
         }
     }
     public void isCorrect()
@@ -109,7 +110,7 @@ public class LetterGame extends JPanel implements ActionListener {
     }
 
 
-    public void resetChallenge()
+    public void resetChallenge(int iNumber)
     {
         lab.setText(RandomStringToBeGenerated());
 

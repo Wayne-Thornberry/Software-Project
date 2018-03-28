@@ -1,9 +1,9 @@
-package gui;
+package ui.scenes;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainScene extends JPanel {
+public class SceneTitle extends JPanel {
 
     private JPanel pRightSpace;
     private JPanel pLeftSpace;
@@ -24,7 +24,7 @@ public class MainScene extends JPanel {
 
     private String sScene;
 
-    public MainScene(){
+    public SceneTitle(){
 
         this.setLayout(new GridLayout(0,2));
 
