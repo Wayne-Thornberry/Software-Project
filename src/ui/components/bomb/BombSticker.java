@@ -6,11 +6,11 @@ import java.awt.*;
 public class BombSticker extends JPanel {
 
     private JLabel lSticker;
-    private int iStickerNo;
+    private String sStickerNo;
 
     public BombSticker(){
-        iStickerNo = (int)(Math.random() * 999999);
-        lSticker = new JLabel(Integer.toString(iStickerNo));
+        sStickerNo = String.format("%06d",((int)(Math.random() * 999999)));
+        lSticker = new JLabel(sStickerNo);
         lSticker.setFont(new Font("Arial",0,70));
 
         this.setBackground(Color.BLACK);
@@ -20,16 +20,16 @@ public class BombSticker extends JPanel {
     }
 
     public void resetSticker(){
-        iStickerNo = (int)(Math.random() * 999999);
-        lSticker.setText(Integer.toString(iStickerNo));
+        sStickerNo = String.format("%06d",((int)(Math.random() * 999999)));
+        lSticker.setText(sStickerNo);
     }
 
-    public void setStickerNo(int stickerNo){
-        iStickerNo = stickerNo;
-        lSticker.setText(Integer.toString(iStickerNo));
+    public void setStickerNo(String stickerNo){
+        sStickerNo = stickerNo;
+        lSticker.setText(sStickerNo);
     }
 
-    public int getStickerNo(){
-        return iStickerNo;
+    public String getStickerNo(){
+        return sStickerNo;
     }
 }

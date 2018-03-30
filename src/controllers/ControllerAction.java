@@ -15,12 +15,12 @@ import java.awt.event.ActionListener;
 public class ControllerAction implements ActionListener {
 
     private ControllerUI cUI;
-    private ControllerLogic cLogic;
+    private ControllerGame cGame;
 
-    public ControllerAction(ControllerUI ui, ControllerLogic logic){
+    public ControllerAction(ControllerUI ui, ControllerGame game){
         System.out.println("Controller Action Running...");
         cUI = ui;
-        cLogic = logic;
+        cGame = game;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ControllerAction implements ActionListener {
             case "Title Scene" : cUI.setScene("0");break;
             case "Game Scene" : cUI.setScene("1"); break;
             case "End Scene" : cUI.setScene("2");break;
-            case "Reset Bomb" : cLogic.resetBomb(); break;
+            case "Reset Bomb" : cGame.resetController(); break;
             case "Wire Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             case "Keypad Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             case "Letter Challenge": cUI.helpChallengeInfo("WireChallenge"); break;

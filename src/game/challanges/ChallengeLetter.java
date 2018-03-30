@@ -1,5 +1,5 @@
 
-package gamelogic.challanges;
+package game.challanges;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -116,12 +116,11 @@ public class ChallengeLetter extends JPanel implements ActionListener {
 
 
     }
-
-    public void setStickerNo(int test){
-
-    }
     public int getState(){
-        //Return the state of challenge
         return iChallengeState;
+    }
+
+    public void setState(int state) {
+        iChallengeState = state;
     }
 }

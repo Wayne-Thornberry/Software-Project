@@ -1,4 +1,4 @@
-package gamelogic;
+package game;
 
 public class Player {
 

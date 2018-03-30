@@ -8,19 +8,22 @@
  */
 
 import controllers.*;
-import gamelogic.Player;
+import game.Player;
+import game.Progress;
 import ui.Display;
 
 public class Application{
 
     private static Display dUI;
     private static Player pUser;
+    private static Progress pUpdate;
 
-    private static ControllerLogic cLogic;
+    private static ControllerGame cGame;
     private static ControllerAction cAction;
     private static ControllerUI cUI;
     private static ControllerInput cInput;
     private static ControllerDatabase cDatabase;
+
 
     public static void main(String ARGS[]){ // Main Controller
 
@@ -28,10 +31,10 @@ public class Application{
         pUser = new Player(null, 0,0,0,0,0);
 
         cDatabase = new ControllerDatabase(pUser); // Controls the database, login, stats etc
-        cLogic = new ControllerLogic(dUI, pUser); // Controls the game information, what challenge gets displayed. play info etc..
-        cUI = new ControllerUI(cLogic, dUI, pUser); // Controls the display of the game, including the JFrame and panels that get displayed
-        cAction = new ControllerAction(cUI, cLogic); // Controls All Events for buttons within the game
-        cInput = new ControllerInput(cUI, cLogic); // Controls all inputs received by the keyboard
+        cGame = new ControllerGame(dUI, pUser); // Controls the game information, what challenge gets displayed. play info etc..
+        cUI = new ControllerUI(cGame, dUI, pUser); // Controls the display of the game, including the JFrame and panels that get displayed
+        cAction = new ControllerAction(cUI, cGame); // Controls All Events for buttons within the game
+        cInput = new ControllerInput(cUI, cGame); // Controls all inputs received by the keyboard
 
         dUI.addKeyListener(cInput); // This User Interface needs to listen out for key inputs
 
@@ -54,6 +57,15 @@ public class Application{
         dUI.dMenuBar.mHelpKeypadChallenge.addActionListener(cAction); // Help Keypad Challenge Button
         dUI.dMenuBar.mHelpLetterChallenge.addActionListener(cAction); // Help Letter Challenge Button
         dUI.dMenuBar.mHelpPictureChallenge.addActionListener(cAction); // Help Picture Challenge Button
+
+        System.out.println(">Attempting to execute Progress Thread");
+        try {
+            pUpdate = new Progress(cGame, cUI, pUser);
+            new Thread(pUpdate).start();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(">Unknown Error Has Occurred");
+        }
 
         System.out.println("Application Running...");
     }

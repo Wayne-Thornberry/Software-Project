@@ -1,4 +1,4 @@
-package gamelogic.challanges;
+package game.challanges;
 
 import javafx.scene.media.AudioClip;
 
@@ -182,19 +182,17 @@ public class ChallengeKeypad extends JPanel{
         setlInputText("");
     }
 
-    public int getState(){
-        switch (iChallengeState){
-            case 0 : return 0;
-            case 1 : iChallengeState = 3; return 1;
-            case 2 : iChallengeState = 3; return 2;
-            case 3 : return 3;
-            default: return 0;
-        }
-    }
-
     public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
         iChallengeState = 0;
         lInputText = "";
         setlInputText("");
+    }
+
+    public int getState(){
+        return iChallengeState;
+    }
+
+    public void setState(int state) {
+        iChallengeState = state;
     }
 }

@@ -8,8 +8,8 @@ public class BombLives extends JPanel {
     private JLabel lLives;
     private int iLives;
 
-    public BombLives(){
-        iLives = 3;
+    public BombLives(int lives){
+        iLives = lives;
         lLives = new JLabel();
         lLives.setFont(new Font("Arial",0,70));
 

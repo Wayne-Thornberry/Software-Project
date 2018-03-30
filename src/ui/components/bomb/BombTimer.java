@@ -8,8 +8,8 @@ public class BombTimer extends JPanel {
     private JLabel lTimer;
     private int iTime;
 
-    public BombTimer(){
-        iTime = 300;
+    public BombTimer(int seconds){
+        iTime = seconds;
         lTimer = new JLabel((iTime / 60) + ":" + String.format("%02d", iTime % 60));
         lTimer.setFont(new Font("Arial",0,70));
 

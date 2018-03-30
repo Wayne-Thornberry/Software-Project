@@ -9,7 +9,7 @@
 
 package controllers;
 
-import gamelogic.Player;
+import game.Player;
 import ui.Display;
 
 import javax.swing.*;
@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class ControllerUI extends ComponentAdapter {
 
     private Display dUI;
-    private ControllerLogic cLogic;
+    private ControllerGame cGame;
     private String sScene;
     private Player pUser;
 
@@ -30,11 +30,11 @@ public class ControllerUI extends ComponentAdapter {
     private boolean isGameVisible;
     private boolean isEndVisible;
 
-    public ControllerUI(ControllerLogic logic, Display ui, Player user){
+    public ControllerUI(ControllerGame game, Display ui, Player user){
         System.out.println("Controller UI Running...");
         System.out.println(">Setting Variable");
         try {
-            cLogic = logic;
+            cGame = game;
             dUI = ui;
             pUser = user;
         }catch (Exception e){

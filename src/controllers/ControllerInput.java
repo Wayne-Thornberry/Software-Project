@@ -15,12 +15,12 @@ import java.awt.event.KeyListener;
 public class ControllerInput implements KeyListener {
 
     private ControllerUI cUI;
-    private ControllerLogic cLogic;
+    private ControllerGame cGame;
 
-    public ControllerInput(ControllerUI ui, ControllerLogic logic){
+    public ControllerInput(ControllerUI ui, ControllerGame game){
         System.out.println("Controller Input Running...");
         cUI = ui;
-        cLogic = logic;
+        cGame = game;
     }
 
     @Override

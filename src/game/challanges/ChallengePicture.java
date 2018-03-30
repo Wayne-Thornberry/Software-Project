@@ -1,6 +1,4 @@
-package gamelogic.challanges;
-
-import javafx.scene.media.AudioClip;
+package game.challanges;
 
 import javax.swing.*;
 import java.awt.*;
@@ -266,7 +264,10 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
     }
 
     public int getState(){
-        //Return the state of challenge
         return iChallengeState;
+    }
+
+    public void setState(int state) {
+        iChallengeState = state;
     }
 }//class end
