@@ -1,4 +1,4 @@
-package gamelogic.challanges;
+package game.challanges;
 
 import javax.swing.*;
 

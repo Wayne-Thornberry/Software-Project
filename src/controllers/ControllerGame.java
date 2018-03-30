@@ -1,19 +1,16 @@
 package controllers;
 
-import gamelogic.Player;
+import game.Player;
 import ui.Bomb;
 import ui.Display;
 
-import javax.swing.*;
-
-public class ControllerLogic {
+public class ControllerGame {
 
     private Display dUI;
     private Bomb bBomb;
-    private Timer tUpdate;
     private Player pUser;
 
-    public ControllerLogic(Display ui, Player user) {
+    public ControllerGame(Display ui, Player user) {
         System.out.println("Controller Logic Running...");
         System.out.println(">Setting Variable");
         try {
@@ -38,12 +35,9 @@ public class ControllerLogic {
         dUI.sGame.add(bBomb);
     }
 
-    public void resetBomb(){
+    public void resetController(){
         if (bBomb != null) {
-            bBomb.bTimer.resetTimer();
-            bBomb.bSticker.resetSticker();
-            bBomb.bLives.resetLives();
-            //bBomb.resetChallenges();
+            bBomb.resetBomb();
         }
     }
 
@@ -54,5 +48,9 @@ public class ControllerLogic {
         pUser.setiLives(2);
         pUser.setiFailed(2);
         pUser.setiPassed(4);
+    }
+
+    public void getProgress() {
+        bBomb.updateProgress();
     }
 }

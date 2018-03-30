@@ -1,4 +1,4 @@
-package gamelogic.challanges;
+package game.challanges;
 
 
 
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChallengeEvenOdd extends JPanel implements ActionListener{
+public class ChallengeEvenOdd extends JPanel{
      int iStickerNo;
     private AudioClip aInteractSound;
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
@@ -61,17 +61,15 @@ public class ChallengeEvenOdd extends JPanel implements ActionListener{
         return true;
     }
 
-    public int getState(){
-        //Return the state of challenge
-        return iChallengeState;
-    }
-
     public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public int getState(){
+        return iChallengeState;
+    }
 
+    public void setState(int state) {
+        iChallengeState = state;
     }
 }

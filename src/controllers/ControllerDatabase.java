@@ -1,6 +1,6 @@
 package controllers;
 
-import gamelogic.Player;
+import game.Player;
 import java.sql.*;
 
 public class ControllerDatabase {
