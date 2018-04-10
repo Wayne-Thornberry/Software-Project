@@ -93,7 +93,7 @@ public class ChallengeLetter extends JPanel implements ActionListener {
 
         if(e.getActionCommand().equals("Reset"))
         {
-            //resetChallenge();
+            //createChallenge();
         }
     }
     public void isCorrect()

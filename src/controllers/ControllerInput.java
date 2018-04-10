@@ -9,18 +9,28 @@
 
 package controllers;
 
+import game.Player;
+import ui.Display;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ControllerInput implements KeyListener {
 
+    private Player pUser;
+    private Display dUI;
     private ControllerUI cUI;
     private ControllerGame cGame;
 
-    public ControllerInput(ControllerUI ui, ControllerGame game){
+    public ControllerInput(Display ui, ControllerUI cui, ControllerGame game, Player user){
         System.out.println("Controller Input Running...");
-        cUI = ui;
+        pUser = user;
+        dUI = ui;
+        cUI = cui;
         cGame = game;
+
+        dUI.addKeyListener(this); // This User Interface needs to listen out for key inputs
+        dUI.sTitle.tUsername.addKeyListener(this);
     }
 
     @Override
@@ -30,9 +40,13 @@ public class ControllerInput implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(Character.toUpperCase(e.getKeyChar()) + " Pressed");
+        System.out.println(e.getKeyCode() + " " + Character.toUpperCase(e.getKeyChar()) + " Pressed");
         switch (e.getKeyCode()){
             case KeyEvent.VK_T: cUI.toggleDebug(); break;
+            case KeyEvent.VK_F11: cUI.toggleFullscreen(); break;
+            case KeyEvent.VK_R: cGame.resetGame(); break;
+            case KeyEvent.VK_ESCAPE: cUI.exitApplication(); break;
+            case KeyEvent.VK_ENTER: cUI.toggleUsernameLock(); break;
         }
     }
 

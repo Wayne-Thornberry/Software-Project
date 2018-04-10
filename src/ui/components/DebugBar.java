@@ -12,9 +12,16 @@ public class DebugBar extends JMenuBar {
     public JMenuItem mSceneGame;
     public JMenuItem mSceneEnd;
 
-    public JMenuItem mDebugLoadBomb;
-    public JMenuItem mDebugResetBomb;
+    public JMenuItem mDebugCreateBomb;
     public JMenuItem mDebugLoadLeaderboard;
+    public JMenuItem mDebugRefreshUI;
+    public JMenuItem mDebugSetSticker;
+
+    private JMenu mDebugResolution;
+
+    public JMenuItem mDebugResolutionOne;
+    public JMenuItem mDebugResolutionTwo;
+    public JMenuItem mDebugResolutionThree;
 
     public JMenuItem mHelpWireChallenge;
     public JMenuItem mHelpEvenOddChallenge;
@@ -32,9 +39,16 @@ public class DebugBar extends JMenuBar {
         mSceneGame = new JMenuItem("Game Scene");
         mSceneEnd = new JMenuItem("End Scene");
 
-        mDebugLoadBomb = new JMenuItem("Load Bomb");
-        mDebugResetBomb = new JMenuItem("Reset Bomb");
+        mDebugCreateBomb = new JMenuItem("Create Bomb");
         mDebugLoadLeaderboard = new JMenuItem("Load Leaderboard");
+        mDebugRefreshUI = new JMenuItem("Refresh UI");
+        mDebugSetSticker = new JMenuItem("Set Sticker Number");
+
+        mDebugResolution = new JMenu("Resolution");
+
+        mDebugResolutionOne = new JMenuItem("1024x576");
+        mDebugResolutionTwo = new JMenuItem("1280x720");
+        mDebugResolutionThree = new JMenuItem("1920x1080");
 
         mHelpWireChallenge  = new JMenuItem("Wire Challenge");
         mHelpEvenOddChallenge  = new JMenuItem("Even Odd Challenge");
@@ -50,9 +64,16 @@ public class DebugBar extends JMenuBar {
         mScene.add(mSceneGame);
         mScene.add(mSceneEnd);
 
-        mDebug.add(mDebugLoadBomb);
-        mDebug.add(mDebugResetBomb);
+        mDebug.add(mDebugCreateBomb);
         mDebug.add(mDebugLoadLeaderboard);
+        mDebug.add(mDebugRefreshUI);
+        mDebug.add(mDebugSetSticker);
+
+        mDebug.add(mDebugResolution);
+
+        mDebugResolution.add(mDebugResolutionOne);
+        mDebugResolution.add(mDebugResolutionTwo);
+        mDebugResolution.add(mDebugResolutionThree);
 
         mHelp.add(mHelpWireChallenge);
         mHelp.add(mHelpEvenOddChallenge);
