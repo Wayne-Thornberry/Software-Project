@@ -1,19 +1,21 @@
 package ui.scenes;
 
-import ui.Bomb;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class SceneGame extends JPanel {
 
-    private static BorderLayout bLayout;
-
     public SceneGame(){
-        bLayout = new BorderLayout();
-        bLayout.setHgap(50);
-        bLayout.setVgap(50);
-        this.setLayout(bLayout);
+        this.setBorder(BorderFactory.createEmptyBorder(40,110,40,110));
+        this.setBackground(Color.GREEN);
+        this.setLayout(new BorderLayout());
+    }
+
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(new ImageIcon("Graphics/backgroundimage.jpg").getImage(),0,0, 1920 , 1080, null);
     }
 
 }

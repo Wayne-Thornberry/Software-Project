@@ -140,7 +140,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         //two
         if (e.getActionCommand().equals ("blue")){
             bPicTwo=true;
-            //resetChallenge();
+            //createChallenge();
             bImgTwo.setIcon(wrong);
             lBottomLabel.setText("Wrong!!!");
 
@@ -152,7 +152,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         //four
         if (e.getActionCommand().equals ("blue1")){
             bPicFour=true;
-            //resetChallenge();
+            //createChallenge();
             bImgFour.setIcon(wrong);
             lBottomLabel.setText("Wrong!!!");
         }
@@ -162,7 +162,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         }
         if(e.getActionCommand().equals ("RESTART"))
         {
-            //resetChallenge();
+            //createChallenge();
             lBottomLabel.setText(" ");
 
         }
@@ -209,7 +209,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         //two
         if (c.getActionCommand().equals ("blue")){
             bPicTwo=true;
-            resetChallenge();
+            createChallenge();
             bImgTwo.setIcon(wrong);
             lBottomLabel.setText("Wrong!!!");
 
@@ -221,7 +221,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         //four
         if (c.getActionCommand().equals ("blue1")){
             bPicFour=true;
-            resetChallenge();
+            createChallenge();
             bImgFour.setIcon(wrong);
 
             lBottomLabel.setText("Wrong!!!");
@@ -233,7 +233,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
         }
         if(c.getActionCommand().equals ("RESTART"))
         {
-            resetChallenge();
+            createChallenge();
             lBottomLabel.setText(" ");
 
         }

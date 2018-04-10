@@ -11,22 +11,14 @@ public class BombTimer extends JPanel {
     public BombTimer(int seconds){
         iTime = seconds;
         lTimer = new JLabel((iTime / 60) + ":" + String.format("%02d", iTime % 60));
-        lTimer.setFont(new Font("Arial",0,70));
-
-        this.setBackground(Color.BLACK);
-        lTimer.setForeground(Color.WHITE);
-
+        lTimer.setFont(new Font("Arial",0,48));
         this.add(lTimer);
-    }
-
-    public void resetTimer(){
-        iTime = 300;
-        lTimer.setText(Integer.toString(iTime / 60)  + ":" +  String.format("%02d", iTime % 60));
     }
 
     public void setTimer(int time){
         iTime = time;
         lTimer.setText(Integer.toString(iTime / 60)  + ":" +  String.format("%02d", iTime % 60));
+        lTimer.setFont(new Font("Arial",0,48));
     }
 
     public int getTimer(){

@@ -8,25 +8,17 @@ public class BombSticker extends JPanel {
     private JLabel lSticker;
     private String sStickerNo;
 
-    public BombSticker(){
-        sStickerNo = String.format("%06d",((int)(Math.random() * 999999)));
+    public BombSticker(int sticker){
+        sStickerNo = String.format("%06d",(sticker));
         lSticker = new JLabel(sStickerNo);
-        lSticker.setFont(new Font("Arial",0,70));
-
-        this.setBackground(Color.BLACK);
-        lSticker.setForeground(Color.WHITE);
-
+        lSticker.setFont(new Font("Arial",0,48));
         this.add(lSticker);
     }
 
-    public void resetSticker(){
-        sStickerNo = String.format("%06d",((int)(Math.random() * 999999)));
+    public void setStickerNo(int sticker){
+        sStickerNo = String.format("%06d",(sticker));
         lSticker.setText(sStickerNo);
-    }
-
-    public void setStickerNo(String stickerNo){
-        sStickerNo = stickerNo;
-        lSticker.setText(sStickerNo);
+        lSticker.setFont(new Font("Arial",0,48));
     }
 
     public String getStickerNo(){

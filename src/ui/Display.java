@@ -27,6 +27,8 @@ public class Display extends JFrame {
     public CardLayout cLayout;
     public JPanel pBase;
 
+    private String sScene;
+
     public Display(){
         super("Game");
 
@@ -53,4 +55,24 @@ public class Display extends JFrame {
         this.setVisible(true);
     }
 
+    public void setScene(String scene){
+        cLayout.show(pBase, scene);
+        sScene = scene;
+    }
+
+    public String getScene(){
+        return sScene;
+    }
+
+    public void setDebug(boolean visible){
+        dMenuBar.setVisible(visible);
+    }
+
+    public void setIsFullscreen(boolean fullscreen){
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setVisible(false);
+        this.dispose();
+        this.setUndecorated(fullscreen);
+        this.setVisible(true);
+    }
 }

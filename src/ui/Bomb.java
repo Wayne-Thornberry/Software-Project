@@ -8,58 +8,60 @@ import java.awt.*;
 
 public class Bomb extends JPanel{
 
+    private JPanel pInfo;
     public BombSticker bSticker;
     public BombTimer bTimer;
     public BombLives bLives;
 
-    private ChallengeWireSequence cTwo;
-    private ChallengeWireSequence cThree;
-    private ChallengeWireSequence cOne;
-    private ChallengeWireSequence cFour;
-    private ChallengeWireSequence cFive;
-    private ChallengeWireSequence cSix;
-
-    private int iCCompleted;
-    private int iCFailed;
-
-    private int iState;
+    private JPanel pChallenges;
+    private ChallengeWire cOne;
+    private ChallengeWire cTwo;
+    private ChallengeWire cThree;
+    private ChallengeWire cFour;
+    private ChallengeWire cFive;
+    private ChallengeWire cSix;
 
     public Bomb() {
 
-        this.setLayout(new GridLayout(3,3));
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        System.out.println("Bomb has been created");
-        bSticker = new BombSticker();
+        System.out.println("Bomb Generating...");
+        this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, false));
+
+        pInfo = new JPanel();
+        pChallenges = new JPanel();
+
+        pInfo.setLayout(new GridLayout(0,3));
+        pChallenges.setLayout(new GridLayout(2,3));
+
+        bSticker = new BombSticker((int)(Math.random() * 999999));
         bTimer = new BombTimer(300);
         bLives = new BombLives(3);
 
-        cOne = new ChallengeWireSequence(this, bSticker.getStickerNo());
-        cTwo = new ChallengeWireSequence(this, bSticker.getStickerNo());
-        cThree = new ChallengeWireSequence(this, bSticker.getStickerNo());
-        cFour = new ChallengeWireSequence(this, bSticker.getStickerNo());
-        cFive = new ChallengeWireSequence(this, bSticker.getStickerNo());
-        cSix = new ChallengeWireSequence(this, bSticker.getStickerNo());
+        cOne = new ChallengeWire(bSticker.getStickerNo());
+        cTwo = new ChallengeWire(bSticker.getStickerNo());
+        cThree = new ChallengeWire(bSticker.getStickerNo());
+        cFour = new ChallengeWire(bSticker.getStickerNo());
+        cFive = new ChallengeWire(bSticker.getStickerNo());
+        cSix = new ChallengeWire(bSticker.getStickerNo());
 
-        iCCompleted = 0;
-        iCFailed = 0;
-        iState = 0;
+        pInfo.add(bSticker);
+        pInfo.add(bTimer);
+        pInfo.add(bLives);
+        this.add(pInfo, BorderLayout.NORTH);
 
-        this.add(bSticker);
-        this.add(bTimer);
-        this.add(bLives);
-
-        this.add(cOne);
-        this.add(cTwo);
-        this.add(cThree);
-        this.add(cFour);
-        this.add(cFive);
-        this.add(cSix);
+        pChallenges.add(cOne);
+        pChallenges.add(cTwo);
+        pChallenges.add(cThree);
+        pChallenges.add(cFour);
+        pChallenges.add(cFive);
+        pChallenges.add(cSix);
+        this.add(pChallenges, BorderLayout.CENTER);
     }
 
-    public void resetBomb(){
-        bSticker.resetSticker();
-        bLives.resetLives();
-        bTimer.resetTimer();
+    /*public void resetBomb(){
+        bSticker.setStickerNo((int)(Math.random() * 999999));
+        bLives.setLives(3);
+        bTimer.setTimer(300);
 
         cOne.resetChallenge(bSticker.getStickerNo());
         cTwo.resetChallenge(bSticker.getStickerNo());
@@ -67,83 +69,5 @@ public class Bomb extends JPanel{
         cFour.resetChallenge(bSticker.getStickerNo());
         cFive.resetChallenge(bSticker.getStickerNo());
         cSix.resetChallenge(bSticker.getStickerNo());
-    }
-
-    public void updateProgress() {
-        if(cOne.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cOne.setState(3);
-        }else if(cOne.getState() == 2){
-            setFailed(getFailed()+1);
-            cOne.setState(3);
-        }
-
-        if(cTwo.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cTwo.setState(3);
-        }else if(cTwo.getState() == 2){
-            setFailed(getFailed()+1);
-            cTwo.setState(3);
-        }
-
-        if(cThree.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cThree.setState(3);
-        }else if(cThree.getState() == 2){
-            setFailed(getFailed()+1);
-            cThree.setState(3);
-        }
-
-        if(cFour.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cFour.setState(3);
-        }else if(cFour.getState() == 2){
-            setFailed(getFailed()+1);
-            cFour.setState(3);
-        }
-
-        if(cFive.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cFive.setState(3);
-        }else if(cFive.getState() == 2){
-            setFailed(getFailed()+1);
-            cFive.setState(3);
-        }
-
-        if(cSix.getState() == 1){
-            setCompleted(getCompleted()+1);
-            cSix.setState(3);
-        }else if(cSix.getState() == 2){
-            setFailed(getFailed()+1);///
-            cSix.setState(3);
-        }
-
-        System.out.println(getCompleted() + " " + getFailed());
-    }
-
-    private void setState(int state){
-        iState = state;
-    }
-
-    public int getState(){
-        return iState;
-    }
-
-    public int getCompleted() {
-        return iCCompleted;
-    }
-
-    private void setCompleted(int completed) {
-        iCCompleted = completed;
-        System.out.println(getCompleted());
-    }
-
-    public int getFailed() {
-        return iCFailed;
-    }
-
-    private void setFailed(int failed) {
-        iCFailed = failed;
-        System.out.println(getFailed());
-    }
+    }*/
 }

@@ -23,12 +23,14 @@ public class ControllerUI extends ComponentAdapter {
 
     private Display dUI;
     private ControllerGame cGame;
-    private String sScene;
     private Player pUser;
 
     private boolean isTitleVisible;
     private boolean isGameVisible;
     private boolean isEndVisible;
+    private boolean isFullscreen;
+    private boolean isDebugVisible;
+    private boolean isUserLocked;
 
     public ControllerUI(ControllerGame game, Display ui, Player user){
         System.out.println("Controller UI Running...");
@@ -50,6 +52,10 @@ public class ControllerUI extends ComponentAdapter {
             e.printStackTrace();
             System.out.println("Unknown Error Has Occurred");
         }
+
+        dUI.sTitle.addComponentListener(this); // Scene = 0
+        dUI.sGame.addComponentListener(this); // Scene = 1
+        dUI.sEnd.addComponentListener(this); // Scene = 2
     }
 
     @Override
@@ -75,21 +81,16 @@ public class ControllerUI extends ComponentAdapter {
     }
 
     public void setScene(String scene){
-        sScene = scene;
-        dUI.cLayout.show(dUI.pBase,sScene);
-    }
-
-    public String getScene(){
-        return sScene;
+        dUI.setScene(scene);
     }
 
     private void setTitleVisible(boolean titleVisible) {
         isTitleVisible = titleVisible;
         if(isTitleVisible){
-            // Do somethign when the scene loads
+            dUI.sTitle.setOptionsVisible(false);
             System.out.println("Title Loaded");
         }else{
-            // Do soemthign when the scene unloads
+            // Do something when the scene unloads
             System.out.println("Title Unloaded");
         }
     }
@@ -101,9 +102,10 @@ public class ControllerUI extends ComponentAdapter {
     private void setGameVisible(boolean gameVisible) {
         isGameVisible = gameVisible;
         if(isGameVisible){
+            cGame.createGame();
             System.out.println("Game Loaded");
         }else{
-            // Do soemthign when the scene unloads
+            // Do something when the scene unloads
             System.out.println("Game Unloaded");
         }
     }
@@ -115,10 +117,10 @@ public class ControllerUI extends ComponentAdapter {
     private void setEndVisible(boolean endVisible) {
         isEndVisible = endVisible;
         if(isEndVisible){
-            // Do somethign when the scene loads
+            // Do something when the scene loads
             System.out.println("End Loaded");
         }else{
-            // Do soemthign when the scene unloads
+            // Do something when the scene unloads
             System.out.println("End Unloaded");
         }
     }
@@ -139,7 +141,55 @@ public class ControllerUI extends ComponentAdapter {
     }
 
     public void toggleDebug(){
-        dUI.dMenuBar.setVisible(!dUI.dMenuBar.isVisible());
+        dUI.setDebug(!isDebugVisible);
+        isDebugVisible = !isDebugVisible;
     }
 
+    public void refreshUI() {
+        System.out.println("Repainting...");
+        dUI.repaint();
+        dUI.revalidate();
+        dUI.sEnd.repaint();
+        dUI.sEnd.revalidate();
+        dUI.sGame.repaint();
+        dUI.sGame.revalidate();
+        dUI.sTitle.repaint();
+        dUI.sTitle.revalidate();
+    }
+
+    public void setResolution(int width, int height) {
+        dUI.setSize(width, height);
+    }
+
+    public void toggleFullscreen() {
+        dUI.setIsFullscreen(!isFullscreen);
+        isFullscreen = !isFullscreen;
+    }
+
+    public void toggleUsernameLock() {
+        dUI.sTitle.setUsernameLock(!isUserLocked);
+        isUserLocked = !isUserLocked;
+        if (isUserLocked) {
+            pUser.setsName(dUI.sTitle.tUsername.getText());
+            System.out.println(pUser.getsName());
+        }
+    }
+
+    public void toggleOptionMenu() {
+        dUI.sTitle.setOptionsVisible(!dUI.sTitle.getOptionsVisible());
+    }
+
+    public void exitApplication() {
+        if(dUI.getScene() == "0") {
+            int iExit = JOptionPane.showConfirmDialog(null, "Do you wish to exit the game?", "Exit Prompt", JOptionPane.YES_NO_OPTION);
+            if (iExit == JOptionPane.YES_OPTION) {
+                System.exit(1);
+            }
+        }else{
+            int iExit = JOptionPane.showConfirmDialog(null, "Do you wish to exit the game? You will lose unsaved progress", "Exit Prompt", JOptionPane.YES_NO_OPTION);
+            if (iExit == JOptionPane.YES_OPTION) {
+                dUI.setScene("0");
+            }
+        }
+    }
 }

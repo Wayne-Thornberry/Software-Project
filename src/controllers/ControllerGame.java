@@ -3,12 +3,17 @@ package controllers;
 import game.Player;
 import ui.Bomb;
 import ui.Display;
+import ui.PanelStats;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class ControllerGame {
 
     private Display dUI;
     private Bomb bBomb;
     private Player pUser;
+    private PanelStats iPanel;
 
     public ControllerGame(Display ui, Player user) {
         System.out.println("Controller Logic Running...");
@@ -16,41 +21,35 @@ public class ControllerGame {
         try {
             dUI = ui;
             pUser = user;
+            iPanel = new PanelStats();
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(">Unknown Error Has Occurred");
         }
+    }
+
+    public void createGame(){
         System.out.println(">Attempting to create the Bomb");
-        try {
-            createBomb();
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println(">Unknown Error Has Occurred");
+        if(bBomb == null) {
+            bBomb = new Bomb();
+            dUI.sGame.add(bBomb, BorderLayout.CENTER);
+        }else {
+            dUI.sGame.remove(bBomb);
+            bBomb = null;
+            createGame();
         }
-        // create a new thread to manage update checks
+        dUI.sGame.repaint();
+        dUI.sGame.revalidate();
     }
 
-    public void createBomb(){
-        bBomb = new Bomb();
-        dUI.sGame.add(bBomb);
+    public void resetGame(){
+        dUI.sGame.remove(bBomb);
+        createGame();
     }
 
-    public void resetController(){
-        if (bBomb != null) {
-            bBomb.resetBomb();
-        }
-    }
-
-    public void updatePlayer(){
-        pUser.setsName("Wayno717");
-        pUser.setiSeconds(200);
-        pUser.setiScore(1795);
-        pUser.setiLives(2);
-        pUser.setiFailed(2);
-        pUser.setiPassed(4);
-    }
-
-    public void getProgress() {
-        bBomb.updateProgress();
+    public void setCustomSticker(){
+        int input = Integer.parseInt(JOptionPane.showInputDialog(null,"Input Sticker Number","Sticker Number",3));
+        bBomb.bSticker.setStickerNo(input);
+        //bBomb.resetBomb();
     }
 }

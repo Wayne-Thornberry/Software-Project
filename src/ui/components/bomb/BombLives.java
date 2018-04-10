@@ -10,23 +10,15 @@ public class BombLives extends JPanel {
 
     public BombLives(int lives){
         iLives = lives;
-        lLives = new JLabel();
-        lLives.setFont(new Font("Arial",0,70));
-
-        this.setBackground(Color.BLACK);
-        lLives.setForeground(Color.WHITE);
-
+        lLives = new JLabel(Integer.toString(lives));
+        lLives.setFont(new Font("Arial",0,48));
         this.add(lLives);
-    }
-
-    public void resetLives(){
-        iLives = 3;
-        lLives.setText(Integer.toString(iLives));
     }
 
     public void setLives(int lives){
         iLives = lives;
         lLives.setText(Integer.toString(iLives));
+        lLives.setFont(new Font("Arial",0,48));
     }
 
     public int getLives(){
