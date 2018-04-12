@@ -3,6 +3,7 @@ package controllers;
 import game.Player;
 import ui.Bomb;
 import ui.Display;
+import ui.Leaderboard;
 import ui.PanelStats;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class ControllerGame {
 
     private Display dUI;
     private Bomb bBomb;
+    private Leaderboard lLeaderboard;
     private Player pUser;
     private PanelStats iPanel;
 
@@ -42,9 +44,18 @@ public class ControllerGame {
         dUI.sGame.revalidate();
     }
 
-    public void resetGame(){
-        dUI.sGame.remove(bBomb);
-        createGame();
+    public void createLeaderboard(){
+        System.out.println(">Attempting to create the Leadeboard");
+        if(lLeaderboard == null) {
+            lLeaderboard = new Leaderboard();
+            dUI.sEnd.add(lLeaderboard, BorderLayout.CENTER);
+        }else {
+            dUI.sEnd.remove(lLeaderboard);
+            lLeaderboard = null;
+            createLeaderboard();
+        }
+        dUI.sGame.repaint();
+        dUI.sGame.revalidate();
     }
 
     public void setCustomSticker(){

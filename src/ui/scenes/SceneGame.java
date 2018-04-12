@@ -6,9 +6,9 @@ import java.awt.*;
 public class SceneGame extends JPanel {
 
     public SceneGame(){
+        this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(40,110,40,110));
         this.setBackground(Color.GREEN);
-        this.setLayout(new BorderLayout());
     }
 
 

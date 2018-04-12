@@ -117,7 +117,7 @@ public class ControllerUI extends ComponentAdapter {
     private void setEndVisible(boolean endVisible) {
         isEndVisible = endVisible;
         if(isEndVisible){
-            // Do something when the scene loads
+            cGame.createLeaderboard();
             System.out.println("End Loaded");
         }else{
             // Do something when the scene unloads
@@ -131,7 +131,7 @@ public class ControllerUI extends ComponentAdapter {
 
     public void helpChallengeInfo(String filename){
         try {
-            String content = new Scanner(new File(filename + ".txt")).useDelimiter("\\z").next();
+            String content = new Scanner(new File(filename + ".html")).useDelimiter("\\z").next();
             JLabel label = new JLabel(content);
             new JOptionPane().showMessageDialog(null,label);
         }catch (IOException e){
