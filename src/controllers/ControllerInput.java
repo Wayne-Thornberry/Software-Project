@@ -10,7 +10,7 @@
 package controllers;
 
 import game.Player;
-import ui.Display;
+import ui.components.Display;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -44,7 +44,7 @@ public class ControllerInput implements KeyListener {
         switch (e.getKeyCode()){
             case KeyEvent.VK_T: cUI.toggleDebug(); break;
             case KeyEvent.VK_F11: cUI.toggleFullscreen(); break;
-            case KeyEvent.VK_R: cGame.createLeaderboard(); break;
+            case KeyEvent.VK_R: cGame.loadLeaderboard(true); break;
             case KeyEvent.VK_ESCAPE: cUI.exitApplication(); break;
             case KeyEvent.VK_ENTER: cUI.toggleUsernameLock(); break;
         }

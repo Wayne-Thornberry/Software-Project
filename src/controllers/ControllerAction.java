@@ -10,7 +10,7 @@
 package controllers;
 
 import game.Player;
-import ui.Display;
+import ui.components.Display;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,9 +41,17 @@ public class ControllerAction implements ActionListener {
         dUI.dMenuBar.mSceneGame.addActionListener(this); // Scene End Button
 
         dUI.dMenuBar.mDebugCreateBomb.addActionListener(this); // Debug Load Bomb Button
-        dUI.dMenuBar.mDebugLoadLeaderboard.addActionListener(this); // Debug Load Leaderboard Button
+        dUI.dMenuBar.mDebugCreateLeaderboard.addActionListener(this); // Debug Load Leaderboard Button
         dUI.dMenuBar.mDebugRefreshUI.addActionListener(this); // Debug Refresh UI
-        dUI.dMenuBar.mDebugSetSticker.addActionListener(this); // Debug Refresh UI
+
+        dUI.dMenuBar.mDebugBombSetSticker.addActionListener(this); // Debug Set Sticker
+        dUI.dMenuBar.mDebugBombSetTime.addActionListener(this); // Debug Set Time
+        dUI.dMenuBar.mDebugBombSetLives.addActionListener(this); // Debug Set Lives
+
+        dUI.dMenuBar.mDebugPlayerSetUserName.addActionListener(this); // Debug Set Username
+        dUI.dMenuBar.mDebugPlayerSetScore.addActionListener(this); // Debug Set Score
+        dUI.dMenuBar.mDebugPlayerSetPassed.addActionListener(this); // Debug Set Passed
+        dUI.dMenuBar.mDebugPlayerSetFailed.addActionListener(this); // Debug Set Failed
 
         dUI.dMenuBar.mDebugResolutionOne.addActionListener(this); // Debug Set Resolution 800x600
         dUI.dMenuBar.mDebugResolutionTwo.addActionListener(this); // Debug Set Resolution 1280x720
@@ -66,12 +74,24 @@ public class ControllerAction implements ActionListener {
             case "Title Scene" : cUI.setScene("0");break;
             case "Game Scene" : cUI.setScene("1"); break;
             case "End Scene" : cUI.setScene("2");break;
-            case "Create Bomb" : cGame.createGame(); break;
+
+            case "Create Bomb" : cGame.loadGame(true); break;
+            case "Create Leaderboard" : cGame.loadLeaderboard(true); break;
             case "Refresh UI" : cUI.refreshUI(); break;
-            case "Set Sticker Number" : cGame.setCustomSticker(); break;
+
+            case "Set Sticker Number" : cGame.setSticker(); break;
+            case "Set Timer" : cGame.setTimer(); break;
+            case "Set Lives" : cGame.setLives(); break;
+
+            case "Set Username" : cGame.setUsername(); break;
+            case "Set Score" : cGame.setScore(); break;
+            case "Set Passed" : cGame.setPassed(); break;
+            case "Set Failed" : cGame.setFailed(); break;
+
             case "1024x576" : cUI.setResolution(1024,576);break;
             case "1280x720" : cUI.setResolution(1280,720);break;
             case "1920x1080" : cUI.setResolution(1920,1080);break;
+
             case "Wire Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             case "Keypad Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             case "Letter Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
@@ -79,6 +99,8 @@ public class ControllerAction implements ActionListener {
             case "Picture Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             default: System.out.println("Unknown Debug Button");
         }
+
+        // Main Menu Options
 
         switch (e.getActionCommand()){
             case "Start Game" : cUI.setScene("1"); break;

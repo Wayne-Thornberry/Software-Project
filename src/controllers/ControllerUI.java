@@ -10,7 +10,7 @@
 package controllers;
 
 import game.Player;
-import ui.Display;
+import ui.components.Display;
 
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
@@ -44,14 +44,6 @@ public class ControllerUI extends ComponentAdapter {
             System.out.println(">Unknown Error Has Occurred");
         }
         System.out.println(">Setting Menus");
-        try {
-            setTitleVisible(true);
-            setGameVisible(false);
-            setEndVisible(false);
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Unknown Error Has Occurred");
-        }
 
         dUI.sTitle.addComponentListener(this); // Scene = 0
         dUI.sGame.addComponentListener(this); // Scene = 1
@@ -82,6 +74,10 @@ public class ControllerUI extends ComponentAdapter {
 
     public void setScene(String scene){
         dUI.setScene(scene);
+        if(scene == "1") {
+            pUser.setsName(dUI.sTitle.tUsername.getText());
+            System.out.println(pUser.getsName());
+        }
     }
 
     private void setTitleVisible(boolean titleVisible) {
@@ -102,10 +98,10 @@ public class ControllerUI extends ComponentAdapter {
     private void setGameVisible(boolean gameVisible) {
         isGameVisible = gameVisible;
         if(isGameVisible){
-            cGame.createGame();
+            cGame.loadGame(true);
             System.out.println("Game Loaded");
         }else{
-            // Do something when the scene unloads
+            cGame.loadGame(false);
             System.out.println("Game Unloaded");
         }
     }
@@ -117,10 +113,11 @@ public class ControllerUI extends ComponentAdapter {
     private void setEndVisible(boolean endVisible) {
         isEndVisible = endVisible;
         if(isEndVisible){
-            cGame.createLeaderboard();
+            cGame.checkUser();
+            cGame.loadLeaderboard(true);
             System.out.println("End Loaded");
         }else{
-            // Do something when the scene unloads
+            cGame.loadLeaderboard(false);
             System.out.println("End Unloaded");
         }
     }
@@ -142,19 +139,15 @@ public class ControllerUI extends ComponentAdapter {
 
     public void toggleDebug(){
         dUI.setDebug(!isDebugVisible);
+        pUser.setDebug(!isDebugVisible);
         isDebugVisible = !isDebugVisible;
+        refreshUI();
     }
 
     public void refreshUI() {
         System.out.println("Repainting...");
-        dUI.repaint();
         dUI.revalidate();
-        dUI.sEnd.repaint();
-        dUI.sEnd.revalidate();
-        dUI.sGame.repaint();
-        dUI.sGame.revalidate();
-        dUI.sTitle.repaint();
-        dUI.sTitle.revalidate();
+        dUI.repaint();
     }
 
     public void setResolution(int width, int height) {
