@@ -4,12 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SceneEnd extends JPanel {
+
     public SceneEnd(){
+        this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createEmptyBorder(40,110,40,110));
         this.setBackground(Color.BLUE);
     }
 
-    public void setScene(String scene){
-
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(new ImageIcon("Graphics/backgroundimage.jpg").getImage(),0,0, 1920 , 1080, null);
     }
 }
 

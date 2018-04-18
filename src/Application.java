@@ -10,7 +10,7 @@
 import controllers.*;
 import game.Player;
 import game.Progress;
-import ui.Display;
+import ui.components.Display;
 
 public class Application{
 
@@ -28,12 +28,12 @@ public class Application{
 
     public static void main(String ARGS[]){ // Main Controller
 
-        dUI = new Display();
-        pUser = new Player(null, 0,0,0,0,0);
+        dUI = new Display(); // Main display
+        pUser = new Player(null, 0,300,3,0,0); // Creates a new saved player that updates throughout the game
 
         cAudio = new ControllerAudio();
         cDatabase = new ControllerDatabase(pUser); // Controls the database, login, stats etc
-        cGame = new ControllerGame(dUI, pUser); // Controls the game information, what challenge gets displayed. play info etc..
+        cGame = new ControllerGame(dUI, pUser, cDatabase); // Controls the game information, what challenge gets displayed. play info etc..
         cUI = new ControllerUI(cGame, dUI, pUser); // Controls the display of the game, including the JFrame and panels that get displayed
         cAction = new ControllerAction(dUI, cUI, cGame, pUser); // Controls All Events for buttons within the game
         cInput = new ControllerInput(dUI, cUI, cGame, pUser); // Controls all inputs received by the keyboard

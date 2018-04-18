@@ -9,6 +9,8 @@ public class Player {
     private int iFailed;
     private int iPassed;
 
+    private boolean isDebug;
+
     public Player(String name, int score, int seconds, int lives, int failed, int passed){
         sName = name;
         iScore = score;
@@ -64,5 +66,13 @@ public class Player {
 
     public void setiPassed(int iPassed){
         this.iPassed = iPassed;
+    }
+
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    public void setDebug(boolean debug) {
+        isDebug = debug;
     }
 }

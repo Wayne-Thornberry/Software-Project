@@ -13,9 +13,21 @@ public class DebugBar extends JMenuBar {
     public JMenuItem mSceneEnd;
 
     public JMenuItem mDebugCreateBomb;
-    public JMenuItem mDebugLoadLeaderboard;
+    public JMenuItem mDebugCreateLeaderboard;
     public JMenuItem mDebugRefreshUI;
-    public JMenuItem mDebugSetSticker;
+
+    private JMenu mDebugBomb;
+
+    public JMenuItem mDebugBombSetSticker;
+    public JMenuItem mDebugBombSetTime;
+    public JMenuItem mDebugBombSetLives;
+
+    private JMenu mDebugPlayer;
+
+    public JMenuItem mDebugPlayerSetUserName;
+    public JMenuItem mDebugPlayerSetScore;
+    public JMenuItem mDebugPlayerSetPassed;
+    public JMenuItem mDebugPlayerSetFailed;
 
     private JMenu mDebugResolution;
 
@@ -40,9 +52,21 @@ public class DebugBar extends JMenuBar {
         mSceneEnd = new JMenuItem("End Scene");
 
         mDebugCreateBomb = new JMenuItem("Create Bomb");
-        mDebugLoadLeaderboard = new JMenuItem("Load Leaderboard");
+        mDebugCreateLeaderboard = new JMenuItem("Create Leaderboard");
         mDebugRefreshUI = new JMenuItem("Refresh UI");
-        mDebugSetSticker = new JMenuItem("Set Sticker Number");
+
+        mDebugBomb = new JMenu("Bomb");
+
+        mDebugBombSetSticker = new JMenuItem("Set Sticker Number");
+        mDebugBombSetTime = new JMenuItem("Set Timer");
+        mDebugBombSetLives = new JMenuItem("Set Lives");
+
+        mDebugPlayer = new JMenu("Player");
+
+        mDebugPlayerSetUserName = new JMenuItem("Set Username");
+        mDebugPlayerSetScore = new JMenuItem("Set Score");
+        mDebugPlayerSetPassed = new JMenuItem("Set Passed");
+        mDebugPlayerSetFailed = new JMenuItem("Set Failed");
 
         mDebugResolution = new JMenu("Resolution");
 
@@ -65,9 +89,21 @@ public class DebugBar extends JMenuBar {
         mScene.add(mSceneEnd);
 
         mDebug.add(mDebugCreateBomb);
-        mDebug.add(mDebugLoadLeaderboard);
+        mDebug.add(mDebugCreateLeaderboard);
         mDebug.add(mDebugRefreshUI);
-        mDebug.add(mDebugSetSticker);
+
+        mDebug.add(mDebugBomb);
+
+        mDebugBomb.add(mDebugBombSetSticker);
+        mDebugBomb.add(mDebugBombSetTime);
+        mDebugBomb.add(mDebugBombSetLives);
+
+        mDebug.add(mDebugPlayer);
+
+        mDebugPlayer.add(mDebugPlayerSetUserName);
+        mDebugPlayer.add(mDebugPlayerSetScore);
+        mDebugPlayer.add(mDebugPlayerSetPassed);
+        mDebugPlayer.add(mDebugPlayerSetFailed);
 
         mDebug.add(mDebugResolution);
 
