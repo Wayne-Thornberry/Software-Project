@@ -36,22 +36,22 @@ public class Leaderboard extends JPanel {
         System.out.println(">Attempting to populate Leadeboard...");
         List<String[]> table = cDatabase.getPlayers();
 
+        int nextID = 0;
         for( String[] row: table ){
             pRow = new JLabel();
             pRow.setLayout(new GridLayout(0, 7));
             int columnCount = 0;
             JButton bDelete = new JButton();
             bDelete.setFocusable(false);
+            pRow.add(new JLabel(Integer.toString(nextID++), SwingConstants.CENTER));
             for (String s : row) {
-                pRow.add(new JLabel(s, SwingConstants.CENTER));
-                if (columnCount == 0) {
-                    bDelete.addActionListener(e -> {
-                        cDatabase.removeUser(Integer.parseInt(s));
-                        this.repaint();
-                        this.revalidate();
+                 if(columnCount == 0) {
+                     bDelete.addActionListener(e -> {
+                         System.out.println(s);
+                            cDatabase.removeUser(s);
                     });
                 }
-                columnCount++;
+                pRow.add(new JLabel(s, SwingConstants.CENTER));
             }
             if (pUser.isDebug()) {
                 pRow.setLayout(new GridLayout(0, 8));
