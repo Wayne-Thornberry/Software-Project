@@ -16,7 +16,6 @@ public class Application{
 
     private static Display dUI;
     private static Player pUser;
-    private static Progress pUpdate;
 
     private static ControllerAudio cAudio;
     private static ControllerGame cGame;
@@ -29,23 +28,14 @@ public class Application{
     public static void main(String ARGS[]){ // Main Controller
 
         dUI = new Display(); // Main display
-        pUser = new Player(null, 0,300,3,0,0); // Creates a new saved player that updates throughout the game
+        pUser = new Player(null, 0,0,0,0,0); // Creates a new saved player that updates throughout the game
 
-        cAudio = new ControllerAudio();
+        //cAudio = new ControllerAudio();
         cDatabase = new ControllerDatabase(pUser); // Controls the database, login, stats etc
         cGame = new ControllerGame(dUI, pUser, cDatabase); // Controls the game information, what challenge gets displayed. play info etc..
         cUI = new ControllerUI(cGame, dUI, pUser); // Controls the display of the game, including the JFrame and panels that get displayed
         cAction = new ControllerAction(dUI, cUI, cGame, pUser); // Controls All Events for buttons within the game
         cInput = new ControllerInput(dUI, cUI, cGame, pUser); // Controls all inputs received by the keyboard
-
-        //System.out.println(">Attempting to execute Progress Thread");
-        //try {
-        //    pUpdate = new Progress(cGame, cUI, pUser);
-        //    new Thread(pUpdate).start();
-        //}catch (Exception e){
-        //    e.printStackTrace();
-        //    System.out.println(">Unknown Error Has Occurred");
-        //}
 
         System.out.println("Application Running...");
     }

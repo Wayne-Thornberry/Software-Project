@@ -16,6 +16,7 @@ public class ControllerGame {
     private Bomb bBomb;
     private Leaderboard lLeaderboard;
     private Player pUser;
+
     private Timer tUpdate;
     private Timer tTimer;
 
@@ -33,25 +34,28 @@ public class ControllerGame {
     }
 
     public void loadGame(boolean state){
-        pUser.setsName(dUI.sTitle.tUsername.getText());
-        pUser.setiScore(0);
-        pUser.setiSeconds(300);
-        pUser.setiPassed(0);
-        pUser.setiFailed(0);
-        pUser.setiLives(3);
-
         if(state) {
+            pUser.setsName(dUI.sTitle.tUsername.getText());
+            pUser.setiScore(0);
+            pUser.setiSeconds(300);
+            pUser.setiPassed(0);
+            pUser.setiFailed(0);
+            pUser.setiLives(3);
             System.out.println(">Attempting to create the Bomb");
             bBomb = new Bomb(pUser);
             dUI.sGame.add(bBomb, BorderLayout.CENTER);
 
             tUpdate = new Timer(100, e -> {
-                /// Check progression and health
+                if(pUser.getiLives() <= 0){
+                    dUI.setScene("2");
+                }
             });
 
             tTimer = new Timer(1000, e -> {
                 bBomb.bTimer.setTimer(bBomb.bTimer.getTimer() - 1);
-                System.out.println(bBomb.bTimer.getTimer());
+                if(bBomb.bTimer.getTimer() <= 0){
+                    dUI.setScene("2");
+                }
             });
 
             tUpdate.start();

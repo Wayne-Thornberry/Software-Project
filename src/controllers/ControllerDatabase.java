@@ -25,8 +25,8 @@ public class ControllerDatabase {
 
     public void createLeaderboard(){
         String sql = "CREATE TABLE IF NOT EXISTS Leaderboard(" +
-                "   lId INT PRIMARY KEY NOT NULL," +
-                "   lName VARCHAR(28)," +
+                //"   lId INT PRIMARY KEY NOT NULL," +
+                "   lName VARCHAR(28) NOT NULL PRIMARY KEY ," +
                 "   lTime INT," +
                 "   lScore INT," +
                 "   lPassed INT," +
@@ -41,10 +41,11 @@ public class ControllerDatabase {
             System.out.println(">Unable to create database table 'LEADERBOARD'");
         }
     }
+    //(SELECT MAX(lId) + 1 FROM Leaderboard), lId,
 
     public void addUser(String name, int time, int score, int passed, int failed, int lives) {
-        String sql ="INSERT INTO Leaderboard(lId, lName, lTime, lScore, lPassed, lFailed, lLives) " +
-                    "VALUES ((SELECT MAX(lId) + 1 FROM Leaderboard),'"+name+"','"+time+"','"+score+"','"+passed+"','"+failed+"','"+lives+"')";
+        String sql ="INSERT INTO Leaderboard(lName, lTime, lScore, lPassed, lFailed, lLives) " +
+                    "VALUES ('"+name+"','"+time+"','"+score+"','"+passed+"','"+failed+"','"+lives+"')";
 
         try {
             cConnect.createStatement().execute(sql);
@@ -80,33 +81,6 @@ public class ControllerDatabase {
         }
     }
 
-    public String[] getPlayer(int id) {
-        String sql ="" +
-                "SELECT * " +
-                "FROM Leaderboard " +
-                "WHERE lID = '"+ id + "'";
-        try {
-            System.out.println("Retrieving player");
-            Statement st = cConnect.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            String[] player = {
-                    rs.getString("lId"),
-                    rs.getString("lName"),
-                    rs.getString("lTime"),
-                    rs.getString("lScore"),
-                    rs.getString("lPassed"),
-                    rs.getString("lFailed"),
-                    rs.getString("lLives")
-            };
-
-            System.out.println(player);
-            return player;
-        }catch (SQLException e){
-            System.out.println("Unable to retrieve player");
-            return null;
-        }
-    }
-
     public boolean userExists(String user) {
         String sql ="" +
                 "SELECT *" +
@@ -136,14 +110,12 @@ public class ControllerDatabase {
         }
     }
 
-    public void removeUser(int id) {
+    public void removeUser(String name) {
         String sql ="DELETE FROM Leaderboard " +
-                "WHERE lId = '" + id  +"'";
+                "WHERE lName LIKE '" + name  +"'";
         try {
             System.out.println("Removing Player");
-            if(id !=0) {
-                cConnect.createStatement().execute(sql);
-            }
+            cConnect.createStatement().execute(sql);
         }catch (SQLException e){
             e.printStackTrace();
             System.out.println("Unable to remove player");
