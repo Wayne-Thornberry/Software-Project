@@ -80,6 +80,12 @@ public class ControllerUI extends ComponentAdapter {
         if(isTitleVisible){
             dUI.sTitle.setOptionsVisible(false);
             System.out.println("Title Loaded");
+            pUser.setiScore(0);
+            pUser.setiSeconds(300);
+            pUser.setiPassed(0);
+            pUser.setiFailed(0);
+            pUser.setiLives(3);
+            pUser.setiSticker((int)(Math.random() * 999999));
         }else{
             // Do something when the scene unloads
             System.out.println("Title Unloaded");

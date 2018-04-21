@@ -13,8 +13,9 @@ public class Player {
 
     private boolean isAdmin;
 
-    public Player(String name, int score, int seconds, int lives, int failed, int passed){
+    public Player(String name, int sticker, int score, int seconds, int lives, int failed, int passed){
         sName = name;
+        iSticker = sticker;
         iScore = score;
         iSeconds = seconds;
         iLives = lives;

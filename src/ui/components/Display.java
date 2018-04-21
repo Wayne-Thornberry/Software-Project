@@ -8,7 +8,7 @@
  */
 package ui.components;
 
-import ui.components.DebugBar;
+import game.Player;
 import ui.scenes.SceneTitle;
 import ui.scenes.SceneGame;
 import ui.scenes.SceneEnd;

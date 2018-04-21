@@ -50,45 +50,6 @@ public class ControllerGame {
             if (state) {
                 System.out.println(">Attempting to create the Bomb");
 
-
-
-
-
-                pUser.setiScore(0);
-
-                try{
-                    pUser.setiSeconds(Integer.parseInt(dUI.sTitle.optionsTime.getText()));
-                }catch(Exception e)
-                {
-                    if(pUser.getiSeconds() == 0)
-                    {
-                        pUser.setiSeconds(300);
-                    }
-                }
-
-
-
-                pUser.setiPassed(0);
-                pUser.setiFailed(0);
-
-                try
-                {
-                    pUser.setiLives(Integer.parseInt(dUI.sTitle.optionsLives.getText()));
-                }catch(Exception e){
-                        pUser.setiLives(3);
-
-                }
-
-                try
-                {
-                    pUser.setiSticker(Integer.parseInt(dUI.sTitle.optionsSeed.getText()));
-                }catch(Exception e){
-                    pUser.setiSticker((int)(Math.random() * 999999));
-
-                }
-
-
-
                 bBomb = new Bomb(pUser);
                 dUI.sGame.add(bBomb, BorderLayout.CENTER);
 

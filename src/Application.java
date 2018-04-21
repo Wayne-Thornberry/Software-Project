@@ -3,7 +3,6 @@
  * declaring and creating a structure. This houses nothing of real importance
  *
  * @author Wayne Thornberry B00100288
- * @version 2.0
  * @since 27/03/2018
  */
 
@@ -29,7 +28,7 @@ public class Application{
     public static void main(String ARGS[]){ // Main Controller
 
         dUI = new Display(); // Main display
-        pUser = new Player(null, 0,0,0,0,0); // Creates a new saved player that updates throughout the game
+        pUser = new Player("Temp Name", (int)(Math.random() * 999999),0,300,3,0,0); // Creates a new saved player that updates throughout the game
 
         cDatabase = new ControllerDatabase(pUser); // Controls the database, login, stats etc
         cGame = new ControllerGame(dUI, pUser, cDatabase); // Controls the game information, what challenge gets displayed. play info etc..

@@ -2,10 +2,6 @@ package ui.scenes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class SceneTitle extends JPanel {
 
@@ -23,23 +19,19 @@ public class SceneTitle extends JPanel {
     public JButton bOptions;
     public JButton bQuitGame;
 
-    public JButton optionsButton1;
-    public JButton optionsButton2;
-    public JButton optionsButton3;
-    public JButton optionsButton4;
-    public JButton optionsLeaderboard;
+    public JButton bOptionsLives;
+    public JButton bOptionsSticker;
+    public JButton bOptionsTime;
+    public JButton bOptionsRes;
+    public JButton bLeaderboard;
 
-    public JTextField optionsLives;
-    public JTextField optionsTime;
-    public JTextField optionsSeed;
-    public JComboBox optionsResolution;
-
-
-    public JLabel optionsLabel1;
+    public JTextField tOptionsLives;
+    public JTextField tOptionsTime;
+    public JTextField tOptionsSticker;
+    public JComboBox cResolutionBox;
 
     public JButton bUser;
-
-    private String sScene;
+    public String[] sResolutions = {"1024x576", "1280x720" ,"1920x1080"};
 
     private boolean isOptionsVisible;
 
@@ -57,7 +49,7 @@ public class SceneTitle extends JPanel {
         pTitleSpace = new JPanel();
         pTitleSpace.setOpaque(false);
 
-        pButtonSpace = new JPanel(new GridLayout(3,0, 0,5));
+        pButtonSpace = new JPanel(new GridLayout(4,0, 0,5));
         pButtonSpace.setOpaque(false);
 
         pBDeadSpace = new JPanel(new GridLayout(0,2));
@@ -68,7 +60,7 @@ public class SceneTitle extends JPanel {
         lTitle.setOpaque(false);
 
         bStartGame = new JButton("Start Game");
-        bStartGame.setBackground(new Color(0x0078DE));
+        bStartGame.setBackground(new Color(0x007B11));
         bStartGame.setFocusable(false);
         bStartGame.setFont(new Font("Arial",1,32));
         bStartGame.setForeground(Color.WHITE);
@@ -81,14 +73,21 @@ public class SceneTitle extends JPanel {
         bOptions.setForeground(Color.WHITE);
         bOptions.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
 
+        bLeaderboard = new JButton("View Leaderboard");
+        bLeaderboard.setFocusable(false);
+        bLeaderboard.setFont(new Font("Arial",1,32));
+        bLeaderboard.setBackground(new Color(0xFF8600));
+        bLeaderboard.setForeground(Color.WHITE);
+        bLeaderboard.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+
         bQuitGame = new JButton("Quit Game");
-        bQuitGame.setBackground(new Color(0x0078DE));
+        bQuitGame.setBackground(new Color(0xFF0000));
         bQuitGame.setFocusable(false);
         bQuitGame.setFont(new Font("Arial",1,32));
         bQuitGame.setForeground(Color.WHITE);
         bQuitGame.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
 
-        tUsername = new JTextField();
+        tUsername = new JTextField("Username");
         tUsername.setHorizontalAlignment(JTextField.CENTER);
         tUsername.setFont(new Font("Arial",1,24));
         tUsername.setBorder(BorderFactory.createEmptyBorder());
@@ -101,87 +100,77 @@ public class SceneTitle extends JPanel {
         bUser.setBackground(new Color(0x009A21));
         bUser.setForeground(Color.WHITE);
 
-        this.setBackground(Color.RED);
+        pButtonSpace.add(bStartGame);
+        pButtonSpace.add(bOptions);
+        pButtonSpace.add(bLeaderboard);
+        pButtonSpace.add(bQuitGame);
 
         this.setOptionsVisible(false);
 
+        pRightSpace.setLayout(new GridLayout(4,2,5,5));
+        pRightSpace.setBackground(Color.WHITE);
 
-        //////////////////////Options Menu///////////////////
-        JPanel optionsPanel = new JPanel();
+        bOptionsLives = new JButton("Change Lives");
+        bOptionsSticker = new JButton("Change Sticker");
+        bOptionsTime = new JButton("Change Time");
+        bOptionsRes = new JButton("Change Resolution");
 
-        optionsPanel.setLayout(new GridLayout(5,3));
+        tOptionsLives = new JTextField("Lives");
+        tOptionsLives.setHorizontalAlignment(SwingConstants.CENTER);
+        tOptionsLives.setBorder(null);
+        tOptionsLives.setFont(new Font("Arial",1,24));
 
-         optionsButton1 = new JButton("Change Lives");
-         optionsButton2 = new JButton("Change Seed");
-         optionsButton3 = new JButton("Change Time");
-         optionsButton4 = new JButton("Change Res");
-         optionsLeaderboard = new JButton("Leaderboard");
+        tOptionsSticker = new JTextField("Sticker");
+        tOptionsSticker.setHorizontalAlignment(SwingConstants.CENTER);
+        tOptionsSticker.setBorder(null);
+        tOptionsSticker.setFont(new Font("Arial",1,24));
 
-        JLabel optionsLabel1 = new JLabel("Enter lives: ");
-        JLabel optionsLabel2 = new JLabel("Enter seed: ");
-        JLabel optionsLabel3 = new JLabel("Enter time: ");
-        JLabel optionsLabel4 = new JLabel("Choose size: ");
-        JLabel optionsLabel5 = new JLabel("Label");
-        JLabel optionsLabel6 = new JLabel("Label");
+        tOptionsTime = new JTextField("Seconds");
+        tOptionsTime.setHorizontalAlignment(SwingConstants.CENTER);
+        tOptionsTime.setBorder(null);
+        tOptionsTime.setFont(new Font("Arial",1,24));
 
-        optionsLives = new JTextField();
-        optionsSeed = new JTextField();
-        optionsTime = new JTextField();
-        String[] resolutions = {"1024x576", "1280x720" ,"1920x1080"};
-        optionsResolution = new JComboBox(resolutions);
+        cResolutionBox = new JComboBox(sResolutions);
+        cResolutionBox.setBorder(null);
+        cResolutionBox.setFont(new Font("Arial",1,24));
 
+        bOptionsLives.setFont(new Font("Arial",1,18));
+        bOptionsSticker.setFont(new Font("Arial",1,18));
+        bOptionsTime.setFont(new Font("Arial",1,18));
+        bOptionsRes.setFont(new Font("Arial",1,18));
 
+        bOptionsLives.setBackground(new Color(0x0078DE));
+        bOptionsLives.setFocusable(false);
+        bOptionsLives.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        bOptionsLives.setForeground(Color.WHITE);
 
-        optionsPanel.add(optionsLabel1);
-        optionsPanel.add(optionsLives);
-        optionsPanel.add(optionsButton1);
+        bOptionsSticker.setBackground(new Color(0x0078DE));
+        bOptionsSticker.setFocusable(false);
+        bOptionsSticker.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        bOptionsSticker.setForeground(Color.WHITE);
 
-        optionsPanel.add(optionsLabel2);
-        optionsPanel.add(optionsSeed);
-        optionsPanel.add(optionsButton2);
+        bOptionsTime.setBackground(new Color(0x0078DE));
+        bOptionsTime.setFocusable(false);
+        bOptionsTime.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        bOptionsTime.setForeground(Color.WHITE);
 
-        optionsPanel.add(optionsLabel3);
-        optionsPanel.add(optionsTime);
-        optionsPanel.add(optionsButton3);
+        bOptionsRes.setBackground(new Color(0x0078DE));
+        bOptionsRes.setFocusable(false);
+        bOptionsRes.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        bOptionsRes.setForeground(Color.WHITE);
 
-        optionsPanel.add(optionsLabel4);
-        optionsPanel.add(optionsResolution);
-        optionsPanel.add(optionsButton4);
+        pRightSpace.add(tOptionsLives);
+        pRightSpace.add(bOptionsLives);
 
-        optionsPanel.add(new JLabel(""));
-        optionsPanel.add(new JLabel(""));
-        optionsPanel.add(optionsLeaderboard);
+        pRightSpace.add(tOptionsSticker);
+        pRightSpace.add(bOptionsSticker);
 
-        optionsButton1.setFont(new Font("Arial",1,20));
-        optionsLabel1.setFont(new Font("Arial",1,20));
+        pRightSpace.add(tOptionsTime);
+        pRightSpace.add(bOptionsTime);
 
-        optionsButton2.setFont(new Font("Arial",1,20));
-        optionsLabel2.setFont(new Font("Arial",1,20));
-        optionsButton3.setFont(new Font("Arial",1,20));
-        optionsLabel3.setFont(new Font("Arial",1,20));
-        optionsResolution.setFont(new Font("Arial",1,20));
-        optionsButton4.setFont(new Font("Arial",1,20));
-        optionsLabel4.setFont(new Font("Arial",1,20));
-        optionsButton4.setFont(new Font("Arial",1,20));
-        optionsLabel4.setFont(new Font("Arial",1,20));
-        optionsLeaderboard.setFont(new Font("Arial",1,20));
+        pRightSpace.add(cResolutionBox);
+        pRightSpace.add(bOptionsRes);
 
-        optionsButton1.setBackground(new Color(0x0078DE));
-        optionsButton1.setForeground(Color.WHITE);
-        optionsButton2.setBackground(new Color(0x0078DE));
-        optionsButton2.setForeground(Color.WHITE);
-        optionsButton3.setBackground(new Color(0x0078DE));
-        optionsButton3.setForeground(Color.WHITE);
-        optionsButton4.setBackground(new Color(0x0078DE));
-        optionsButton4.setForeground(Color.WHITE);
-        optionsLeaderboard.setBackground(new Color(0x0078DE));
-        optionsLeaderboard.setForeground(Color.WHITE);
-
-
-
-
-        pRightSpace.add(optionsPanel);
-        /////////////////////////////////////////////////////
         this.add(pLeftSpace);
         this.add(pRightSpace);
 
@@ -193,10 +182,6 @@ public class SceneTitle extends JPanel {
 
         pBDeadSpace.add(tUsername);
         pBDeadSpace.add(bUser);
-
-        pButtonSpace.add(bStartGame);
-        pButtonSpace.add(bOptions);
-        pButtonSpace.add(bQuitGame);
     }
 
     public void setOptionsVisible(boolean scene){
