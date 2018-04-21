@@ -1,5 +1,7 @@
 package game.challanges;
 
+import javafx.scene.media.AudioClip;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ public class ChallengeWire extends Challenge implements ActionListener {
     private JButton[] bWires;
     private String[] sWires;
     private int[] iWires;
+    private AudioClip aInteractSound;
 
     public ChallengeWire(String sticker){
         super(0,sticker, 4);
@@ -17,6 +20,7 @@ public class ChallengeWire extends Challenge implements ActionListener {
         sWires = new String[getiStickerNo().length()];
         iWires = new int[3];
         this.setLayout(new GridLayout(bWires.length,0));
+        aInteractSound = new AudioClip("file:audio/Interaction.wav");
 
         for (int i = 0; i < bWires.length; i++) {
             switch (getiStickerNo().charAt(i)){
@@ -42,6 +46,7 @@ public class ChallengeWire extends Challenge implements ActionListener {
         bWires[i].setActionCommand(String.valueOf(i));
         bWires[i].addActionListener(this);
         bWires[i].setBorder(null);
+        bWires[i].setFocusable(false);
         bWires[i].setBackground(Color.WHITE);
         bWires[i].setOpaque(false);
         this.add(bWires[i]);
@@ -56,6 +61,7 @@ public class ChallengeWire extends Challenge implements ActionListener {
         bWires[i].setIcon(new ImageIcon("Graphics/" + bWires[i].getName() + "_cut.png"));
         bWires[i].removeActionListener(this);
         System.out.println(bWires[i].getName());
+        aInteractSound.play();
         switch (bWires[i].getName()){
             case "wire_red" : checkWire(iWires[0]--); break;
             case "wire_green" : checkWire(iWires[1]--);break;
