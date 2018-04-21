@@ -220,12 +220,14 @@ public class ControllerGame {
     }
 
     public void checkUser() {
-        if (cDatabase.userExists(pUser.getsName())){
-            System.out.println("USER EXISTS!!! Updating user...");
-            cDatabase.updateUser(pUser.getsName(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
-        }else{
-            System.out.println("USER DOES NOT EXIST!!! Creating user...");
-            cDatabase.addUser(pUser.getsName(), pUser.getiSticker(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
+        if(pUser.getsName() != null) {
+            if (cDatabase.userExists(pUser.getsName())) {
+                System.out.println("USER EXISTS!!! Updating user...");
+                cDatabase.updateUser(pUser.getsName(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
+            } else {
+                System.out.println("USER DOES NOT EXIST!!! Creating user...");
+                cDatabase.addUser(pUser.getsName(), pUser.getiSticker(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
+            }
         }
     }
 }

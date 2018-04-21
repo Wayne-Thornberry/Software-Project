@@ -25,7 +25,7 @@ public class Leaderboard extends JPanel implements ActionListener {
         pRow = new JPanel(new GridLayout(0,8));
         pRow.setBackground(Color.GRAY);
 
-        String sHeadings[] = {"Id","Username","Sticker","Time","Score","Passed","Failed","Lives","Delete"};
+        String sHeadings[] = {"Rank","Username","Sticker","Time","Score","Passed","Failed","Lives","Delete"};
 
         for (int i = 0; i<sHeadings.length;i++) {
             if (i < sHeadings.length - 1) {

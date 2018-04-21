@@ -10,6 +10,7 @@
 package controllers;
 
 import game.Player;
+import javafx.scene.media.AudioClip;
 import ui.components.Display;
 
 import java.awt.event.ActionEvent;
@@ -22,12 +23,15 @@ public class ControllerAction implements ActionListener {
     private ControllerUI cUI;
     private ControllerGame cGame;
 
+    private AudioClip aActionSound;
+
     public ControllerAction(Display ui, ControllerUI cui, ControllerGame game, Player user){
         System.out.println("Controller Action Running...");
         pUser = user;
         dUI = ui;
         cUI = cui;
         cGame = game;
+        aActionSound = new AudioClip("file:audio/Interaction.wav");
 
         //Scene Title Events
         dUI.sTitle.bUser.addActionListener(this);
@@ -110,5 +114,8 @@ public class ControllerAction implements ActionListener {
             case "Edit User" : cUI.toggleUsernameLock(); break;
             default: System.out.println("Unknown Menu Button");
         }
+
+        aActionSound.play();
+
     }
 }

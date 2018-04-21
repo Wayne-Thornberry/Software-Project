@@ -1,6 +1,7 @@
 package game.challanges;
 
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class Challenge extends JPanel{
 

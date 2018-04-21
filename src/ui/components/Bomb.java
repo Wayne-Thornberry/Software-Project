@@ -27,15 +27,17 @@ public class Bomb extends JPanel{
 
         System.out.println("Bomb Generating...");
         this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5, false));
 
         pInfo = new JPanel();
-        pInfo.setBackground(Color.LIGHT_GRAY);
+        pInfo.setBackground(Color.GRAY);
 
         pChallenges = new JPanel();
+        pChallenges.setBackground(Color.GRAY);
+        pChallenges.setBorder(BorderFactory.createEmptyBorder(5,0,0,0));
 
-        pInfo.setLayout(new GridLayout(0,3));
-        pChallenges.setLayout(new GridLayout(2,3));
+        pInfo.setLayout(new GridLayout(0,3, 5,5));
+        pChallenges.setLayout(new GridLayout(2,3,5,5));
 
         bSticker = new BombSticker(pUser.getiSticker());
         bTimer = new BombTimer(pUser.getiSeconds());
@@ -43,7 +45,7 @@ public class Bomb extends JPanel{
 
         cOne = new ChallengeWire(bSticker.getStickerNo());
         cTwo = new ChallengeKeypad(bSticker.getStickerNo());
-        cThree = new ChallengeWire(bSticker.getStickerNo());
+        cThree = new ChallengeEvenOdd(bSticker.getStickerNo());
         cFour = new ChallengeWire(bSticker.getStickerNo());
         cFive = new ChallengeWire(bSticker.getStickerNo());
         cSix = new ChallengeWire(bSticker.getStickerNo());
