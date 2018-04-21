@@ -35,13 +35,13 @@ public class ControllerGame {
 
     public void loadGame(boolean state){
             if (state) {
+                System.out.println(">Attempting to create the Bomb");
                 pUser.setiSticker((int)(Math.random() * 999999));
                 pUser.setiScore(0);
                 pUser.setiSeconds(300);
                 pUser.setiPassed(0);
                 pUser.setiFailed(0);
                 pUser.setiLives(3);
-                System.out.println(">Attempting to create the Bomb");
                 bBomb = new Bomb(pUser);
                 dUI.sGame.add(bBomb, BorderLayout.CENTER);
 
