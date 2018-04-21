@@ -98,7 +98,7 @@ public class ControllerUI extends ComponentAdapter {
                 cGame.loadGame(true);
                 System.out.println("Game Loaded");
             }else{
-                JOptionPane.showMessageDialog(null, "Please Enter a Username below to record your progress?", "Information", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please Enter a Username below to record your progress!", "Information", JOptionPane.INFORMATION_MESSAGE);
                 setScene("0");
             }
         }else{
