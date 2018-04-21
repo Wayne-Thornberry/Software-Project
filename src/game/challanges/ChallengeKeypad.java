@@ -5,10 +5,7 @@ import javafx.scene.media.AudioClip;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChallengeKeypad extends JPanel{
-
-    private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
-    private int iStickerNo;
+public class ChallengeKeypad extends Challenge{
 
     private JLabel lRedLight;
     private JLabel lInputDisplay;
@@ -30,9 +27,8 @@ public class ChallengeKeypad extends JPanel{
 
     private AudioClip aInteractSound;
 
-    public ChallengeKeypad(int iNumber){
-        // Define Any Vars
-        iChallengeState = 0;
+    public ChallengeKeypad(String sticker){
+        super(0,sticker, 2);
 
         this.setLayout(new GridLayout(5,3));
         this.setBorder(BorderFactory.createEtchedBorder());
@@ -80,70 +76,70 @@ public class ChallengeKeypad extends JPanel{
         // Create Any Events
 
         bKeyOne.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyOne.getText());
             }
             aInteractSound.play();
         });
 
         bKeyTwo.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyTwo.getText());
             }
             aInteractSound.play();
         });
 
         bKeyThree.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyThree.getText());
             }
             aInteractSound.play();
         });
 
         bKeyFour.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyFour.getText());
             }
             aInteractSound.play();
         });
 
         bKeyFive.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyFive.getText());
             }
             aInteractSound.play();
         });
 
         bKeySix.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeySix.getText());
             }
             aInteractSound.play();
         });
 
         bKeySeven.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeySeven.getText());
             }
             aInteractSound.play();
         });
 
         bKeyEight.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyEight.getText());
             }
             aInteractSound.play();
         });
 
         bKeyNine.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyNine.getText());
             }
             aInteractSound.play();
         });
 
         bKeyZero.addActionListener(e->{
-            if(getKeyInputLength() != 4 && iChallengeState == 0) {
+            if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyZero.getText());
             }
             aInteractSound.play();
@@ -172,27 +168,13 @@ public class ChallengeKeypad extends JPanel{
 
     private void isCorrect(){
         if(lInputText.equals("2018")) {
-            iChallengeState = 1;
+            setiState(1);
             System.out.println("Passed");
         }else {
-            iChallengeState = 2;
+            setiState(2);
             System.out.println("Failed");
         }
         lInputText = "";
         setlInputText("");
-    }
-
-    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
-        iChallengeState = 0;
-        lInputText = "";
-        setlInputText("");
-    }
-
-    public int getState(){
-        return iChallengeState;
-    }
-
-    public void setState(int state) {
-        iChallengeState = state;
     }
 }
