@@ -34,43 +34,109 @@ public class ControllerGame {
     }
 
     public void loadGame(boolean state){
-        if(state) {
-            pUser.setsName(dUI.sTitle.tUsername.getText());
-            pUser.setiScore(0);
-            pUser.setiSeconds(300);
-            pUser.setiPassed(0);
-            pUser.setiFailed(0);
-            pUser.setiLives(3);
-            System.out.println(">Attempting to create the Bomb");
-            bBomb = new Bomb(pUser);
-            dUI.sGame.add(bBomb, BorderLayout.CENTER);
+            if (state) {
+                pUser.setiSticker((int)(Math.random() * 999999));
+                pUser.setiScore(0);
+                pUser.setiSeconds(300);
+                pUser.setiPassed(0);
+                pUser.setiFailed(0);
+                pUser.setiLives(3);
+                System.out.println(">Attempting to create the Bomb");
+                bBomb = new Bomb(pUser);
+                dUI.sGame.add(bBomb, BorderLayout.CENTER);
 
-            tUpdate = new Timer(100, e -> {
-                if(pUser.getiLives() <= 0){
-                    dUI.setScene("2");
+                tUpdate = new Timer(100, e -> {
+                    if(bBomb.cOne.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        bBomb.cOne.setiState(3);
+                    }else if(bBomb.cOne.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        bBomb.cOne.setiState(3);
+                    }
+
+                    if(bBomb.cTwo.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        bBomb.cTwo.setiState(3);
+                    }else if(bBomb.cTwo.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        bBomb.cTwo.setiState(3);
+                    }
+
+                    if(bBomb.cThree.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        bBomb.cThree.setiState(3);
+                    }else if(bBomb.cThree.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        bBomb.cThree.setiState(3);
+                    }
+
+                    if(bBomb.cFour.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        bBomb.cFour.setiState(3);
+                    }else if(bBomb.cFour.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        bBomb.cFour.setiState(3);
+                    }
+
+                    if(bBomb.cFive.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        System.out.println("Completed");
+                        bBomb.cFive.setiState(3);
+                    }else if(bBomb.cFive.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        bBomb.cFive.setiState(3);
+                    }
+
+
+
+                    bBomb.bLives.setLives(pUser.getiLives());
+
+
+                    if (pUser.getiLives() <= 0 || pUser.getiPassed() + pUser.getiFailed() == 6) {
+                        dUI.setScene("2");
+                    }
+                });
+
+                tTimer = new Timer(1000, e -> {
+                    bBomb.bTimer.setTimer(bBomb.bTimer.getTimer() - 1);
+                    pUser.setiSeconds(bBomb.bTimer.getTimer());
+                    if (bBomb.bTimer.getTimer() <= 0) {
+                        dUI.setScene("2");
+                    }
+                });
+
+                tUpdate.start();
+                tTimer.start();
+            } else {
+                try {
+                    dUI.sGame.remove(bBomb);
+                    bBomb = null;
+                    tUpdate.stop();
+                    tUpdate = null;
+                    tTimer.stop();
+                    tTimer = null;
+                }catch(NullPointerException e){
+                    System.out.println("Game does not exist cannot unload");
                 }
-            });
+            }
 
-            tTimer = new Timer(1000, e -> {
-                bBomb.bTimer.setTimer(bBomb.bTimer.getTimer() - 1);
-                if(bBomb.bTimer.getTimer() <= 0){
-                    dUI.setScene("2");
-                }
-            });
-
-            tUpdate.start();
-            tTimer.start();
-        }else{
-            dUI.sGame.remove(bBomb);
-            bBomb = null;
-            tUpdate.stop();
-            tUpdate = null;
-            tTimer.stop();
-            tTimer = null;
-        }
-
-        dUI.sGame.repaint();
-        dUI.sGame.revalidate();
+            dUI.sGame.repaint();
+            dUI.sGame.revalidate();
     }
 
     public void loadLeaderboard(boolean state){
@@ -89,7 +155,10 @@ public class ControllerGame {
     public void setSticker(){
         try {
             int input = Integer.parseInt(JOptionPane.showInputDialog(null, "Current Sticker: " + bBomb.bSticker.getStickerNo(), "Set Sticker", 3));
+            pUser.setiSticker(input);
             bBomb.bSticker.setStickerNo(input);
+            loadGame(false);
+            loadGame(true);
         }catch (NumberFormatException e){
             System.out.println("Invalid Input");
         }
@@ -156,7 +225,7 @@ public class ControllerGame {
             cDatabase.updateUser(pUser.getsName(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
         }else{
             System.out.println("USER DOES NOT EXIST!!! Creating user...");
-            cDatabase.addUser(pUser.getsName(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
+            cDatabase.addUser(pUser.getsName(), pUser.getiSticker(), pUser.getiSeconds(), pUser.getiScore(), pUser.getiPassed(), pUser.getiFailed(), pUser.getiLives());
         }
     }
 }

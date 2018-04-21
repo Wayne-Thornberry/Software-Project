@@ -5,44 +5,38 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChallengeWire extends JPanel implements ActionListener {
+public class ChallengeWire extends Challenge implements ActionListener {
 
-    private String sSticker;
     private JButton[] bWires;
-    private JButton[] bWireO;
-
-    private int numWires[];
+    private String[] sWires;
+    private int[] iWires;
 
     public ChallengeWire(String sticker){
-        sSticker = sticker;
-        numWires = new int[5];
+        super(0,sticker, 2);
+        bWires = new JButton[getiStickerNo().length()];
+        sWires = new String[getiStickerNo().length()];
+        iWires = new int[3];
+        this.setLayout(new GridLayout(bWires.length,0));
+        this.setOpaque(false);
 
-        this.setLayout(new GridLayout(5,0));
-
-        generateProblem();
-        System.out.println((numWires[0] + " " + numWires[1]  + " " + numWires[2] + " " + numWires[3] + " " + numWires[4]));
-    }
-
-
-    private void generateProblem(){
-        bWires = new JButton[5];
         for (int i = 0; i < bWires.length; i++) {
-            switch (sSticker.charAt(i)){
-                case '0' : setWire("wire_red",i);break;
-                case '1' : setWire("wire_green",i);break;
-                case '2' : setWire("wire_blue",i);break;
-                case '3' : setWire("wire_white",i);break;
-                case '4' : setWire("wire_black",i);break;
-                case '5' : setWire("wire_red",i);break;
-                case '6' : setWire("wire_green",i);break;
-                case '7' : setWire("wire_blue",i);break;
-                case '8' : setWire("wire_white",i);break;
-                case '9' : setWire("wire_black",i);break;
+            switch (getiStickerNo().charAt(i)){
+                case '0' : setWire("wire_red",i);   iWires[0]++;break;
+                case '1' : setWire("wire_green",i); iWires[1]++;break;
+                case '2' : setWire("wire_blue",i);  iWires[2]++;break;
+                case '3' : setWire("wire_red",i);   iWires[0]++;break;
+                case '4' : setWire("wire_green",i); iWires[1]++;break;
+                case '5' : setWire("wire_blue",i);  iWires[2]++;break;
+                case '6' : setWire("wire_red",i);   iWires[0]++;break;
+                case '7' : setWire("wire_green",i); iWires[1]++;break;
+                case '8' : setWire("wire_blue",i);  iWires[2]++;break;
+                case '9' : setWire("wire_red",i);   iWires[0]++;break;
             }
         }
     }
 
     private void setWire(String name, int i) {
+        sWires[i] = name;
         bWires[i] = new JButton();
         bWires[i].setIcon(new ImageIcon("Graphics/" + name + ".png"));
         bWires[i].setName(name);
@@ -54,23 +48,36 @@ public class ChallengeWire extends JPanel implements ActionListener {
         this.add(bWires[i]);
     }
 
-    private void generateSolution(int i) {
-        if (i == 0){
-
-        }else{
-
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
         cutWire(Integer.parseInt(e.getActionCommand()));
     }
 
     private void cutWire(int i) {
-        System.out.println(bWires[i].getName());
         bWires[i].setIcon(new ImageIcon("Graphics/" + bWires[i].getName() + "_cut.png"));
-        System.out.println("test");
+        bWires[i].removeActionListener(this);
+        System.out.println(bWires[i].getName());
+        switch (bWires[i].getName()){
+            case "wire_red" : checkWire(iWires[0]--); break;
+            case "wire_green" : checkWire(iWires[1]--);break;
+            case "wire_blue" : checkWire(iWires[2]--);break;
+        }
+    }
+
+    private void checkWire(int wireAmount) {
+        for(int i = 0; i < iWires.length; i++ ){
+            System.out.println(wireAmount + " " + iWires[i]);
+            if(wireAmount < iWires[i]){
+                setiState(2);
+                System.out.println("Failed");
+                // Failed because the amount of wires in that set is less than the other two wires
+            }
+        }
+
+        if(iWires[0] + iWires[1] + iWires[2] == 0){
+            setiState(1);
+            System.out.println("No More Wires");
+        }
+
     }
 }

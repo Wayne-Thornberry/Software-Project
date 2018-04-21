@@ -42,9 +42,9 @@ public class ControllerInput implements KeyListener {
     public void keyPressed(KeyEvent e) {
         System.out.println(e.getKeyCode() + " " + Character.toUpperCase(e.getKeyChar()) + " Pressed");
         switch (e.getKeyCode()){
-            case KeyEvent.VK_T: cUI.toggleDebug(); break;
+            case KeyEvent.VK_T: cUI.loginPrompt(); break;
             case KeyEvent.VK_F11: cUI.toggleFullscreen(); break;
-            case KeyEvent.VK_R: cGame.loadLeaderboard(true); break;
+            case KeyEvent.VK_R: cUI.refreshUI(); break;
             case KeyEvent.VK_ESCAPE: cUI.exitApplication(); break;
             case KeyEvent.VK_ENTER: cUI.toggleUsernameLock(); break;
         }

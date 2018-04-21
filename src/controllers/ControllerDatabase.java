@@ -27,6 +27,7 @@ public class ControllerDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS Leaderboard(" +
                 //"   lId INT PRIMARY KEY NOT NULL," +
                 "   lName VARCHAR(28) NOT NULL PRIMARY KEY ," +
+                "   lSticker INT," +
                 "   lTime INT," +
                 "   lScore INT," +
                 "   lPassed INT," +
@@ -43,9 +44,9 @@ public class ControllerDatabase {
     }
     //(SELECT MAX(lId) + 1 FROM Leaderboard), lId,
 
-    public void addUser(String name, int time, int score, int passed, int failed, int lives) {
-        String sql ="INSERT INTO Leaderboard(lName, lTime, lScore, lPassed, lFailed, lLives) " +
-                    "VALUES ('"+name+"','"+time+"','"+score+"','"+passed+"','"+failed+"','"+lives+"')";
+    public void addUser(String name, int sticker, int time, int score, int passed, int failed, int lives) {
+        String sql ="INSERT INTO Leaderboard(lName, lSticker, lTime, lScore, lPassed, lFailed, lLives) " +
+                    "VALUES ('"+name+"','" + sticker + "','" +time+"','"+score+"','"+passed+"','"+failed+"','"+lives+"')";
 
         try {
             cConnect.createStatement().execute(sql);

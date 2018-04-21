@@ -12,6 +12,8 @@ public class BombTimer extends JPanel {
         iTime = seconds;
         lTimer = new JLabel((iTime / 60) + ":" + String.format("%02d", iTime % 60));
         lTimer.setFont(new Font("Arial",0,48));
+
+        this.setOpaque(false);
         this.add(lTimer);
     }
 
