@@ -44,6 +44,8 @@ public class ChallengeEvenOdd extends Challenge implements ActionListener {
         if(Integer.parseInt(getiStickerNo()) % 2 == 0){
             if(e.getActionCommand() == "button_green"){
                 System.out.println("Button green pressed and the number was even so correct");
+                bGreenButton.removeActionListener(this);
+                bRedButton.removeActionListener(this);
                 setiState(1);
             }else{
                 System.out.println("Button red pressed but the number was even so incorrect");
@@ -52,13 +54,13 @@ public class ChallengeEvenOdd extends Challenge implements ActionListener {
         }else{
             if(e.getActionCommand() == "button_red"){
                 System.out.println("Button red pressed and the number was odd so correct");
+                bGreenButton.removeActionListener(this);
+                bRedButton.removeActionListener(this);
                 setiState(1);
             }else{
                 System.out.println("Button green pressed but the number was odd so incorrect");
                 setiState(2);
             }
         }
-        bGreenButton.removeActionListener(this);
-        bRedButton.removeActionListener(this);
     }
 }

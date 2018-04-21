@@ -21,6 +21,7 @@ public class ChallengeWire extends Challenge implements ActionListener {
         iWires = new int[3];
         this.setLayout(new GridLayout(bWires.length,0));
         aInteractSound = new AudioClip("file:audio/Interaction.wav");
+        aInteractSound.setVolume(0.05);
 
         for (int i = 0; i < bWires.length; i++) {
             switch (getiStickerNo().charAt(i)){

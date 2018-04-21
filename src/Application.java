@@ -9,7 +9,6 @@
 
 import controllers.*;
 import game.Player;
-import game.Progress;
 import javafx.scene.media.AudioClip;
 import ui.components.Display;
 
