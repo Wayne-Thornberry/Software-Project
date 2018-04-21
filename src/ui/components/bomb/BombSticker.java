@@ -12,8 +12,9 @@ public class BombSticker extends JPanel {
         sStickerNo = String.format("%06d",(sticker));
         lSticker = new JLabel(sStickerNo);
         lSticker.setFont(new Font("Arial",0,48));
+        lSticker.setForeground(Color.BLACK);
 
-        this.setOpaque(false);
+        this.setBackground(Color.WHITE);
         this.add(lSticker);
     }
 

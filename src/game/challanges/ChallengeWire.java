@@ -12,12 +12,11 @@ public class ChallengeWire extends Challenge implements ActionListener {
     private int[] iWires;
 
     public ChallengeWire(String sticker){
-        super(0,sticker, 2);
+        super(0,sticker, 4);
         bWires = new JButton[getiStickerNo().length()];
         sWires = new String[getiStickerNo().length()];
         iWires = new int[3];
         this.setLayout(new GridLayout(bWires.length,0));
-        this.setOpaque(false);
 
         for (int i = 0; i < bWires.length; i++) {
             switch (getiStickerNo().charAt(i)){

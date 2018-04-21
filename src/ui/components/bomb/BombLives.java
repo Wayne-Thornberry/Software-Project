@@ -12,8 +12,9 @@ public class BombLives extends JPanel {
         iLives = lives;
         lLives = new JLabel(Integer.toString(lives));
         lLives.setFont(new Font("Arial",0,48));
+        lLives.setForeground(new Color(0x009A21));
 
-        this.setOpaque(false);
+
         this.add(lLives);
     }
 

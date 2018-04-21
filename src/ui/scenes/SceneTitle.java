@@ -48,7 +48,7 @@ public class SceneTitle extends JPanel {
         pBDeadSpace = new JPanel(new GridLayout(0,2));
         pBDeadSpace.setOpaque(false);
 
-        lTitle = new JLabel("<html><div style='text-align:center;'>BOMB DEFUSE <br> EXPERT</div></html>", SwingConstants.CENTER);
+        lTitle = new JLabel("<html><div style='text-align:center; color: white;'>BOMB DEFUSE <br> EXPERT</div></html>", SwingConstants.CENTER);
         lTitle.setFont(new Font("Arial",1,64));
         lTitle.setOpaque(false);
 
@@ -75,11 +75,12 @@ public class SceneTitle extends JPanel {
 
         tUsername = new JTextField();
         tUsername.setHorizontalAlignment(JTextField.CENTER);
-        tUsername.setFont(new Font("Arial",1,32));
+        tUsername.setFont(new Font("Arial",1,24));
         tUsername.setBorder(BorderFactory.createEmptyBorder());
+        tUsername.setFocusable(true);
 
         bUser = new JButton("Select User");
-        bUser.setFont(new Font("Arial",1,32));
+        bUser.setFont(new Font("Arial",1,24));
         bUser.setFocusable(false);
         bUser.setBorder(BorderFactory.createEmptyBorder());
         bUser.setBackground(new Color(0x009A21));

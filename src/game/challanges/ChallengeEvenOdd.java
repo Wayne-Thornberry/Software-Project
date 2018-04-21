@@ -1,7 +1,5 @@
 package game.challanges;
 
-
-
 import javafx.scene.media.AudioClip;
 
 import javax.swing.*;
@@ -9,46 +7,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChallengeEvenOdd extends JPanel{
-     int iStickerNo;
+public class ChallengeEvenOdd extends Challenge implements ActionListener {
     private AudioClip aInteractSound;
-    private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private JButton bRedButton,bGreenButton;
 
-    public ChallengeEvenOdd(int iNumber){
-        iChallengeState = 0;
-        // Define Any Vars
-        // Create Any Events
-        this.setBorder(BorderFactory.createEtchedBorder());
+    public ChallengeEvenOdd(String sticker){
+        super(0,sticker, 3);
         aInteractSound = new AudioClip("file:Audio/Interaction.wav");
-        bRedButton = new JButton("", new ImageIcon("redbutton.png"));
+
+        bRedButton = new JButton("", new ImageIcon("graphics/redbutton.png"));
         bRedButton.setOpaque(false);
         bRedButton.setContentAreaFilled(false);
-        bRedButton.setBorderPainted(false);
+        bRedButton.setFocusable(false);
+        bRedButton.setBorder(BorderFactory.createEmptyBorder());
 
-        bGreenButton = new JButton("", new ImageIcon("greenbutton.png"));
+        bGreenButton = new JButton("", new ImageIcon("graphics/greenbutton.png"));
         bGreenButton.setOpaque(false);
         bGreenButton.setContentAreaFilled(false);
-        bGreenButton.setBorderPainted(false);
+        bGreenButton.setFocusable(false);
+        bGreenButton.setBorder(BorderFactory.createEmptyBorder());
 
-        bRedButton.addActionListener(e->{
-                    System.out.println("RED BUTTON PRESSED: " + iStickerNo);
-                    if((iStickerNo % 2 == 0))
-                    {
-                        System.out.println("STICKER IS EVEN");
-                        aInteractSound.play();
-                    }
-                });
-
-        bGreenButton.addActionListener(e->{
-            System.out.println("GREEN BUTTON PRESSED: "  + iStickerNo);
-            aInteractSound.play();
-        });
-
-
-
-
-
+        bRedButton.addActionListener(this);
+        bRedButton.setActionCommand("button_red");
+        bGreenButton.addActionListener(this);
+        bGreenButton.setActionCommand("button_green");
 
         this.setLayout(new GridLayout(0,2));
         this.add(bRedButton);
@@ -56,20 +38,27 @@ public class ChallengeEvenOdd extends JPanel{
 
     }
 
-    private boolean isCorrect(){
-        // Return if your pattern or task is correct
-        return true;
-    }
-
-    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
-
-    }
-
-    public int getState(){
-        return iChallengeState;
-    }
-
-    public void setState(int state) {
-        iChallengeState = state;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        aInteractSound.play();
+        if(Integer.parseInt(getiStickerNo()) % 2 == 0){
+            if(e.getActionCommand() == "button_green"){
+                System.out.println("Button green pressed and the number was even so correct");
+                setiState(1);
+            }else{
+                System.out.println("Button red pressed but the number was even so incorrect");
+                setiState(2);
+            }
+        }else{
+            if(e.getActionCommand() == "button_red"){
+                System.out.println("Button red pressed and the number was odd so correct");
+                setiState(1);
+            }else{
+                System.out.println("Button green pressed but the number was odd so incorrect");
+                setiState(2);
+            }
+        }
+        bGreenButton.removeActionListener(this);
+        bRedButton.removeActionListener(this);
     }
 }
