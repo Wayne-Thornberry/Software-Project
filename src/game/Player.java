@@ -3,11 +3,15 @@ package game;
 public class Player {
 
     private String sName;
+    private int iSticker;
+
     private int iScore;
     private int iSeconds;
     private int iLives;
     private int iFailed;
     private int iPassed;
+
+    private boolean isAdmin;
 
     private boolean isDebug;
 
@@ -68,11 +72,19 @@ public class Player {
         this.iPassed = iPassed;
     }
 
-    public boolean isDebug() {
-        return isDebug;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setDebug(boolean debug) {
-        isDebug = debug;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public int getiSticker() {
+        return iSticker;
+    }
+
+    public void setiSticker(int sSticker) {
+        this.iSticker = sSticker;
     }
 }

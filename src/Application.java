@@ -30,7 +30,7 @@ public class Application{
         dUI = new Display(); // Main display
         pUser = new Player(null, 0,0,0,0,0); // Creates a new saved player that updates throughout the game
 
-        //cAudio = new ControllerAudio();
+        cAudio = new ControllerAudio();
         cDatabase = new ControllerDatabase(pUser); // Controls the database, login, stats etc
         cGame = new ControllerGame(dUI, pUser, cDatabase); // Controls the game information, what challenge gets displayed. play info etc..
         cUI = new ControllerUI(cGame, dUI, pUser); // Controls the display of the game, including the JFrame and panels that get displayed

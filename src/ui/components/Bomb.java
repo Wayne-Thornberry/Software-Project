@@ -15,26 +15,29 @@ public class Bomb extends JPanel{
     public BombLives bLives;
 
     private JPanel pChallenges;
-    private ChallengeWire cOne;
-    private ChallengeWire cTwo;
-    private ChallengeWire cThree;
-    private ChallengeWire cFour;
-    private ChallengeWire cFive;
-    private ChallengeWire cSix;
+
+    public Challenge cOne;
+    public Challenge cTwo;
+    public Challenge cThree;
+    public Challenge cFour;
+    public Challenge cFive;
+    public Challenge cSix;
 
     public Bomb(Player pUser) {
 
         System.out.println("Bomb Generating...");
         this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, false));
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 
         pInfo = new JPanel();
+        pInfo.setBackground(Color.LIGHT_GRAY);
+
         pChallenges = new JPanel();
 
         pInfo.setLayout(new GridLayout(0,3));
         pChallenges.setLayout(new GridLayout(2,3));
 
-        bSticker = new BombSticker((int)(Math.random() * 999999));
+        bSticker = new BombSticker(pUser.getiSticker());
         bTimer = new BombTimer(pUser.getiSeconds());
         bLives = new BombLives(pUser.getiLives());
 
@@ -57,18 +60,7 @@ public class Bomb extends JPanel{
         pChallenges.add(cFive);
         pChallenges.add(cSix);
         this.add(pChallenges, BorderLayout.CENTER);
+
+        cOne.getiState();
     }
-
-    /*public void resetBomb(){
-        bSticker.setStickerNo((int)(Math.random() * 999999));
-        bLives.setLives(3);
-        bTimer.setTimer(300);
-
-        cOne.resetChallenge(bSticker.getStickerNo());
-        cTwo.resetChallenge(bSticker.getStickerNo());
-        cThree.resetChallenge(bSticker.getStickerNo());
-        cFour.resetChallenge(bSticker.getStickerNo());
-        cFive.resetChallenge(bSticker.getStickerNo());
-        cSix.resetChallenge(bSticker.getStickerNo());
-    }*/
 }

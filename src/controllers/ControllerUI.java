@@ -74,10 +74,6 @@ public class ControllerUI extends ComponentAdapter {
 
     public void setScene(String scene){
         dUI.setScene(scene);
-        if(scene == "1") {
-            pUser.setsName(dUI.sTitle.tUsername.getText());
-            System.out.println(pUser.getsName());
-        }
     }
 
     private void setTitleVisible(boolean titleVisible) {
@@ -98,8 +94,13 @@ public class ControllerUI extends ComponentAdapter {
     private void setGameVisible(boolean gameVisible) {
         isGameVisible = gameVisible;
         if(isGameVisible){
-            cGame.loadGame(true);
-            System.out.println("Game Loaded");
+            if(isUserLocked) {
+                cGame.loadGame(true);
+                System.out.println("Game Loaded");
+            }else{
+                JOptionPane.showMessageDialog(null, "Please Enter a Username below to record your progress?", "Information", JOptionPane.INFORMATION_MESSAGE);
+                setScene("0");
+            }
         }else{
             cGame.loadGame(false);
             System.out.println("Game Unloaded");
@@ -137,15 +138,21 @@ public class ControllerUI extends ComponentAdapter {
         }
     }
 
-    public void toggleDebug(){
-        dUI.setDebug(!isDebugVisible);
-        pUser.setDebug(!isDebugVisible);
-        isDebugVisible = !isDebugVisible;
+    public void toggleDebug(boolean b){
+        dUI.setDebug(b);
+        System.out.println(pUser.isAdmin());
         refreshUI();
     }
 
     public void refreshUI() {
         System.out.println("Repainting...");
+        if(dUI.getScene() == "1") {
+            cGame.loadGame(false);
+            cGame.loadGame(true);
+        }else if(dUI.getScene() == "2"){
+            cGame.loadLeaderboard(false);
+            cGame.loadLeaderboard(true);
+        }
         dUI.revalidate();
         dUI.repaint();
     }
@@ -160,11 +167,13 @@ public class ControllerUI extends ComponentAdapter {
     }
 
     public void toggleUsernameLock() {
-        dUI.sTitle.setUsernameLock(!isUserLocked);
-        isUserLocked = !isUserLocked;
-        if (isUserLocked) {
-            pUser.setsName(dUI.sTitle.tUsername.getText());
-            System.out.println(pUser.getsName());
+        if(dUI.sTitle.tUsername.getText() != null && !dUI.sTitle.tUsername.getText().trim().isEmpty()) {
+            dUI.sTitle.setUsernameLock(!isUserLocked);
+            isUserLocked = !isUserLocked;
+            if (isUserLocked) {
+                pUser.setsName(dUI.sTitle.tUsername.getText());
+                System.out.println(pUser.getsName());
+            }
         }
     }
 
@@ -183,6 +192,23 @@ public class ControllerUI extends ComponentAdapter {
             if (iExit == JOptionPane.YES_OPTION) {
                 dUI.setScene("0");
             }
+        }
+    }
+
+    public void loginPrompt() {
+        if(!pUser.isAdmin()) {
+            try {
+                String pass = JOptionPane.showInputDialog(null, "Enter Admin Password: ", "Admin Login", JOptionPane.INFORMATION_MESSAGE);
+                if (pass.equals("root") && !pUser.isAdmin()) {
+                    pUser.setAdmin(true);
+                    toggleDebug(pUser.isAdmin());
+                }
+            }catch (NullPointerException e){
+                System.out.println("Null Detected");
+            }
+        }else{
+            pUser.setAdmin(false);
+            toggleDebug(pUser.isAdmin());
         }
     }
 }

@@ -31,33 +31,61 @@ public class SceneTitle extends JPanel {
 
     public SceneTitle(){
 
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(0,2,15,0));
         this.setBorder(BorderFactory.createEmptyBorder(40,110,40,110));
 
         pLeftSpace = new JPanel(new BorderLayout());
+        pLeftSpace.setOpaque(false);
+
         pRightSpace = new JPanel();
 
         pTitleSpace = new JPanel();
-        pButtonSpace = new JPanel(new GridLayout(3,0));
-        pBDeadSpace = new JPanel(new GridLayout(0,2));
+        pTitleSpace.setOpaque(false);
 
-        lTitle = new JLabel("TITLE");
-        tUsername = new JTextField("Player");
+        pButtonSpace = new JPanel(new GridLayout(3,0, 0,5));
+        pButtonSpace.setOpaque(false);
+
+        pBDeadSpace = new JPanel(new GridLayout(0,2));
+        pBDeadSpace.setOpaque(false);
+
+        lTitle = new JLabel("<html><div style='text-align:center;'>BOMB DEFUSE <br> EXPERT</div></html>", SwingConstants.CENTER);
+        lTitle.setFont(new Font("Arial",1,64));
+        lTitle.setOpaque(false);
 
         bStartGame = new JButton("Start Game");
+        bStartGame.setBackground(new Color(0x0078DE));
+        bStartGame.setFocusable(false);
+        bStartGame.setFont(new Font("Arial",1,32));
+        bStartGame.setForeground(Color.WHITE);
+        bStartGame.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+
         bOptions = new JButton("Options");
+        bOptions.setBackground(new Color(0x0078DE));
+        bOptions.setFocusable(false);
+        bOptions.setFont(new Font("Arial",1,32));
+        bOptions.setForeground(Color.WHITE);
+        bOptions.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+
         bQuitGame = new JButton("Quit Game");
+        bQuitGame.setBackground(new Color(0x0078DE));
+        bQuitGame.setFocusable(false);
+        bQuitGame.setFont(new Font("Arial",1,32));
+        bQuitGame.setForeground(Color.WHITE);
+        bQuitGame.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+
+        tUsername = new JTextField();
+        tUsername.setHorizontalAlignment(JTextField.CENTER);
+        tUsername.setFont(new Font("Arial",1,32));
+        tUsername.setBorder(BorderFactory.createEmptyBorder());
 
         bUser = new JButton("Select User");
+        bUser.setFont(new Font("Arial",1,32));
+        bUser.setFocusable(false);
+        bUser.setBorder(BorderFactory.createEmptyBorder());
+        bUser.setBackground(new Color(0x009A21));
+        bUser.setForeground(Color.WHITE);
 
         this.setBackground(Color.RED);
-
-        pLeftSpace.setBackground(Color.GREEN);
-        pRightSpace.setBackground(Color.ORANGE);
-
-        pTitleSpace.setBackground(Color.RED);
-        pButtonSpace.setBackground(Color.GREEN);
-        pBDeadSpace.setBackground(Color.BLUE);
 
         this.setOptionsVisible(false);
         this.add(pLeftSpace);
@@ -100,6 +128,6 @@ public class SceneTitle extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("Graphics/backgroundimage.jpg").getImage(),0,0, 1920 , 1080, null);
+        g.drawImage(new ImageIcon("Graphics/backgroundimage.jpg").getImage(),0,0, 1280 , 720, null);
     }
 }
