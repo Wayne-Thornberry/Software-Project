@@ -97,9 +97,9 @@ public class ControllerAction implements ActionListener {
             case "1920x1080" : cUI.setResolution(1920,1080);break;
 
             case "Wire Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
-            case "Keypad Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
+            case "Keypad Challenge": cUI.helpChallengeInfo("KeypadChallenge"); break;
             case "Letter Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
-            case "OddEven Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
+            case "Even Odd Challenge": cUI.helpChallengeInfo("EvenOddChallenge"); break;
             case "Picture Challenge": cUI.helpChallengeInfo("WireChallenge"); break;
             default: System.out.println("Unknown Debug Button");
         }

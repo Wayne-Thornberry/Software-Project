@@ -4,67 +4,166 @@ import javafx.scene.media.AudioClip;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ChallengeKeypad extends Challenge implements ActionListener {
+public class ChallengeKeypad extends Challenge{
 
-    private JButton[] bKeyButtons;
     private JLabel lRedLight;
     private JLabel lInputDisplay;
     private JLabel lGreenLight;
     private String lInputText;
 
+    private JButton bKeyOne;
+    private JButton bKeyTwo;
+    private JButton bKeyThree;
+    private JButton bKeyFour;
+    private JButton bKeyFive;
+    private JButton bKeySix;
+    private JButton bKeySeven;
+    private JButton bKeyEight;
+    private JButton bKeyNine;
+    private JButton bKeyZero;
+    private JButton bKeyClear;
+    private JButton bKeyEnter;
+
     private AudioClip aInteractSound;
 
-    public ChallengeKeypad(String sticker){
-        super(0,sticker, 2);
+    String answer;
 
-        this.setLayout(new GridLayout(5,3, 2,2));
+    public ChallengeKeypad(String iSticker){
+        super(0, iSticker, 4);
+
+        String stickerArray[] = iSticker.split("");
+        answer = stickerArray[5] + stickerArray[4] + stickerArray[3] + stickerArray[2];
+        // Define Any Vars
+        iChallengeState = 0;
+        System.out.println("STICKER" + iSticker);
+      
+        this.setLayout(new GridLayout(5,3));
+        this.setBorder(BorderFactory.createEtchedBorder());
 
         lInputText = "";
-        bKeyButtons = new JButton[12];
-        lRedLight = new JLabel();
 
+        lRedLight = new JLabel(new ImageIcon("redbutton.png"));
         lInputDisplay = new JLabel("", SwingConstants.CENTER);
-        lInputDisplay.setBackground(Color.WHITE);
+        lGreenLight = new JLabel(new ImageIcon("greenbutton.png"));
+
         lInputDisplay.setFont(new Font("Arial", 1, 28));
 
-        lGreenLight = new JLabel();
+        bKeyOne = new JButton("1");
+        bKeyTwo = new JButton("2");
+        bKeyThree = new JButton("3");
+        bKeyFour = new JButton("4");
+        bKeyFive = new JButton("5");
+        bKeySix = new JButton("6");
+        bKeySeven = new JButton("7");
+        bKeyEight = new JButton("8");
+        bKeyNine = new JButton("9");
+        bKeyZero = new JButton("0");
 
-        aInteractSound = new AudioClip("file:audio/Interaction.wav");
+        bKeyClear = new JButton("Clear");
+        bKeyEnter = new JButton("Enter");
 
+        aInteractSound = new AudioClip("file:Audio/Interaction.wav");
 
         add(lRedLight);
         add(lInputDisplay);
         add(lGreenLight);
+        add(bKeyOne);
+        add(bKeyTwo);
+        add(bKeyThree);
+        add(bKeyFour);
+        add(bKeyFive);
+        add(bKeySix);
+        add(bKeySeven);
+        add(bKeyEight);
+        add(bKeyNine);
+        add(bKeyClear);
+        add(bKeyZero);
+        add(bKeyEnter);
 
-        for(int i=0;i<12;i++){
-            if(i == 9) {
-                bKeyButtons[i] = new JButton("Clear");
-                bKeyButtons[i].setActionCommand("Clear");
-                bKeyButtons[i].setBackground(Color.RED);
-                bKeyButtons[i].setForeground(Color.WHITE);
-            }else if(i == 10){
-                bKeyButtons[i] = new JButton("0");
-                bKeyButtons[i].setActionCommand("0");
-                bKeyButtons[i].setBackground(Color.LIGHT_GRAY);
-            } else if (i == 11) {
-                bKeyButtons[i] = new JButton("Enter");
-                bKeyButtons[i].setActionCommand("Enter");
-                bKeyButtons[i].setBackground(new Color(0x007B11));
-                bKeyButtons[i].setForeground(Color.WHITE);
-            } else {
-                bKeyButtons[i] = new JButton(String.valueOf(i + 1));
-                bKeyButtons[i].setActionCommand(String.valueOf(i + 1));
-                bKeyButtons[i].setBackground(Color.LIGHT_GRAY);
+        // Create Any Events
+
+        bKeyOne.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyOne.getText());
             }
-            bKeyButtons[i].setFont(new Font("Arial", 1, 28));
-            bKeyButtons[i].setBorder(BorderFactory.createEmptyBorder());
-            bKeyButtons[i].addActionListener(this);
-            this.add(bKeyButtons[i]);
-        }
 
+            aInteractSound.play();
+        });
+
+        bKeyTwo.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyTwo.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyThree.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyThree.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyFour.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyFour.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyFive.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyFive.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeySix.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeySix.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeySeven.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeySeven.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyEight.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyEight.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyNine.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyNine.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyZero.addActionListener(e->{
+            if(getKeyInputLength() != 4 && getiState() == 0) {
+                setlInputText(bKeyZero.getText());
+            }
+            aInteractSound.play();
+        });
+
+        bKeyClear.addActionListener(e->{
+            aInteractSound.play();
+            lInputText = "";
+            lInputDisplay.setText("");
+        });
+
+        bKeyEnter.addActionListener(e->{
+            aInteractSound.play();
+            isCorrect();
+        });
     }
 
     private int getKeyInputLength(){
@@ -73,37 +172,18 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
 
     private void setlInputText(String sInput){
         lInputText = lInputText + sInput;
-        lInputDisplay.setText("<html><div style='color: Black;'>" + lInputText + "</div></html>");
+        lInputDisplay.setText("<html><div style='color: red;'>" + lInputText + "</div></html>");
     }
 
     private void isCorrect(){
-        if(lInputText.equals("2018")) {
+        if(lInputText.equals(answer)) {
             setiState(1);
             System.out.println("Passed");
-            lGreenLight.setBackground(new Color(0x007B11));
-            lRedLight.setBackground(Color.GRAY);
         }else {
             setiState(2);
             System.out.println("Failed");
-            lGreenLight.setBackground(Color.GRAY);
-            lRedLight.setBackground(Color.RED);
         }
         lInputText = "";
         setlInputText("");
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        aInteractSound.play();
-        if(e.getActionCommand() == "Clear"){
-            lInputText = "";
-            lInputDisplay.setText("");
-        }else if(e.getActionCommand() == "Enter"){
-            isCorrect();
-        }else {
-            if(getKeyInputLength() < 4) {
-                setlInputText(e.getActionCommand());
-            }
-        }
     }
 }
