@@ -39,6 +39,7 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
         lInputDisplay.setFont(new Font("Arial", 1, 28));
 
         aInteractSound = new AudioClip("file:audio/Interaction.wav");
+        aInteractSound.setVolume(0.05);
 
 
         add(lRedLight);
@@ -82,22 +83,6 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
         lInputDisplay.setText("<html><div style='color: Black;'>" + lInputText + "</div></html>");
     }
 
-    private void isCorrect(){
-        if(lInputText.equals(sAwnser)) {
-            setiState(1);
-            System.out.println("Passed");
-            lGreenLight.setBackground(new Color(0x007B11));
-            lRedLight.setBackground(Color.GRAY);
-        }else {
-            setiState(2);
-            System.out.println("Failed");
-            lGreenLight.setBackground(Color.GRAY);
-            lRedLight.setBackground(Color.RED);
-        }
-        lInputText = "";
-        setlInputText("");
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         aInteractSound.play();
@@ -105,8 +90,20 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
             lInputText = "";
             lInputDisplay.setText("");
         }else if(e.getActionCommand() == "Enter"){
-            isCorrect();
-            bKeyButtons[11].removeActionListener(this);
+            if(lInputText.equals(sAwnser)) {
+                setiState(1);
+                System.out.println("Passed");
+                lGreenLight.setBackground(new Color(0x007B11));
+                lRedLight.setBackground(Color.GRAY);
+                bKeyButtons[11].removeActionListener(this);
+            }else {
+                setiState(2);
+                System.out.println("Failed");
+                lGreenLight.setBackground(Color.GRAY);
+                lRedLight.setBackground(Color.RED);
+            }
+            lInputText = "";
+            setlInputText("");
         }else {
             if(getKeyInputLength() < 4) {
                 setlInputText(e.getActionCommand());

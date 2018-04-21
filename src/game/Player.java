@@ -13,8 +13,6 @@ public class Player {
 
     private boolean isAdmin;
 
-    private boolean isDebug;
-
     public Player(String name, int score, int seconds, int lives, int failed, int passed){
         sName = name;
         iScore = score;

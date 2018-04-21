@@ -29,7 +29,6 @@ public class ControllerUI extends ComponentAdapter {
     private boolean isGameVisible;
     private boolean isEndVisible;
     private boolean isFullscreen;
-    private boolean isDebugVisible;
     private boolean isUserLocked;
 
     public ControllerUI(ControllerGame game, Display ui, Player user){

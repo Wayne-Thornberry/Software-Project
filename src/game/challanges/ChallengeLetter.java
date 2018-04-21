@@ -1,5 +1,7 @@
 
 package game.challanges;
+import javafx.scene.media.AudioClip;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,37 +10,41 @@ import javax.swing.*;
 
 
 public class ChallengeLetter extends Challenge implements ActionListener {
-    private int iChallengeState;
-    private static final String characters =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";//random charcters that loop will pick from
-    private static final int StringSize = 5;//amunt of random char
-    // private static final String bit = "5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsr";//pre given random string
 
-    JPanel pane = new JPanel(new GridLayout(3,1));
-    JLabel lab = new JLabel(" ");
-    JTextArea inputText = new JTextArea();
+    private AudioClip aInteractSound;
+    private String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";//random characters that loop will pick from
+    private int StringSize = 5;//amount of random char
 
-    JButton but = new JButton("Press");
-    JButton res = new JButton("Reset");
-    //String print;
+    private String sRandom;
+    private JLabel lString;
+    private JTextField tInput;
 
+    private JButton bSubmit;
+    private JButton bReset;
 
-    //////////////////////////////////////////////////////////////////////////
-    public ChallengeLetter(String iNumber)
-    {
-        this.setBorder(BorderFactory.createEtchedBorder());
-        //getContentPane().add(pane);
-        this.add(pane,new GridLayout(2,2));
-        pane.add(lab);
-        lab.setText(RandomStringToBeGenerated());
-        pane.add(inputText);
+    public ChallengeLetter(String sticker) {
+        super(0,sticker,3);
 
-        pane.add(but);
-        pane.add(res);
-        but.addActionListener(this);
-        res.addActionListener(this);
-       // setSize(500,500);
-        //setVisible(true);
+        sRandom = RandomStringToBeGenerated();
+        lString = new JLabel(sRandom);
+        tInput = new JTextField();
+
+        aInteractSound = new AudioClip("file:audio/Interaction.wav");
+        aInteractSound.setVolume(0.05);
+
+        bSubmit = new JButton("Submit");
+        bSubmit.addActionListener(this);
+        bSubmit.setActionCommand("Submit");
+
+        bReset = new JButton("Reset");
+        bReset.addActionListener(this);
+        bReset.setActionCommand("Reset");
+
+        this.setLayout(new GridLayout(2,2));
+        this.add(lString);
+        this.add(tInput);
+        this.add(bReset);
+        this.add(bSubmit);
     }
 
     //generates random string
@@ -49,16 +55,12 @@ public class ChallengeLetter extends Challenge implements ActionListener {
             int number = getRandom();
             char ch = characters.charAt(number);
             rand.append(ch);
-
-
         }
 
         return rand.toString();
 
     }
-    /////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-    //returnns random numbers
+
     private int getRandom() {
         int randomInt = 0;
         Random Generator = new Random();
@@ -68,59 +70,18 @@ public class ChallengeLetter extends Challenge implements ActionListener {
         } else {
             return randomInt - 1;
         }
-        //////////////////////////////////////////////////////////////////////
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String contents = inputText.getText();
-
-        if(e.getActionCommand().equals("Press"))
-        {
-
-            if(contents.equals(lab.getText()))
-            {
-                isCorrect();
-
+        if(e.getActionCommand().equals("Submit")){
+            if (tInput.getText().equals(sRandom)) {
+                setiState(1);
+            }else{
+                setiState(2);
             }
-            if(!contents.equals(lab.getText()))
-            {
-                isWrong();
-
-            }
+        }else{
+            tInput.setText("");
         }
-
-        if(e.getActionCommand().equals("Reset"))
-        {
-            //createChallenge();
-        }
-    }
-    public void isCorrect()
-    {
-        iChallengeState++;
-        inputText.setText("well done");
-        System.out.println(iChallengeState);
-    }
-    void isWrong()
-    {
-        iChallengeState--;
-        inputText.setText("wrong");
-        System.out.println(iChallengeState);
-    }
-
-
-    public void resetChallenge(int iNumber)
-    {
-        lab.setText(RandomStringToBeGenerated());
-
-
-    }
-    public int getState(){
-        return iChallengeState;
-    }
-
-    public void setState(int state) {
-        iChallengeState = state;
     }
 }

@@ -32,6 +32,7 @@ public class ControllerAction implements ActionListener {
         cUI = cui;
         cGame = game;
         aActionSound = new AudioClip("file:audio/Interaction.wav");
+        aActionSound.setVolume(0.05);
 
         //Scene Title Events
         dUI.sTitle.bUser.addActionListener(this);
