@@ -39,6 +39,15 @@ public class ControllerAction implements ActionListener {
         dUI.sTitle.bOptions.addActionListener(this);
         dUI.sTitle.bQuitGame.addActionListener(this);
 
+        //Option Menu Events
+        dUI.sTitle.optionsButton1.addActionListener(this);
+        dUI.sTitle.optionsButton2.addActionListener(this);
+        dUI.sTitle.optionsButton3.addActionListener(this);
+        dUI.sTitle.optionsButton4.addActionListener(this);
+        dUI.sTitle.optionsLeaderboard.addActionListener(this);
+
+
+
         //Debug Menu Events
         dUI.dMenuBar.mSceneTitle.addActionListener(this); // Scene Title Button
         dUI.dMenuBar.mSceneEnd.addActionListener(this); // Scene Game Button
@@ -112,8 +121,28 @@ public class ControllerAction implements ActionListener {
             case "Quit Game" : cUI.exitApplication(); break;
             case "Select User" : cUI.toggleUsernameLock(); break;
             case "Edit User" : cUI.toggleUsernameLock(); break;
+
+            //Option Bar
+
+            case "Change Lives" : System.out.println("Lives set to " + dUI.sTitle.optionsLives.getText()); break;
+            case "Change Seed" : System.out.println("Seed set to " + dUI.sTitle.optionsSeed.getText()); break;
+            case "Change Time" : System.out.println("Time set to " + dUI.sTitle.optionsTime.getText() + "seconds"); break;
+            case "Change Res" : System.out.println("Resolution set to " + dUI.sTitle.optionsResolution.getSelectedItem());
+
+                String res = dUI.sTitle.optionsResolution.getSelectedItem().toString();
+                String[] resarray = res.split("x");
+                cUI.setResolution(Integer.parseInt(resarray[0]),Integer.parseInt(resarray[1]));
+                break;
+            case "Leaderboard": cUI.setScene("2"); break;
+
+
+
             default: System.out.println("Unknown Menu Button");
         }
+
+        // Options Menu
+
+
 
         aActionSound.play();
 

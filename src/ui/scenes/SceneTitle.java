@@ -23,6 +23,20 @@ public class SceneTitle extends JPanel {
     public JButton bOptions;
     public JButton bQuitGame;
 
+    public JButton optionsButton1;
+    public JButton optionsButton2;
+    public JButton optionsButton3;
+    public JButton optionsButton4;
+    public JButton optionsLeaderboard;
+
+    public JTextField optionsLives;
+    public JTextField optionsTime;
+    public JTextField optionsSeed;
+    public JComboBox optionsResolution;
+
+
+    public JLabel optionsLabel1;
+
     public JButton bUser;
 
     private String sScene;
@@ -38,6 +52,7 @@ public class SceneTitle extends JPanel {
         pLeftSpace.setOpaque(false);
 
         pRightSpace = new JPanel();
+
 
         pTitleSpace = new JPanel();
         pTitleSpace.setOpaque(false);
@@ -96,13 +111,11 @@ public class SceneTitle extends JPanel {
 
         optionsPanel.setLayout(new GridLayout(5,3));
 
-        JButton optionsButton1 = new JButton("Change Lives");
-        JButton optionsButton2 = new JButton("Change Seed");
-        JButton optionsButton3 = new JButton("Change Time");
-        JButton optionsButton4 = new JButton("Change Res");
-        JButton optionsButton5 = new JButton("Submit");
-        JButton optionsButton6 = new JButton("Submit");
-        JButton optionsLeaderboard = new JButton("Leaderboard");
+         optionsButton1 = new JButton("Change Lives");
+         optionsButton2 = new JButton("Change Seed");
+         optionsButton3 = new JButton("Change Time");
+         optionsButton4 = new JButton("Change Res");
+         optionsLeaderboard = new JButton("Leaderboard");
 
         JLabel optionsLabel1 = new JLabel("Enter lives: ");
         JLabel optionsLabel2 = new JLabel("Enter seed: ");
@@ -111,11 +124,11 @@ public class SceneTitle extends JPanel {
         JLabel optionsLabel5 = new JLabel("Label");
         JLabel optionsLabel6 = new JLabel("Label");
 
-        JTextField optionsLives = new JTextField();
-        JTextField optionsSeed = new JTextField();
-        JTextField optionsTime = new JTextField();
+        optionsLives = new JTextField();
+        optionsSeed = new JTextField();
+        optionsTime = new JTextField();
         String[] resolutions = {"1024x576", "1280x720" ,"1920x1080"};
-        JComboBox optionsResolution = new JComboBox(resolutions);
+        optionsResolution = new JComboBox(resolutions);
 
 
 
