@@ -49,19 +49,52 @@ public class ControllerGame {
     public void loadGame(boolean state){
             if (state) {
                 System.out.println(">Attempting to create the Bomb");
-                pUser.setiSticker((int)(Math.random() * 999999));
+
+
+
+
+
                 pUser.setiScore(0);
-                pUser.setiSeconds(300);
+
+                try{
+                    pUser.setiSeconds(Integer.parseInt(dUI.sTitle.optionsTime.getText()));
+                }catch(Exception e)
+                {
+                    if(pUser.getiSeconds() == 0)
+                    {
+                        pUser.setiSeconds(300);
+                    }
+                }
+
+
+
                 pUser.setiPassed(0);
                 pUser.setiFailed(0);
-                pUser.setiLives(3);
+
+                try
+                {
+                    pUser.setiLives(Integer.parseInt(dUI.sTitle.optionsLives.getText()));
+                }catch(Exception e){
+                        pUser.setiLives(3);
+
+                }
+
+                try
+                {
+                    pUser.setiSticker(Integer.parseInt(dUI.sTitle.optionsSeed.getText()));
+                }catch(Exception e){
+                    pUser.setiSticker((int)(Math.random() * 999999));
+
+                }
+
+
 
                 bBomb = new Bomb(pUser);
                 dUI.sGame.add(bBomb, BorderLayout.CENTER);
 
                 aMusic.stop();
                 aMusic = new AudioClip("file:audio/game_music.mp3");
-                aMusic.setVolume(0.1);
+                aMusic.setVolume(0.05);
                 aMusic.play();
 
                 tUpdate = new Timer(100, e -> {
