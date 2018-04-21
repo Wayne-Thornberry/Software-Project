@@ -159,6 +159,9 @@ public class ControllerUI extends ComponentAdapter {
 
     public void setResolution(int width, int height) {
         dUI.setSize(width, height);
+        dUI.sTitle.repaint();
+        dUI.sGame.repaint();
+        dUI.sEnd.repaint();
     }
 
     public void toggleFullscreen() {

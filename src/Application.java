@@ -10,6 +10,7 @@
 import controllers.*;
 import game.Player;
 import game.Progress;
+import javafx.scene.media.AudioClip;
 import ui.components.Display;
 
 public class Application{
@@ -22,6 +23,8 @@ public class Application{
     private static ControllerUI cUI;
     private static ControllerInput cInput;
     private static ControllerDatabase cDatabase;
+
+    private static AudioClip aMusic;
 
 
     public static void main(String ARGS[]){ // Main Controller

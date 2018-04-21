@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 
 
-public class ChallengePicture extends JPanel implements ActionListener {//class start
+public class ChallengePicture extends Challenge implements ActionListener {//class start
     private int iChallengeState;
     //pannels
     JPanel paneLabel = new JPanel(new GridLayout(1,2));//north
@@ -49,7 +49,7 @@ public class ChallengePicture extends JPanel implements ActionListener {//class 
     ImageIcon yellow = new ImageIcon("yellow.jpg");
     ImageIcon black = new ImageIcon("black.png");
 
-    public ChallengePicture(int iNumber)
+    public ChallengePicture(String sticker)
     {//testImgChall start
         add(paneLabel);
        add(paneButtons);

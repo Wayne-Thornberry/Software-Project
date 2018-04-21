@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class ChallengeLetter extends JPanel implements ActionListener {
+public class ChallengeLetter extends Challenge implements ActionListener {
     private int iChallengeState;
     private static final String characters =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";//random charcters that loop will pick from
@@ -24,7 +24,7 @@ public class ChallengeLetter extends JPanel implements ActionListener {
 
 
     //////////////////////////////////////////////////////////////////////////
-    public ChallengeLetter(int iNumber)
+    public ChallengeLetter(String iNumber)
     {
         this.setBorder(BorderFactory.createEtchedBorder());
         //getContentPane().add(pane);

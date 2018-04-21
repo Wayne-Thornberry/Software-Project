@@ -46,8 +46,8 @@ public class Bomb extends JPanel{
         cOne = new ChallengeWire(bSticker.getStickerNo());
         cTwo = new ChallengeKeypad(bSticker.getStickerNo());
         cThree = new ChallengeEvenOdd(bSticker.getStickerNo());
-        cFour = new ChallengeWire(bSticker.getStickerNo());
-        cFive = new ChallengeWire(bSticker.getStickerNo());
+        cFour = new ChallengePicture(bSticker.getStickerNo());
+        cFive = new ChallengeLetter(bSticker.getStickerNo());
         cSix = new ChallengeWire(bSticker.getStickerNo());
 
         pInfo.add(bSticker);

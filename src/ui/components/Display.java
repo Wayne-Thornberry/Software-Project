@@ -45,6 +45,7 @@ public class Display extends JFrame {
         pBase.add(sEnd, "2");
 
         setDebug(false);
+        setScene("0");
 
         this.add(pBase);
         this.setFocusable(true);

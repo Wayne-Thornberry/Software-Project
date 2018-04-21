@@ -14,7 +14,7 @@ public class SceneEnd extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("Graphics/backgroundimage.jpg").getImage(),0,0, 1920 , 1080, null);
+        g.drawImage(new ImageIcon("Graphics/end_scene_graphic.jpg").getImage(),0,0, this.getSize().width , this.getSize().height, null);
     }
 }
 

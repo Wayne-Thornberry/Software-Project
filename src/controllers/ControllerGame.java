@@ -1,6 +1,7 @@
 package controllers;
 
 import game.Player;
+import javafx.scene.media.AudioClip;
 import ui.components.Bomb;
 import ui.components.Display;
 import ui.components.Leaderboard;
@@ -20,10 +21,22 @@ public class ControllerGame {
     private Timer tUpdate;
     private Timer tTimer;
 
+    private AudioClip aMusic;
+    private AudioClip aTimer;
+    private AudioClip aIndication;
+    private AudioClip aExplosion;
+
     public ControllerGame(Display ui, Player user, ControllerDatabase database) {
         System.out.println("Controller Logic Running...");
         System.out.println(">Setting Variable");
         try {
+            aMusic = new AudioClip("file:audio/main_menu_music.mp3");
+            aTimer = new AudioClip("file:audio/timer_beep_sound.mp3");
+            aExplosion = new AudioClip("file:audio/explosion_sound.mp3");
+            aMusic.setVolume(0.1);
+            aTimer.setVolume(0.02);
+            aExplosion.setVolume(0.5);
+            aMusic.play();
             dUI = ui;
             pUser = user;
             cDatabase = database;
@@ -42,64 +55,118 @@ public class ControllerGame {
                 pUser.setiPassed(0);
                 pUser.setiFailed(0);
                 pUser.setiLives(3);
+
                 bBomb = new Bomb(pUser);
                 dUI.sGame.add(bBomb, BorderLayout.CENTER);
+
+                aMusic.stop();
+                aMusic = new AudioClip("file:audio/game_music.mp3");
+                aMusic.setVolume(0.1);
+                aMusic.play();
 
                 tUpdate = new Timer(100, e -> {
                     if(bBomb.cOne.getiState() == 1){
                         pUser.setiPassed(pUser.getiPassed() + 1);
-                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cOne.setiState(3);
                     }else if(bBomb.cOne.getiState() == 2){
                         pUser.setiFailed(pUser.getiFailed() + 1);
                         pUser.setiLives(pUser.getiLives() - 1);
                         tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cOne.setiState(3);
                     }
 
                     if(bBomb.cTwo.getiState() == 1){
                         pUser.setiPassed(pUser.getiPassed() + 1);
-                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cTwo.setiState(3);
                     }else if(bBomb.cTwo.getiState() == 2){
                         pUser.setiFailed(pUser.getiFailed() + 1);
                         pUser.setiLives(pUser.getiLives() - 1);
                         tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cTwo.setiState(3);
                     }
 
                     if(bBomb.cThree.getiState() == 1){
                         pUser.setiPassed(pUser.getiPassed() + 1);
-                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cThree.setiState(3);
                     }else if(bBomb.cThree.getiState() == 2){
                         pUser.setiFailed(pUser.getiFailed() + 1);
                         pUser.setiLives(pUser.getiLives() - 1);
                         tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cThree.setiState(3);
                     }
 
                     if(bBomb.cFour.getiState() == 1){
                         pUser.setiPassed(pUser.getiPassed() + 1);
-                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cFour.setiState(3);
                     }else if(bBomb.cFour.getiState() == 2){
                         pUser.setiFailed(pUser.getiFailed() + 1);
                         pUser.setiLives(pUser.getiLives() - 1);
                         tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cFour.setiState(3);
                     }
 
                     if(bBomb.cFive.getiState() == 1){
                         pUser.setiPassed(pUser.getiPassed() + 1);
-                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty());
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         System.out.println("Completed");
                         bBomb.cFive.setiState(3);
                     }else if(bBomb.cFive.getiState() == 2){
                         pUser.setiFailed(pUser.getiFailed() + 1);
                         pUser.setiLives(pUser.getiLives() - 1);
                         tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
                         bBomb.cFive.setiState(3);
+                    }
+
+                    if(bBomb.cSix.getiState() == 1){
+                        pUser.setiPassed(pUser.getiPassed() + 1);
+                        pUser.setiScore(pUser.getiSeconds() * bBomb.cOne.getiDifficulty() * pUser.getiLives());
+                        aIndication = new AudioClip("file:audio/correct_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
+                        System.out.println("Completed");
+                        bBomb.cSix.setiState(3);
+                    }else if(bBomb.cSix.getiState() == 2){
+                        pUser.setiFailed(pUser.getiFailed() + 1);
+                        pUser.setiLives(pUser.getiLives() - 1);
+                        tTimer.setDelay(tTimer.getDelay() / 2);
+                        aIndication = new AudioClip("file:audio/incorrect_sound.mp3");
+                        aIndication.setVolume(0.1);
+                        aIndication.play();
+                        bBomb.cSix.setiState(3);
                     }
 
 
@@ -108,6 +175,9 @@ public class ControllerGame {
 
 
                     if (pUser.getiLives() <= 0 || pUser.getiPassed() + pUser.getiFailed() == 6) {
+                        if(pUser.getiLives() <= 0) {
+                            aExplosion.play();
+                        }
                         dUI.setScene("2");
                     }
                 });
@@ -115,7 +185,9 @@ public class ControllerGame {
                 tTimer = new Timer(1000, e -> {
                     bBomb.bTimer.setTimer(bBomb.bTimer.getTimer() - 1);
                     pUser.setiSeconds(bBomb.bTimer.getTimer());
+                    aTimer.play();
                     if (bBomb.bTimer.getTimer() <= 0) {
+                        aExplosion.play();
                         dUI.setScene("2");
                     }
                 });
@@ -130,6 +202,11 @@ public class ControllerGame {
                     tUpdate = null;
                     tTimer.stop();
                     tTimer = null;
+
+                    aMusic.stop();
+                    aMusic = new AudioClip("file:audio/main_menu_music.mp3");
+                    aMusic.setVolume(0.1);
+                    aMusic.play();
                 }catch(NullPointerException e){
                     System.out.println("Game does not exist cannot unload");
                 }
