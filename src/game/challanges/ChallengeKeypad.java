@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 public class ChallengeKeypad extends Challenge implements ActionListener {
 
     private JButton[] bKeyButtons;
-    private JLabel lRedLight;
+    private JPanel lRedLight;
     private JLabel lInputDisplay;
-    private JLabel lGreenLight;
+    private JPanel lGreenLight;
     private String lInputText;
     private String sAwnser;
     private AudioClip aInteractSound;
@@ -26,14 +26,17 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
         sAwnser = stickerArray[5] + stickerArray[4] + stickerArray[3] + stickerArray[2];
 
         lInputText = "";
+        lGreenLight = new JPanel();
+        lGreenLight.setBackground(Color.GRAY);
+
+        lRedLight = new JPanel();
+        lRedLight.setBackground(Color.GRAY);
+
         bKeyButtons = new JButton[12];
-        lRedLight = new JLabel();
 
         lInputDisplay = new JLabel("", SwingConstants.CENTER);
         lInputDisplay.setBackground(Color.WHITE);
         lInputDisplay.setFont(new Font("Arial", 1, 28));
-
-        lGreenLight = new JLabel();
 
         aInteractSound = new AudioClip("file:audio/Interaction.wav");
 
@@ -103,6 +106,7 @@ public class ChallengeKeypad extends Challenge implements ActionListener {
             lInputDisplay.setText("");
         }else if(e.getActionCommand() == "Enter"){
             isCorrect();
+            bKeyButtons[11].removeActionListener(this);
         }else {
             if(getKeyInputLength() < 4) {
                 setlInputText(e.getActionCommand());
