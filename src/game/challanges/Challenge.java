@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public abstract class Challenge extends JPanel{
 
+    Challenge(){}
+
     private int iState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private int iDifficulty; // Can range from 1 to 5, 1 beings very easy 5 being very hard
     private String iStickerNo;

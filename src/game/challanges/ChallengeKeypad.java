@@ -27,9 +27,17 @@ public class ChallengeKeypad extends Challenge{
 
     private AudioClip aInteractSound;
 
-    public ChallengeKeypad(String sticker){
-        super(0,sticker, 2);
+    String answer;
 
+    public ChallengeKeypad(String iSticker){
+        super(0, iSticker, 4);
+
+        String stickerArray[] = iSticker.split("");
+        answer = stickerArray[5] + stickerArray[4] + stickerArray[3] + stickerArray[2];
+        // Define Any Vars
+        iChallengeState = 0;
+        System.out.println("STICKER" + iSticker);
+      
         this.setLayout(new GridLayout(5,3));
         this.setBorder(BorderFactory.createEtchedBorder());
 
@@ -79,6 +87,7 @@ public class ChallengeKeypad extends Challenge{
             if(getKeyInputLength() != 4 && getiState() == 0) {
                 setlInputText(bKeyOne.getText());
             }
+
             aInteractSound.play();
         });
 
@@ -167,7 +176,7 @@ public class ChallengeKeypad extends Challenge{
     }
 
     private void isCorrect(){
-        if(lInputText.equals("2018")) {
+        if(lInputText.equals(answer)) {
             setiState(1);
             System.out.println("Passed");
         }else {
