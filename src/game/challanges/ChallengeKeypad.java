@@ -5,7 +5,7 @@ import javafx.scene.media.AudioClip;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChallengeKeypad extends JPanel{
+public class ChallengeKeypad extends Challenge{
 
     private int iChallengeState; // Defines if the challenge has been completed, idle or failed - 0 Idle - 1 Completed - 2 Failed 3 - Checked Either Failed/Passed
     private int iStickerNo;
@@ -30,10 +30,17 @@ public class ChallengeKeypad extends JPanel{
 
     private AudioClip aInteractSound;
 
-    public ChallengeKeypad(int iNumber){
+
+    String answer;
+
+    public ChallengeKeypad(String iSticker){
+        super(0, iSticker, 4);
+
+        String stickerArray[] = iSticker.split("");
+        answer = stickerArray[5] + stickerArray[4] + stickerArray[3] + stickerArray[2];
         // Define Any Vars
         iChallengeState = 0;
-
+        System.out.println("STICKER" + iSticker);
         this.setLayout(new GridLayout(5,3));
         this.setBorder(BorderFactory.createEtchedBorder());
 
@@ -83,6 +90,7 @@ public class ChallengeKeypad extends JPanel{
             if(getKeyInputLength() != 4 && iChallengeState == 0) {
                 setlInputText(bKeyOne.getText());
             }
+
             aInteractSound.play();
         });
 
@@ -171,9 +179,10 @@ public class ChallengeKeypad extends JPanel{
     }
 
     private void isCorrect(){
-        if(lInputText.equals("2018")) {
+        if(lInputText.equals(answer)) {
             iChallengeState = 1;
             System.out.println("Passed");
+
         }else {
             iChallengeState = 2;
             System.out.println("Failed");
@@ -182,7 +191,7 @@ public class ChallengeKeypad extends JPanel{
         setlInputText("");
     }
 
-    public void resetChallenge(int iNumber){  // Reset the object to its default states allowing to start again, must have this
+    public void resetChallenge(String iNumber){  // Reset the object to its default states allowing to start again, must have this
         iChallengeState = 0;
         lInputText = "";
         setlInputText("");
@@ -195,4 +204,6 @@ public class ChallengeKeypad extends JPanel{
     public void setState(int state) {
         iChallengeState = state;
     }
+
+
 }
